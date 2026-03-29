@@ -9,7 +9,7 @@ import { FEATURES, PLATFORMS, WORKFLOW_STEPS } from "../utils/dummyData";
 
 const Home = () => {
   return (
-    <div className="relative min-h-screen dark:bg-navy-950/30 bg-white/30">
+    <div className="relative min-h-screen dark:bg-navy-950/20 bg-white/20">
       <Navbar />
 
       {/* Hero Section */}
@@ -18,7 +18,7 @@ const Home = () => {
       {/* Features Section */}
       <section
         id="features"
-        className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-navy-950/10 bg-white/10"
+        className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-navy-950/5 bg-white/5"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -42,7 +42,7 @@ const Home = () => {
       {/* Platforms Section */}
       <section
         id="platforms"
-        className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-navy-900/10 bg-gray-50/10"
+        className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-navy-900/5 bg-gray-50/5"
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -64,7 +64,7 @@ const Home = () => {
       </section>
 
       {/* Workflow Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-navy-950/10 bg-white/10">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-navy-950/5 bg-white/5">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold dark:text-white text-gray-900 mb-4">
@@ -83,7 +83,7 @@ const Home = () => {
       {/* CTA Section */}
       <section
         id="pricing"
-        className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-gradient-to-br dark:from-indigo-600 dark:to-cyan-500 bg-gradient-to-br from-indigo-500 to-cyan-400"
+        className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-950/90 via-indigo-950/85 to-cyan-950/80"
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">

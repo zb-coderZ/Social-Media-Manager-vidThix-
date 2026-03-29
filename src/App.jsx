@@ -14,31 +14,35 @@ function App() {
   return (
     <ToastProvider>
       <AppProvider>
-        <ParticlesBackground />
-        <BrowserRouter>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
+        <div className="relative isolate min-h-screen">
+          <ParticlesBackground />
+          <div className="relative z-10 min-h-screen">
+            <BrowserRouter>
+              <Routes>
+                {/* Public Routes */}
+                <Route path="/" element={<Home />} />
 
-            {/* Dashboard Routes */}
-            <Route element={<MainLayout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/upload" element={<Upload />} />
-              <Route path="/seo" element={<SEOAnalyzer />} />
-              <Route path="/platforms" element={<Platforms />} />
-              <Route path="/settings" element={<Settings />} />
+                {/* Dashboard Routes */}
+                <Route element={<MainLayout />}>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/upload" element={<Upload />} />
+                  <Route path="/seo" element={<SEOAnalyzer />} />
+                  <Route path="/platforms" element={<Platforms />} />
+                  <Route path="/settings" element={<Settings />} />
 
-              {/* Alias routes */}
-              <Route
-                path="/scheduled"
-                element={<Navigate to="/dashboard" replace />}
-              />
-            </Route>
+                  {/* Alias routes */}
+                  <Route
+                    path="/scheduled"
+                    element={<Navigate to="/dashboard" replace />}
+                  />
+                </Route>
 
-            {/* 404 - Redirect to home */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </BrowserRouter>
+                {/* 404 - Redirect to home */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </BrowserRouter>
+          </div>
+        </div>
       </AppProvider>
     </ToastProvider>
   );

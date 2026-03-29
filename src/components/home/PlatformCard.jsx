@@ -8,7 +8,7 @@ const PlatformCard = ({ platform }) => {
     <div
       className={`group p-6 backdrop-blur-xl rounded-2xl transition-all duration-200 ${
         enabled
-          ? "dark:bg-navy-800/60 dark:border dark:border-indigo-600/30 dark:hover:border-cyan-400/50 dark:hover:shadow-glow-cyan dark:hover:-translate-y-1 bg-white/60 border border-gray-200/50 hover:border-indigo-300/50 hover:shadow-md hover:-translate-y-1 cursor-pointer"
+          ? "dark:bg-navy-800/45 dark:border dark:border-indigo-600/30 dark:hover:border-cyan-400/50 dark:hover:shadow-glow-cyan dark:hover:-translate-y-1 bg-white/45 border border-gray-200/50 hover:border-indigo-300/50 hover:shadow-md hover:-translate-y-1 cursor-pointer"
           : "dark:bg-navy-800/30 dark:border dark:border-navy-700/30 dark:opacity-60 bg-gray-100/60 border border-gray-200 opacity-60"
       }`}
     >
@@ -42,8 +42,12 @@ const PlatformCard = ({ platform }) => {
 
         {/* Content */}
         <div>
-          <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-2">{name}</h3>
-          <p className="text-sm dark:text-gray-400 text-gray-600">{description}</p>
+          <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-2">
+            {name}
+          </h3>
+          <p className="text-sm dark:text-gray-400 text-gray-600">
+            {description}
+          </p>
         </div>
 
         {/* Button */}
