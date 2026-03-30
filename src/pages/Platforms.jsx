@@ -1,11 +1,11 @@
 import { useState } from "react";
-import * as LucideIcons from "lucide-react";
 import { useApp } from "../context/AppContext";
 import { useToast } from "../context/ToastContext";
 import { PLATFORMS } from "../utils/dummyData";
 import { API_DELAYS } from "../utils/constants";
 import { sleep } from "../utils/helpers";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import { getIconByName } from "../utils/iconMap";
 
 const PlatformCard = ({
   platform,
@@ -14,7 +14,7 @@ const PlatformCard = ({
   onDisconnect,
   isConnecting,
 }) => {
-  const Icon = LucideIcons[platform.icon] || LucideIcons.Globe;
+  const Icon = getIconByName(platform.icon, "Globe");
   const isConnected = connection?.connected === true;
   const isDisabled = !platform.enabled;
 
@@ -59,8 +59,12 @@ const PlatformCard = ({
         )}
       </div>
 
-      <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-2">{platform.name}</h3>
-      <p className="text-sm dark:text-gray-400 text-gray-600 mb-4">{platform.description}</p>
+      <h3 className="text-xl font-bold dark:text-white text-gray-900 mb-2">
+        {platform.name}
+      </h3>
+      <p className="text-sm dark:text-gray-400 text-gray-600 mb-4">
+        {platform.description}
+      </p>
 
       {isConnected && (
         <div className="mb-4 p-3 dark:bg-indigo-500/10 dark:border dark:border-indigo-500/30 bg-indigo-50 border border-indigo-200 rounded-lg">
@@ -136,7 +140,7 @@ const Platforms = () => {
 
       connectPlatform(platformId, mockData);
       success("Platform connected successfully!");
-    } catch (err) {
+    } catch {
       error("Failed to connect platform. Please try again.");
     } finally {
       setConnectingPlatform(null);
@@ -164,11 +168,17 @@ const Platforms = () => {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-          <p className="text-sm dark:text-gray-400 text-gray-600 mb-1">Total Platforms</p>
-          <p className="text-3xl font-bold dark:text-white text-gray-900">{PLATFORMS.length}</p>
+          <p className="text-sm dark:text-gray-400 text-gray-600 mb-1">
+            Total Platforms
+          </p>
+          <p className="text-3xl font-bold dark:text-white text-gray-900">
+            {PLATFORMS.length}
+          </p>
         </div>
         <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-          <p className="text-sm dark:text-gray-400 text-gray-600 mb-1">Connected</p>
+          <p className="text-sm dark:text-gray-400 text-gray-600 mb-1">
+            Connected
+          </p>
           <p className="text-3xl font-bold dark:text-emerald-400 text-emerald-600">
             {
               Object.values(connectedPlatforms).filter((p) => p.connected)
@@ -177,7 +187,9 @@ const Platforms = () => {
           </p>
         </div>
         <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-          <p className="text-sm dark:text-gray-400 text-gray-600 mb-1">Coming Soon</p>
+          <p className="text-sm dark:text-gray-400 text-gray-600 mb-1">
+            Coming Soon
+          </p>
           <p className="text-3xl font-bold dark:text-gray-500 text-gray-400">
             {PLATFORMS.filter((p) => !p.enabled).length}
           </p>

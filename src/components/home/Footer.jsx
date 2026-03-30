@@ -1,10 +1,49 @@
 import { Link } from "react-router-dom";
-import * as LucideIcons from "lucide-react";
 import { APP_NAME } from "../../utils/constants";
 import { FOOTER_LINKS, SOCIAL_LINKS } from "../../utils/dummyData";
+import { getIconByName } from "../../utils/iconMap";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const legalLinks = [
+    { name: "Privacy Policy", href: "/pages/privacy-policy" },
+    { name: "Terms of Service", href: "/pages/terms-of-service" },
+    { name: "Cookie Policy", href: "/pages/cookie-policy" },
+  ];
+
+  const renderFooterLink = (link) => {
+    if (link.href.includes("#")) {
+      return (
+        <a
+          href={link.href}
+          className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
+        >
+          {link.name}
+        </a>
+      );
+    }
+
+    if (link.href.startsWith("/")) {
+      return (
+        <Link
+          to={link.href}
+          className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
+        >
+          {link.name}
+        </Link>
+      );
+    }
+
+    return (
+      <a
+        href={link.href}
+        className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
+      >
+        {link.name}
+      </a>
+    );
+  };
 
   return (
     <footer className="bg-navy-900 border-t border-navy-800">
@@ -28,7 +67,7 @@ const Footer = () => {
             {/* Social Links */}
             <div className="flex gap-3">
               {SOCIAL_LINKS.map((social) => {
-                const Icon = LucideIcons[social.icon] || LucideIcons.Link;
+                const Icon = getIconByName(social.icon, "Link");
                 return (
                   <a
                     key={social.name}
@@ -48,14 +87,7 @@ const Footer = () => {
             <h3 className="font-bold text-white mb-4">Product</h3>
             <ul className="space-y-3">
               {FOOTER_LINKS.product.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
-                  >
-                    {link.name}
-                  </a>
-                </li>
+                <li key={link.name}>{renderFooterLink(link)}</li>
               ))}
             </ul>
           </div>
@@ -65,14 +97,7 @@ const Footer = () => {
             <h3 className="font-bold text-white mb-4">Company</h3>
             <ul className="space-y-3">
               {FOOTER_LINKS.company.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
-                  >
-                    {link.name}
-                  </a>
-                </li>
+                <li key={link.name}>{renderFooterLink(link)}</li>
               ))}
             </ul>
           </div>
@@ -82,14 +107,7 @@ const Footer = () => {
             <h3 className="font-bold text-white mb-4">Support</h3>
             <ul className="space-y-3">
               {FOOTER_LINKS.support.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
-                  >
-                    {link.name}
-                  </a>
-                </li>
+                <li key={link.name}>{renderFooterLink(link)}</li>
               ))}
             </ul>
           </div>
@@ -100,25 +118,12 @@ const Footer = () => {
           <p className="text-sm text-gray-500">
             © {currentYear} {APP_NAME}. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a
-              href="#"
-              className="text-sm text-gray-500 hover:text-cyan-400 transition-colors duration-200"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="text-sm text-gray-500 hover:text-cyan-400 transition-colors duration-200"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className="text-sm text-gray-500 hover:text-cyan-400 transition-colors duration-200"
-            >
-              Cookie Policy
-            </a>
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+            {legalLinks.map((link) => (
+              <span key={link.name} className="text-sm">
+                {renderFooterLink(link)}
+              </span>
+            ))}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
-import * as LucideIcons from "lucide-react";
+import { getIconByName } from "../../utils/iconMap";
 
 const WorkflowStep = ({ step, title, description, icon, isLast }) => {
-  const Icon = LucideIcons[icon] || LucideIcons.Circle;
+  const Icon = getIconByName(icon, "Circle");
 
   return (
     <div className="relative flex gap-6">

@@ -1,8 +1,8 @@
-import * as LucideIcons from "lucide-react";
+import { getIconByName } from "../../utils/iconMap";
 
 const PlatformCard = ({ platform }) => {
   const { name, icon, color, enabled, status, description } = platform;
-  const Icon = LucideIcons[icon] || LucideIcons.Globe;
+  const Icon = getIconByName(icon, "Globe");
 
   return (
     <div

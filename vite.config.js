@@ -8,4 +8,26 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (
+            id.includes("node_modules/react") ||
+            id.includes("react-router-dom")
+          ) {
+            return "react";
+          }
+          if (id.includes("recharts")) return "charts";
+          if (id.includes("@tsparticles") || id.includes("tsparticles")) {
+            return "particles";
+          }
+          if (id.includes("date-fns") || id.includes("react-datepicker")) {
+            return "dates";
+          }
+          return undefined;
+        },
+      },
+    },
+  },
 });

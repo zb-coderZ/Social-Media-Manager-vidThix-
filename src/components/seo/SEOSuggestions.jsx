@@ -1,7 +1,7 @@
-import * as LucideIcons from "lucide-react";
+import { getIconByName } from "../../utils/iconMap";
 
 const SuggestionItem = ({ suggestion }) => {
-  const Icon = LucideIcons[suggestion.icon] || LucideIcons.Info;
+  const Icon = getIconByName(suggestion.icon, "Info");
 
   const getTypeStyles = (type) => {
     switch (type) {
@@ -44,11 +44,13 @@ const SuggestionItem = ({ suggestion }) => {
 };
 
 const SEOSuggestions = ({ suggestions }) => {
+  const TargetIcon = getIconByName("Target");
+
   if (!suggestions || suggestions.length === 0) {
     return (
       <div className="p-8 text-center">
         <div className="w-16 h-16 bg-gray-100 dark:bg-navy-700/60 rounded-full flex items-center justify-center mx-auto mb-4">
-          <LucideIcons.Target className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+          <TargetIcon className="w-8 h-8 text-gray-400 dark:text-gray-500" />
         </div>
         <p className="text-gray-600 dark:text-gray-400">
           Fill in your content to get SEO suggestions

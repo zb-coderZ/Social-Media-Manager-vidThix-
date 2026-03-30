@@ -214,22 +214,22 @@ export const NAV_LINKS = [
 
 export const FOOTER_LINKS = {
   product: [
-    { name: "Features", href: "#" },
-    { name: "Pricing", href: "#" },
-    { name: "API", href: "#" },
-    { name: "Integrations", href: "#" },
+    { name: "Features", href: "/#features" },
+    { name: "Pricing", href: "/#pricing" },
+    { name: "API", href: "/pages/api" },
+    { name: "Integrations", href: "/pages/integrations" },
   ],
   company: [
-    { name: "About", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Contact", href: "#" },
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
+    { name: "Careers", href: "/pages/careers" },
+    { name: "Contact", href: "/contact" },
   ],
   support: [
-    { name: "Help Center", href: "#" },
-    { name: "Documentation", href: "#" },
-    { name: "Community", href: "#" },
-    { name: "Status", href: "#" },
+    { name: "Help Center", href: "/pages/help-center" },
+    { name: "Documentation", href: "/pages/documentation" },
+    { name: "Community", href: "/pages/community" },
+    { name: "Status", href: "/pages/status" },
   ],
 };
 
@@ -245,6 +245,7 @@ export const DEFAULT_USER = {
   name: "Demo User",
   email: "demo@vidthix.com",
   avatar: null,
+  isAdmin: true,
 };
 
 // Initial stats

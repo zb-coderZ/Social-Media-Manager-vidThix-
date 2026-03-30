@@ -5,7 +5,7 @@ import { APP_NAME } from "../../utils/constants";
 import { NAV_LINKS } from "../../utils/dummyData";
 import { useApp } from "../../context/AppContext";
 
-const Navbar = () => {
+const Navbar = ({ isFixed = true }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useApp();
@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
+      className={`${isFixed ? "fixed top-0 left-0 right-0" : "sticky top-0"} z-40 transition-all duration-200 ${
         isScrolled
           ? "dark:bg-navy-900/80 dark:backdrop-blur-xl dark:shadow-lg dark:shadow-indigo-600/10 bg-white/80 backdrop-blur-xl shadow-md"
           : "bg-transparent dark:bg-transparent"

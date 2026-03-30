@@ -1,8 +1,8 @@
-import * as LucideIcons from "lucide-react";
+import { getIconByName } from "../../utils/iconMap";
 import { PLATFORMS } from "../../utils/dummyData";
 
 const PlatformIcon = ({ platform, connected }) => {
-  const Icon = LucideIcons[platform.icon] || LucideIcons.Globe;
+  const Icon = getIconByName(platform.icon, "Globe");
 
   return (
     <div

@@ -1,4 +1,4 @@
-import * as LucideIcons from "lucide-react";
+import { getIconByName } from "../../utils/iconMap";
 import { formatRelativeTime } from "../../utils/helpers";
 
 const ActivityItem = ({ activity }) => {
@@ -32,7 +32,7 @@ const ActivityItem = ({ activity }) => {
     }
   };
 
-  const Icon = LucideIcons[getTypeIcon(type)] || LucideIcons.File;
+  const Icon = getIconByName(getTypeIcon(type), "File");
 
   return (
     <div className="flex items-start gap-4 p-4 dark:hover:bg-navy-800/40 hover:bg-gray-100 rounded-xl transition-colors duration-200">
@@ -58,9 +58,13 @@ const ActivityItem = ({ activity }) => {
           >
             {status}
           </span>
-          <span className="text-xs dark:text-gray-500 text-gray-600">{platform}</span>
+          <span className="text-xs dark:text-gray-500 text-gray-600">
+            {platform}
+          </span>
           <span className="text-xs dark:text-gray-600 text-gray-500">•</span>
-          <span className="text-xs dark:text-gray-500 text-gray-600">{date}</span>
+          <span className="text-xs dark:text-gray-500 text-gray-600">
+            {date}
+          </span>
         </div>
       </div>
     </div>
@@ -68,13 +72,17 @@ const ActivityItem = ({ activity }) => {
 };
 
 const ActivityFeed = ({ activities, title = "Recent Activity" }) => {
+  const InboxIcon = getIconByName("Inbox", "File");
+
   if (!activities || activities.length === 0) {
     return (
       <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-        <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">{title}</h3>
+        <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
+          {title}
+        </h3>
         <div className="text-center py-12">
           <div className="w-16 h-16 dark:bg-navy-700/60 dark:border dark:border-navy-600 bg-gray-200 border border-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
-            <LucideIcons.Inbox className="w-8 h-8 dark:text-gray-600 text-gray-500" />
+            <InboxIcon className="w-8 h-8 dark:text-gray-600 text-gray-500" />
           </div>
           <p className="dark:text-gray-500 text-gray-600">No activity yet</p>
           <p className="text-sm dark:text-gray-600 text-gray-700 mt-1">
@@ -87,7 +95,9 @@ const ActivityFeed = ({ activities, title = "Recent Activity" }) => {
 
   return (
     <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-      <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">{title}</h3>
+      <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
+        {title}
+      </h3>
       <div className="space-y-2">
         {activities.map((activity) => (
           <ActivityItem key={activity.id} activity={activity} />

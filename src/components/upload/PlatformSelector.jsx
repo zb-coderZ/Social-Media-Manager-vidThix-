@@ -1,5 +1,5 @@
-import * as LucideIcons from "lucide-react";
 import { PLATFORMS } from "../../utils/dummyData";
+import { getIconByName } from "../../utils/iconMap";
 
 const PlatformSelector = ({ selected, onChange }) => {
   return (
@@ -9,7 +9,8 @@ const PlatformSelector = ({ selected, onChange }) => {
       </label>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {PLATFORMS.map((platform) => {
-          const Icon = LucideIcons[platform.icon] || LucideIcons.Globe;
+          const Icon = getIconByName(platform.icon, "Globe");
+          const CheckIcon = getIconByName("Check");
           const isSelected = selected === platform.id;
           const isDisabled = !platform.enabled;
 
@@ -54,12 +55,14 @@ const PlatformSelector = ({ selected, onChange }) => {
                     {platform.name}
                   </p>
                   {isDisabled && (
-                    <p className="text-xs dark:text-gray-600 text-gray-400">Coming Soon</p>
+                    <p className="text-xs dark:text-gray-600 text-gray-400">
+                      Coming Soon
+                    </p>
                   )}
                 </div>
                 {isSelected && (
                   <div className="w-5 h-5 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
-                    <LucideIcons.Check className="w-3 h-3 text-white" />
+                    <CheckIcon className="w-3 h-3 text-white" />
                   </div>
                 )}
               </div>

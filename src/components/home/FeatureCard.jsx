@@ -1,7 +1,7 @@
-import * as LucideIcons from "lucide-react";
+import { getIconByName } from "../../utils/iconMap";
 
 const FeatureCard = ({ icon, title, description }) => {
-  const Icon = LucideIcons[icon] || LucideIcons.Box;
+  const Icon = getIconByName(icon, "Box");
 
   return (
     <div className="group p-6 dark:bg-navy-800/45 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 dark:hover:border-cyan-400/50 dark:hover:shadow-glow-cyan bg-white/45 backdrop-blur-xl border border-gray-200/50 hover:border-indigo-300/50 hover:shadow-md rounded-2xl transition-all duration-200 hover:-translate-y-1">

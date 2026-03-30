@@ -1,4 +1,4 @@
-import * as LucideIcons from "lucide-react";
+import { getIconByName } from "../../utils/iconMap";
 import { formatNumber, formatCompactNumber } from "../../utils/helpers";
 
 const StatsCard = ({
@@ -9,7 +9,7 @@ const StatsCard = ({
   trendValue,
   compact = false,
 }) => {
-  const Icon = LucideIcons[icon] || LucideIcons.Activity;
+  const Icon = getIconByName(icon, "Activity");
   const displayValue = compact
     ? formatCompactNumber(value)
     : formatNumber(value);
@@ -37,8 +37,12 @@ const StatsCard = ({
       </div>
 
       <div>
-        <p className="text-3xl font-bold dark:text-white text-gray-900 mb-1">{displayValue}</p>
-        <p className="text-sm dark:text-gray-400 text-gray-600 font-medium">{title}</p>
+        <p className="text-3xl font-bold dark:text-white text-gray-900 mb-1">
+          {displayValue}
+        </p>
+        <p className="text-sm dark:text-gray-400 text-gray-600 font-medium">
+          {title}
+        </p>
       </div>
     </div>
   );

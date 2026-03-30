@@ -18,7 +18,7 @@ export function AppProvider({ children }) {
   // User state
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.USER);
-    return saved ? JSON.parse(saved) : DEFAULT_USER;
+    return saved ? { ...DEFAULT_USER, ...JSON.parse(saved) } : DEFAULT_USER;
   });
 
   // Apply theme to DOM and persist to localStorage

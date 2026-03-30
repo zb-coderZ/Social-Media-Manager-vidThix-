@@ -11,7 +11,10 @@ export const APP_DESCRIPTION =
 // Routes
 export const ROUTES = {
   HOME: "/",
+  BLOG: "/blog",
+  BLOG_POST: "/blog/:slug",
   DASHBOARD: "/dashboard",
+  BLOG_ADMIN: "/dashboard/blog",
   UPLOAD: "/upload",
   SEO: "/seo",
   PLATFORMS: "/platforms",
@@ -22,6 +25,12 @@ export const ROUTES = {
 // Sidebar navigation items
 export const SIDEBAR_ITEMS = [
   { name: "Dashboard", href: "/dashboard", icon: "LayoutDashboard" },
+  {
+    name: "Blog",
+    href: "/dashboard/blog",
+    icon: "BookOpen",
+    requiredAdmin: true,
+  },
   { name: "Upload Content", href: "/upload", icon: "Upload" },
   { name: "SEO Analyzer", href: "/seo", icon: "Target" },
   { name: "Scheduled Posts", href: "/scheduled", icon: "Calendar" },

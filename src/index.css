@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* Light Mode (Default) */
   body {
     @apply m-0 antialiased bg-white text-gray-900;
@@ -21,6 +25,13 @@
 
   * {
     @apply box-border;
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
   }
 }
 
