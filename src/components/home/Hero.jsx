@@ -94,9 +94,12 @@ const Hero = () => {
 
               {/* Feature badges */}
               <div className="mt-4 grid grid-cols-3 gap-2">
+                {/* SEO temporarily disabled. Restore this badge when the feature returns. */}
+                {/*
                 <div className="px-3 py-2 dark:bg-emerald-500/20 dark:text-emerald-400 dark:border dark:border-emerald-500/30 bg-emerald-50/60 text-emerald-700 text-xs font-medium rounded-lg text-center border border-emerald-200">
                   ✓ SEO Optimized
                 </div>
+                */}
                 <div className="px-3 py-2 dark:bg-cyan-500/20 dark:text-cyan-400 dark:border dark:border-cyan-500/30 bg-cyan-50/60 text-cyan-700 text-xs font-medium rounded-lg text-center border border-cyan-200">
                   ✓ Auto Schedule
                 </div>

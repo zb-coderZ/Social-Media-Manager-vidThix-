@@ -1,42 +1,41 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Target, Calendar, Sparkles, CheckCircle2 } from 'lucide-react';
-import { useApp } from '../context/AppContext';
-import { useToast } from '../context/ToastContext';
-import PlatformSelector from '../components/upload/PlatformSelector';
-import UploadBox from '../components/upload/UploadBox';
-import FilePreview from '../components/upload/FilePreview';
-import VideoForm from '../components/upload/VideoForm';
-import SEOScore from '../components/seo/SEOScore';
-import Scheduler from '../components/scheduler/Scheduler';
-import LoadingSpinner from '../components/common/LoadingSpinner';
-import { calculateSEOScore } from '../utils/seoCalculator';
-import { sleep } from '../utils/helpers';
-import { UPLOAD_STATUS } from '../utils/constants';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Calendar, Sparkles, CheckCircle2 } from "lucide-react";
+import { useApp } from "../context/AppContext";
+import { useToast } from "../context/ToastContext";
+import PlatformSelector from "../components/upload/PlatformSelector";
+import UploadBox from "../components/upload/UploadBox";
+import FilePreview from "../components/upload/FilePreview";
+import VideoForm from "../components/upload/VideoForm";
+import Scheduler from "../components/scheduler/Scheduler";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { sleep } from "../utils/helpers";
+import { UPLOAD_STATUS } from "../utils/constants";
 
 const Upload = () => {
   const navigate = useNavigate();
   const { addUpload, addScheduledPost } = useApp();
   const { success, error: showError, info } = useToast();
 
-  const [selectedPlatform, setSelectedPlatform] = useState('youtube');
+  const [selectedPlatform, setSelectedPlatform] = useState("youtube");
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState(UPLOAD_STATUS.IDLE);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    tags: '',
-    category: ''
+    title: "",
+    description: "",
+    tags: "",
+    category: "",
   });
   const [formErrors, setFormErrors] = useState({});
-  const [seoResult, setSeoResult] = useState(null);
+  // SEO temporarily disabled. Preserve this state for later restoration.
+  // const [seoResult, setSeoResult] = useState(null);
   const [isSchedulerOpen, setIsSchedulerOpen] = useState(false);
 
   const handleFileSelect = (file) => {
     setSelectedFile(file);
     setUploadStatus(UPLOAD_STATUS.SELECTING);
-    info('File selected. Fill in the details to continue.');
+    info("File selected. Fill in the details to continue.");
   };
 
   const handleRemoveFile = () => {
@@ -49,19 +48,19 @@ const Upload = () => {
     const errors = {};
 
     if (!formData.title.trim()) {
-      errors.title = 'Title is required';
+      errors.title = "Title is required";
     }
 
     if (!formData.description.trim()) {
-      errors.description = 'Description is required';
+      errors.description = "Description is required";
     }
 
     if (!formData.category) {
-      errors.category = 'Please select a category';
+      errors.category = "Please select a category";
     }
 
     if (!selectedFile) {
-      showError('Please select a video file to upload');
+      showError("Please select a video file to upload");
       return false;
     }
 
@@ -69,6 +68,7 @@ const Upload = () => {
     return Object.keys(errors).length === 0;
   };
 
+  /* SEO temporarily disabled. Preserve the analyzer handler for later restoration.
   const handleCheckSEO = () => {
     if (!formData.title && !formData.description && !formData.tags) {
       info('Fill in at least the title or description to check SEO score');
@@ -86,6 +86,7 @@ const Upload = () => {
       showError('Low SEO score. Please check the suggestions to improve.');
     }
   };
+  */
 
   const simulateUpload = async () => {
     setUploadStatus(UPLOAD_STATUS.UPLOADING);
@@ -109,19 +110,20 @@ const Upload = () => {
       tags: formData.tags,
       category: formData.category,
       platform: selectedPlatform,
-      seoScore: seoResult?.score || 0,
+      // SEO temporarily disabled. Restore the score field with the analyzer.
+      // seoScore: seoResult?.score || 0,
       fileName: selectedFile.name,
       fileSize: selectedFile.size,
-      status: 'published'
+      status: "published",
     };
 
     addUpload(upload);
-    success('Video uploaded successfully!');
+    success("Video uploaded successfully!");
 
     // Reset form
     setTimeout(() => {
       handleReset();
-      navigate('/dashboard');
+      navigate("/dashboard");
     }, 1500);
   };
 
@@ -132,18 +134,19 @@ const Upload = () => {
       ...formData,
       ...scheduleData,
       platform: selectedPlatform,
-      seoScore: seoResult?.score || 0,
+      // SEO temporarily disabled. Restore the score field with the analyzer.
+      // seoScore: seoResult?.score || 0,
       fileName: selectedFile.name,
       fileSize: selectedFile.size,
-      status: 'scheduled'
+      status: "scheduled",
     };
 
     addScheduledPost(post);
-    success('Post scheduled successfully!');
+    success("Post scheduled successfully!");
 
     setTimeout(() => {
       handleReset();
-      navigate('/dashboard');
+      navigate("/dashboard");
     }, 1500);
   };
 
@@ -151,53 +154,89 @@ const Upload = () => {
     setSelectedFile(null);
     setUploadStatus(UPLOAD_STATUS.IDLE);
     setUploadProgress(0);
-    setFormData({ title: '', description: '', tags: '', category: '' });
+    setFormData({ title: "", description: "", tags: "", category: "" });
     setFormErrors({});
-    setSeoResult(null);
+    // SEO temporarily disabled. Restore when the analyzer is re-enabled.
+    // setSeoResult(null);
   };
 
-  const isFormComplete = selectedFile && formData.title && formData.description && formData.category;
+  const isFormComplete =
+    selectedFile && formData.title && formData.description && formData.category;
 
   return (
     <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-5xl mx-auto">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">
-          Upload & Optimize Content
+          Upload & Publish Content
         </h1>
         <p className="dark:text-gray-400 text-gray-600">
-          Upload your video, optimize for SEO, and schedule your post.
+          Upload your video, customize it, publish, or schedule it.
         </p>
       </div>
 
       {/* Progress Steps */}
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         {[
-          { icon: 'upload', label: 'Upload', status: selectedFile ? 'complete' : uploadStatus === UPLOAD_STATUS.SELECTING  ? 'active' : 'pending' },
-          { icon: 'edit', label: 'Details', status: isFormComplete ? 'complete' : selectedFile ? 'active' : 'pending' },
-          { icon: 'seo', label: 'SEO Check', status: seoResult ? 'complete' : isFormComplete ? 'active' : 'pending' },
-          { icon: 'publish', label: 'Publish', status: uploadStatus === UPLOAD_STATUS.COMPLETE ? 'complete' : 'pending' }
+          {
+            icon: "upload",
+            label: "Upload",
+            status: selectedFile
+              ? "complete"
+              : uploadStatus === UPLOAD_STATUS.SELECTING
+                ? "active"
+                : "pending",
+          },
+          {
+            icon: "edit",
+            label: "Details",
+            status: isFormComplete
+              ? "complete"
+              : selectedFile
+                ? "active"
+                : "pending",
+          },
+          // SEO temporarily disabled. Restore the SEO Check step later.
+          {
+            icon: "publish",
+            label: "Publish",
+            status:
+              uploadStatus === UPLOAD_STATUS.COMPLETE ? "complete" : "pending",
+          },
         ].map((step, index) => (
-          <div key={index} className={`p-4 rounded-xl border ${
-            step.status === 'complete' ? 'dark:bg-emerald-500/20 dark:border-emerald-500/30 bg-emerald-50 border-emerald-200' :
-            step.status === 'active' ? 'dark:bg-indigo-500/20 dark:border-indigo-500/30 bg-indigo-50 border-indigo-200' :
-            'dark:bg-navy-800/60 dark:border-navy-700 bg-gray-50 border-gray-200'
-          }`}>
+          <div
+            key={index}
+            className={`p-4 rounded-xl border ${
+              step.status === "complete"
+                ? "dark:bg-emerald-500/20 dark:border-emerald-500/30 bg-emerald-50 border-emerald-200"
+                : step.status === "active"
+                  ? "dark:bg-indigo-500/20 dark:border-indigo-500/30 bg-indigo-50 border-indigo-200"
+                  : "dark:bg-navy-800/60 dark:border-navy-700 bg-gray-50 border-gray-200"
+            }`}
+          >
             <div className="flex items-center gap-2">
-              {step.status === 'complete' ? (
+              {step.status === "complete" ? (
                 <CheckCircle2 className="w-5 h-5 dark:text-emerald-400 text-emerald-600" />
               ) : (
-                <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                  step.status === 'active' ? 'dark:bg-indigo-600 dark:text-white bg-indigo-600 text-white' : 'dark:bg-navy-700 dark:text-gray-400 bg-gray-300 text-gray-600'
-                }`}>
+                <span
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                    step.status === "active"
+                      ? "dark:bg-indigo-600 dark:text-white bg-indigo-600 text-white"
+                      : "dark:bg-navy-700 dark:text-gray-400 bg-gray-300 text-gray-600"
+                  }`}
+                >
                   {index + 1}
                 </span>
               )}
-              <span className={`text-sm font-semibold ${
-                step.status === 'complete' ? 'dark:text-emerald-400 text-emerald-700' :
-                step.status === 'active' ? 'dark:text-indigo-400 text-indigo-700' :
-                'dark:text-gray-400 text-gray-600'
-              }`}>
+              <span
+                className={`text-sm font-semibold ${
+                  step.status === "complete"
+                    ? "dark:text-emerald-400 text-emerald-700"
+                    : step.status === "active"
+                      ? "dark:text-indigo-400 text-indigo-700"
+                      : "dark:text-gray-400 text-gray-600"
+                }`}
+              >
                 {step.label}
               </span>
             </div>
@@ -211,7 +250,10 @@ const Upload = () => {
         <div className="lg:col-span-2 space-y-6">
           {/* Platform Selector */}
           <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-            <PlatformSelector selected={selectedPlatform} onChange={setSelectedPlatform} />
+            <PlatformSelector
+              selected={selectedPlatform}
+              onChange={setSelectedPlatform}
+            />
           </div>
 
           {/* Upload Box */}
@@ -231,7 +273,9 @@ const Upload = () => {
           {/* Video Form */}
           {selectedFile && (
             <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-              <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">Video Details</h3>
+              <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
+                Video Details
+              </h3>
               <VideoForm
                 formData={formData}
                 onChange={setFormData}
@@ -241,17 +285,23 @@ const Upload = () => {
           )}
         </div>
 
-        {/* Right Column - SEO & Actions */}
+        {/* Right Column - Actions */}
         <div className="space-y-6">
-          {/* SEO Score */}
+          {/* SEO temporarily disabled. Restore the score panel here later. */}
+          {/*
           {seoResult && (
             <SEOScore score={seoResult.score} suggestions={seoResult.suggestions} />
           )}
+          */}
 
           {/* Actions */}
           <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl space-y-3">
-            <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">Actions</h3>
+            <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
+              Actions
+            </h3>
 
+            {/* SEO temporarily disabled. Restore the Check SEO Score action later. */}
+            {/*
             <button
               onClick={handleCheckSEO}
               disabled={!selectedFile || (!formData.title && !formData.description)}
@@ -260,6 +310,7 @@ const Upload = () => {
               <Target className="w-5 h-5" />
               Check SEO Score
             </button>
+            */}
 
             <button
               onClick={() => setIsSchedulerOpen(true)}
@@ -272,7 +323,9 @@ const Upload = () => {
 
             <button
               onClick={handleUpload}
-              disabled={!isFormComplete || uploadStatus === UPLOAD_STATUS.UPLOADING}
+              disabled={
+                !isFormComplete || uploadStatus === UPLOAD_STATUS.UPLOADING
+              }
               className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:from-orange-500/40 disabled:to-orange-600/40 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-orange disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
             >
               {uploadStatus === UPLOAD_STATUS.UPLOADING ? (
@@ -303,12 +356,17 @@ const Upload = () => {
 
           {/* Tips */}
           <div className="p-6 dark:bg-indigo-500/10 dark:border dark:border-indigo-500/30 bg-indigo-50 border border-indigo-200 rounded-2xl">
-            <h4 className="font-bold dark:text-indigo-400 text-indigo-900 mb-3">💡 Pro Tips</h4>
+            <h4 className="font-bold dark:text-indigo-400 text-indigo-900 mb-3">
+              💡 Pro Tips
+            </h4>
             <ul className="space-y-2 text-sm dark:text-indigo-300/80 text-indigo-700">
+              {/* SEO tips temporarily disabled. Restore these tips with the analyzer. */}
+              {/*
               <li>• Use 50-60 characters for optimal title length</li>
               <li>• Include keywords in your description</li>
               <li>• Add 10-15 relevant tags</li>
               <li>• Check SEO score before publishing</li>
+              */}
               <li>• Schedule during peak engagement times</li>
             </ul>
           </div>

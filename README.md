@@ -1,16 +1,15 @@
 # vidThix
 
-vidThix is a React dashboard for managing video content across social media platforms. It brings uploading, SEO optimization, scheduling, platform connections, analytics, and content management into one workspace.
+vidThix is a React dashboard for managing video content across social media platforms. It brings uploading, post customization, publishing, scheduling, platform connections, analytics, and content management into one workspace.
 
 This repository currently contains a frontend prototype. Its workflows use simulated delays and browser storage, so it can be explored without an API or third-party OAuth credentials.
 
 ## Features
 
-- Dashboard with upload, scheduling, SEO, platform, and engagement statistics
+- Dashboard with upload, scheduling, platform, and engagement statistics
 - Video upload flow with drag-and-drop file selection and file preview
 - Video metadata form for title, description, tags, and category
 - Simulated publishing and scheduled-post workflows
-- Real-time SEO scoring with actionable suggestions
 - Platform connection management with a simulated YouTube connection flow
 - Light and dark themes with persisted preferences
 - Responsive public pages for the home page, about, contact, blog, and blog posts
@@ -84,8 +83,7 @@ npm run lint
 | `/blog/:slug` | Individual blog post |
 | `/pages/:slug` | Footer content pages |
 | `/dashboard` | Dashboard overview |
-| `/upload` | Upload, optimize, publish, or schedule a video |
-| `/seo` | Standalone SEO analyzer |
+| `/upload` | Upload, customize, publish, or schedule a video |
 | `/platforms` | Connect and manage social platforms |
 | `/settings` | User and application settings |
 | `/dashboard/blog` | Admin blog management |
@@ -102,7 +100,7 @@ src/
 ├── hooks/            Shared React hooks
 ├── layout/           Shared dashboard layout
 ├── pages/            Route-level page components
-├── utils/            Constants, demo data, helpers, and SEO logic
+├── utils/            Constants, demo data, helpers, and feature logic
 ├── App.jsx           Router and application shell
 ├── index.css         Global styles
 └── main.jsx          React entry point
@@ -117,14 +115,32 @@ The following interactions are simulated:
 - Upload progress advances locally before a post is marked as published.
 - Scheduling stores a local scheduled-post record.
 - Connecting YouTube waits for a simulated OAuth flow and then uses demo channel data.
-- SEO results are calculated locally from the title, description, and tags.
 
 To reset the demo state, clear the site's local storage in the browser and reload the application.
+
+## SEO status
+
+SEO is temporarily disabled while the product focuses on the core workflow:
+
+```text
+Upload video -> customize post -> select platforms -> publish -> schedule -> track status
+```
+
+The SEO implementation has not been deleted. The following files and logic remain preserved in the repository for a later reactivation:
+
+- `src/pages/SEOAnalyzer.jsx`
+- `src/components/seo/SEOScore.jsx`
+- `src/components/seo/SEOSuggestions.jsx`
+- `src/utils/seoCalculator.js`
+- SEO-related route, navigation, dashboard, upload, activity, and demo-data snippets preserved as comments
+
+The `/seo` route, sidebar link, dashboard shortcut, upload-page scoring controls, SEO score state, and SEO-only demo UI are currently commented out. SEO metadata fields used by the blog and public pages remain active because they support those existing workflows. Restoring the feature means uncommenting the marked integrations and restoring their imports.
 
 ## Development notes
 
 - The app defaults to the user's system color preference and persists theme changes.
 - The admin route currently treats the default demo user as an administrator.
+- SEO is intentionally unavailable in the current UI but remains preserved for future restoration.
 - There are no environment variables or external service credentials required for the current build.
 - A production version would need a backend for authentication, OAuth, media storage, publishing APIs, scheduling, and persistent analytics.
 

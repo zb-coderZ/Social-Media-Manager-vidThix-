@@ -102,6 +102,8 @@ const Dashboard = () => {
           trend={stats.scheduledPosts > 0 ? "up" : null}
           trendValue={stats.scheduledPosts > 0 ? "+8%" : null}
         />
+        {/* SEO temporarily disabled. Restore the average SEO score card here. */}
+        {/*
         <StatsCard
           icon="Target"
           title="Avg SEO Score"
@@ -115,6 +117,7 @@ const Dashboard = () => {
           }
           trendValue={stats.avgSEOScore > 0 ? `${stats.avgSEOScore}/100` : null}
         />
+        */}
         <StatsCard
           icon="Globe"
           title="Connected Platforms"
@@ -132,7 +135,9 @@ const Dashboard = () => {
           <div className="h-64 dark:bg-gradient-to-br dark:from-indigo-600/10 dark:to-cyan-500/10 dark:border dark:border-indigo-500/20 bg-gradient-to-br from-indigo-100 to-cyan-100 border border-indigo-200 rounded-xl flex items-center justify-center">
             <div className="text-center">
               <TrendingUp className="w-12 h-12 dark:text-indigo-400 text-indigo-600 mx-auto mb-3" />
-              <p className="dark:text-gray-300 text-gray-700 font-medium">Chart visualization</p>
+              <p className="dark:text-gray-300 text-gray-700 font-medium">
+                Chart visualization
+              </p>
               <p className="text-sm dark:text-gray-500 text-gray-600 mt-1">
                 Your upload trends over time
               </p>
@@ -152,7 +157,9 @@ const Dashboard = () => {
                   <p className="text-2xl font-bold dark:text-white text-gray-900">
                     {stats.totalViews || "0"}
                   </p>
-                  <p className="text-sm dark:text-gray-400 text-gray-600">Total Views</p>
+                  <p className="text-sm dark:text-gray-400 text-gray-600">
+                    Total Views
+                  </p>
                 </div>
               </div>
               <span className="px-3 py-1 dark:bg-emerald-500/20 dark:text-emerald-400 dark:border dark:border-emerald-500/30 bg-emerald-50 text-emerald-700 border border-emerald-200 text-sm font-semibold rounded-lg">
@@ -171,7 +178,9 @@ const Dashboard = () => {
                   <p className="text-2xl font-bold dark:text-white text-gray-900">
                     {stats.engagement || "0"}%
                   </p>
-                  <p className="text-sm dark:text-gray-400 text-gray-600">Engagement Rate</p>
+                  <p className="text-sm dark:text-gray-400 text-gray-600">
+                    Engagement Rate
+                  </p>
                 </div>
               </div>
               <span className="px-3 py-1 dark:bg-emerald-500/20 dark:text-emerald-400 dark:border dark:border-emerald-500/30 bg-emerald-50 text-emerald-700 border border-emerald-200 text-sm font-semibold rounded-lg">
@@ -215,6 +224,8 @@ const Dashboard = () => {
           </span>
         </Link>
 
+        {/* SEO temporarily disabled. Restore the analyzer quick action here. */}
+        {/*
         <Link
           to="/seo"
           className="p-6 dark:bg-gradient-to-br dark:from-indigo-600 dark:to-indigo-700 dark:hover:from-indigo-700 dark:hover:to-indigo-800 dark:text-white dark:hover:shadow-glow bg-gradient-to-br from-indigo-400 to-indigo-500 hover:from-indigo-500 hover:to-indigo-600 text-white rounded-2xl hover:shadow-md hover:-translate-y-1 transition-all duration-200 group transform"
@@ -229,6 +240,7 @@ const Dashboard = () => {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
           </span>
         </Link>
+        */}
 
         <Link
           to="/platforms"

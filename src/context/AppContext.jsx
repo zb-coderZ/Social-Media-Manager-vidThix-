@@ -147,7 +147,8 @@ export function AppProvider({ children }) {
     setStats((prev) => ({
       ...prev,
       totalUploads: prev.totalUploads + 1,
-      avgSEOScore: calculateAverageSEO([...uploads, newUpload]),
+      // SEO temporarily disabled. Restore the average score update with the SEO feature.
+      // avgSEOScore: calculateAverageSEO([...uploads, newUpload]),
     }));
 
     return newUpload;
@@ -181,15 +182,15 @@ export function AppProvider({ children }) {
     }));
   };
 
-  // Calculate average SEO score
-  const calculateAverageSEO = (uploadsList) => {
-    if (uploadsList.length === 0) return 0;
-    const total = uploadsList.reduce(
-      (sum, upload) => sum + (upload.seoScore || 0),
-      0,
-    );
-    return Math.round(total / uploadsList.length);
-  };
+  // SEO temporarily disabled. Preserve the scoring helper for later restoration.
+  // const calculateAverageSEO = (uploadsList) => {
+  //   if (uploadsList.length === 0) return 0;
+  //   const total = uploadsList.reduce(
+  //     (sum, upload) => sum + (upload.seoScore || 0),
+  //     0,
+  //   );
+  //   return Math.round(total / uploadsList.length);
+  // };
 
   // Update stats
   const updateStats = (updates) => {

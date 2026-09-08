@@ -50,12 +50,13 @@ export const PLATFORMS = [
 ];
 
 export const FEATURES = [
-  {
-    icon: "Target",
-    title: "SEO Optimization Engine",
-    description:
-      "Intelligent algorithm analyzes your content and provides actionable suggestions to improve discoverability and ranking.",
-  },
+  // SEO temporarily disabled. Preserve the feature card for restoration.
+  // {
+  //   icon: "Target",
+  //   title: "SEO Optimization Engine",
+  //   description:
+  //     "Intelligent algorithm analyzes your content and provides actionable suggestions to improve discoverability and ranking.",
+  // },
   {
     icon: "Calendar",
     title: "Smart Scheduling",
@@ -97,13 +98,14 @@ export const WORKFLOW_STEPS = [
       "Drag and drop your videos with instant preview and file validation.",
     icon: "Upload",
   },
-  {
-    step: 3,
-    title: "Optimize SEO",
-    description:
-      "Get intelligent suggestions to improve your content visibility and ranking.",
-    icon: "Sparkles",
-  },
+  // SEO temporarily disabled. Preserve the workflow step for restoration.
+  // {
+  //   step: 3,
+  //   title: "Optimize SEO",
+  //   description:
+  //     "Get intelligent suggestions to improve your content visibility and ranking.",
+  //   icon: "Sparkles",
+  // },
   {
     step: 4,
     title: "Schedule Post",
@@ -128,7 +130,7 @@ export const RECENT_ACTIVITY = [
     platform: "youtube",
     status: "published",
     date: "2 hours ago",
-    seoScore: 85,
+    // seoScore: 85, // SEO temporarily disabled
     thumbnail: null,
   },
   {
@@ -139,7 +141,7 @@ export const RECENT_ACTIVITY = [
     status: "scheduled",
     scheduledTime: "2026-03-30T14:00:00Z",
     date: "Scheduled for tomorrow",
-    seoScore: 92,
+    // seoScore: 92, // SEO temporarily disabled
     thumbnail: null,
   },
   {
@@ -149,7 +151,7 @@ export const RECENT_ACTIVITY = [
     platform: "youtube",
     status: "published",
     date: "1 day ago",
-    seoScore: 78,
+    // seoScore: 78, // SEO temporarily disabled
     thumbnail: null,
   },
   {
@@ -160,7 +162,7 @@ export const RECENT_ACTIVITY = [
     status: "scheduled",
     scheduledTime: "2026-04-01T10:00:00Z",
     date: "Scheduled for next week",
-    seoScore: 88,
+    // seoScore: 88, // SEO temporarily disabled
     thumbnail: null,
   },
   {
@@ -170,7 +172,7 @@ export const RECENT_ACTIVITY = [
     platform: "youtube",
     status: "published",
     date: "3 days ago",
-    seoScore: 95,
+    // seoScore: 95, // SEO temporarily disabled
     thumbnail: null,
   },
 ];
@@ -252,7 +254,7 @@ export const DEFAULT_USER = {
 export const INITIAL_STATS = {
   totalUploads: 0,
   scheduledPosts: 0,
-  avgSEOScore: 0,
+  // avgSEOScore: 0, // SEO temporarily disabled
   connectedPlatforms: 0,
   totalViews: 0,
   engagement: 0,

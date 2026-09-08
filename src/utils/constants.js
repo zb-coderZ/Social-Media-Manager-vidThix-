@@ -16,7 +16,8 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   BLOG_ADMIN: "/dashboard/blog",
   UPLOAD: "/upload",
-  SEO: "/seo",
+  // SEO temporarily disabled. Restore when the analyzer is re-enabled.
+  // SEO: "/seo",
   PLATFORMS: "/platforms",
   SETTINGS: "/settings",
   SCHEDULED: "/scheduled",
@@ -32,7 +33,8 @@ export const SIDEBAR_ITEMS = [
     requiredAdmin: true,
   },
   { name: "Upload Content", href: "/upload", icon: "Upload" },
-  { name: "SEO Analyzer", href: "/seo", icon: "Target" },
+  // SEO temporarily disabled. Restore when the analyzer is re-enabled.
+  // { name: "SEO Analyzer", href: "/seo", icon: "Target" },
   { name: "Scheduled Posts", href: "/scheduled", icon: "Calendar" },
   { name: "Platforms", href: "/platforms", icon: "Globe" },
   { name: "Settings", href: "/settings", icon: "Settings" },
@@ -86,13 +88,13 @@ export const UPLOAD_CONFIG = {
   SIMULATION_PROGRESS_STEP: 10, // percentage
 };
 
-// SEO scoring thresholds
-export const SEO_THRESHOLDS = {
-  EXCELLENT: 90,
-  GOOD: 70,
-  FAIR: 40,
-  POOR: 0,
-};
+// SEO scoring thresholds (temporarily disabled; preserved for restoration)
+// export const SEO_THRESHOLDS = {
+//   EXCELLENT: 90,
+//   GOOD: 70,
+//   FAIR: 40,
+//   POOR: 0,
+// };
 
 // Color scheme (matching design system)
 export const COLORS = {
@@ -143,5 +145,5 @@ export const API_DELAYS = {
   UPLOAD: 3000,
   CONNECT_PLATFORM: 2000,
   SAVE_SETTINGS: 1000,
-  CALCULATE_SEO: 500,
+  // CALCULATE_SEO: 500, // SEO temporarily disabled
 };

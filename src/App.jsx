@@ -16,7 +16,8 @@ const MainLayout = lazy(() => import("./layout/MainLayout"));
 const Home = lazy(() => import("./pages/Home"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Upload = lazy(() => import("./pages/Upload"));
-const SEOAnalyzer = lazy(() => import("./pages/SEOAnalyzer"));
+// SEO temporarily disabled. Restore this import with the /seo route below.
+// const SEOAnalyzer = lazy(() => import("./pages/SEOAnalyzer"));
 const Platforms = lazy(() => import("./pages/Platforms"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -67,7 +68,8 @@ function AppShell() {
             <Route element={<MainLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/upload" element={<Upload />} />
-              <Route path="/seo" element={<SEOAnalyzer />} />
+              {/* SEO temporarily disabled. Restore this route to re-enable the analyzer. */}
+              {/* <Route path="/seo" element={<SEOAnalyzer />} /> */}
               <Route path="/platforms" element={<Platforms />} />
               <Route path="/settings" element={<Settings />} />
               <Route

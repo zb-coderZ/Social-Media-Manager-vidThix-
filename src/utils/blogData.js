@@ -70,10 +70,11 @@ export const BLOG_POSTS = [
         label: "Best Time to Post on Instagram",
         to: "/blog/best-time-to-post-instagram",
       },
-      {
-        label: "Try the SEO Analyzer",
-        to: "/seo",
-      },
+      // SEO temporarily disabled. Restore this link when the analyzer returns.
+      // {
+      //   label: "Try the SEO Analyzer",
+      //   to: "/seo",
+      // },
     ],
   },
   {

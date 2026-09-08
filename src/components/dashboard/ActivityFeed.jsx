@@ -2,7 +2,9 @@ import { getIconByName } from "../../utils/iconMap";
 import { formatRelativeTime } from "../../utils/helpers";
 
 const ActivityItem = ({ activity }) => {
-  const { type, title, platform, status, date, seoScore } = activity;
+  const { type, title, platform, status, date } = activity;
+  // SEO temporarily disabled. Preserve this field for restoration.
+  // const { seoScore } = activity;
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -45,11 +47,14 @@ const ActivityItem = ({ activity }) => {
           <h4 className="text-sm font-semibold dark:text-white text-gray-900 truncate">
             {title}
           </h4>
+          {/* SEO temporarily disabled. Restore the score label here later. */}
+          {/*
           {seoScore !== undefined && (
             <span className="text-xs font-medium dark:text-gray-500 text-gray-600 flex-shrink-0">
               SEO: {seoScore}
             </span>
           )}
+          */}
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
