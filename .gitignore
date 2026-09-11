@@ -22,7 +22,6 @@ backend/**/*.pyc
 *.pyc
 
 # Virtual environments
-backend/venv/
 backend/.venv/
 
 # Environment variables
