@@ -235,8 +235,8 @@ Create a virtual environment:
 ### Windows
 
 ```bash
-python -m venv venv
-venv\Scripts\activate
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
 ### Linux / macOS
