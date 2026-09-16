@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useApp } from "../context/AppContext";
 import { useToast } from "../context/ToastContext";
 import { PLATFORMS } from "../utils/dummyData";
 import { api } from "../utils/api";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { getIconByName } from "../utils/iconMap";
 
+/* eslint-disable react-hooks/static-components */
 const PlatformCard = ({
   platform,
   connection,
@@ -113,20 +113,52 @@ const PlatformCard = ({
   );
 };
 
+/* eslint-enable react-hooks/static-components */
+
 const Platforms = () => {
-  const { connectedPlatforms, disconnectPlatform } = useApp();
   const { success, error, info } = useToast();
   const location = useLocation();
   const navigate = useNavigate();
+  const [connections, setConnections] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const [connectingPlatform, setConnectingPlatform] = useState(null);
+
+  const loadPlatforms = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const platformConnections = await api.getPlatforms();
+      setConnections(
+        Object.fromEntries(
+          platformConnections.map((connection) => [connection.platform, {
+            connected: connection.status === "connected",
+            channelName: connection.account_name,
+            avatar: connection.account_avatar,
+            subscribers: connection.subscriber_count,
+            status: connection.status,
+          }]),
+        ),
+      );
+    } catch (requestError) {
+      if (requestError.status === 401) {
+        navigate("/auth", { replace: true });
+        return;
+      }
+      error(requestError.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [error, navigate]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     if (params.get("connected") === "youtube") {
+      loadPlatforms();
       success("YouTube connected successfully!");
-      navigate(location.pathname, { replace: true });
+      window.history.replaceState({}, "", location.pathname);
+      return;
     }
-  }, [location.pathname, location.search, navigate, success]);
+    loadPlatforms();
+  }, [location.pathname, location.search, loadPlatforms, success]);
 
   const handleConnect = async (platformId) => {
     // Only YouTube is enabled
@@ -141,18 +173,29 @@ const Platforms = () => {
       const { authorization_url } = await api.youtubeConnect();
       window.location.assign(authorization_url);
     } catch (requestError) {
-      error(requestError.message || "Failed to start YouTube connection.");
+      if (requestError.status === 401) {
+        navigate("/auth", { replace: true });
+        return;
+      }
+      error(requestError.message);
       setConnectingPlatform(null);
     }
   };
 
   const handleDisconnect = async (platformId) => {
+    setConnectingPlatform(platformId);
     try {
       await api.disconnectPlatform(platformId);
-      disconnectPlatform(platformId);
+      await loadPlatforms();
       success("Platform disconnected successfully.");
     } catch (requestError) {
-      error(requestError.message || "Failed to disconnect platform.");
+      if (requestError.status === 401) {
+        navigate("/auth", { replace: true });
+        return;
+      }
+      error(requestError.message);
+    } finally {
+      setConnectingPlatform(null);
     }
   };
 
@@ -185,7 +228,7 @@ const Platforms = () => {
           </p>
           <p className="text-3xl font-bold dark:text-emerald-400 text-emerald-600">
             {
-              Object.values(connectedPlatforms).filter((p) => p.connected)
+              Object.values(connections).filter((p) => p.connected)
                 .length
             }
           </p>
@@ -206,10 +249,10 @@ const Platforms = () => {
           <PlatformCard
             key={platform.id}
             platform={platform}
-            connection={connectedPlatforms[platform.id]}
+              connection={connections[platform.id]}
             onConnect={handleConnect}
             onDisconnect={handleDisconnect}
-            isConnecting={connectingPlatform === platform.id}
+            isConnecting={isLoading || connectingPlatform === platform.id}
           />
         ))}
       </div>

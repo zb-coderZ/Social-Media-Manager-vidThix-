@@ -20,6 +20,7 @@ const Upload = lazy(() => import("./pages/Upload"));
 // const SEOAnalyzer = lazy(() => import("./pages/SEOAnalyzer"));
 const Platforms = lazy(() => import("./pages/Platforms"));
 const Settings = lazy(() => import("./pages/Settings"));
+const Scheduled = lazy(() => import("./pages/Scheduled"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const BlogAdmin = lazy(() => import("./pages/BlogAdmin"));
@@ -98,10 +99,7 @@ function AppShell() {
               />
 
               {/* Alias routes */}
-              <Route
-                path="/scheduled"
-                element={<Navigate to="/dashboard" replace />}
-              />
+              <Route path="/scheduled" element={<Scheduled />} />
             </Route>
 
             {/* 404 - Redirect to home */}

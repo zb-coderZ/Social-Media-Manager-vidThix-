@@ -53,7 +53,9 @@ async function request(path, options = {}, allowRefresh = true) {
 
   const data = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(data.detail || "The request failed");
+    const error = new Error(data.detail || "The request failed");
+    error.status = response.status;
+    throw error;
   }
   return data;
 }
@@ -71,9 +73,15 @@ export const api = {
     }),
   me: () => request("/api/auth/me"),
   youtubeConnect: () => request("/api/auth/youtube/connect"),
+  getPlatforms: () => request("/api/platforms"),
   listPlatforms: () => request("/api/platforms"),
   disconnectPlatform: (platform) =>
     request(`/api/platforms/${platform}`, { method: "DELETE" }),
+  getStats: () => request("/api/dashboard/stats"),
+  getVideos: () => request("/api/videos"),
+  getScheduled: () => request("/api/scheduled"),
+  deleteScheduled: (id) =>
+    request(`/api/scheduled/${id}`, { method: "DELETE" }),
   uploadVideo: (formData) =>
     request("/api/videos/upload", {
       method: "POST",

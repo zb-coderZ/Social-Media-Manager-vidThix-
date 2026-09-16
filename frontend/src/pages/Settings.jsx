@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { User, Mail, Bell, Moon } from "lucide-react";
-import { useApp } from "../context/AppContext";
 import { useToast } from "../context/ToastContext";
+import { api } from "../utils/api";
 import { getInitials } from "../utils/helpers";
 
 const Settings = () => {
-  const { user, updateUser } = useApp();
-  const { success } = useToast();
+  const { error: showError } = useToast();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const [formData, setFormData] = useState({
-    name: user.name,
-    email: user.email,
+    name: "",
+    email: "",
   });
 
   const [notifications, setNotifications] = useState({
@@ -19,16 +21,32 @@ const Settings = () => {
     updates: true,
   });
 
-  const [isSaving, setIsSaving] = useState(false);
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const profile = await api.me();
+        setFormData({ name: profile.name, email: profile.email });
+      } catch (requestError) {
+        if (requestError.status === 401) {
+          navigate("/auth", { replace: true });
+          return;
+        }
+        showError(requestError.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const handleSaveProfile = async () => {
-    setIsSaving(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    loadProfile();
+  }, [navigate, showError]);
 
-    updateUser(formData);
-    success("Profile updated successfully!");
-    setIsSaving(false);
-  };
+  if (isLoading) {
+    return (
+      <div className="flex-1 p-8 dark:text-gray-400 text-gray-600">
+        Loading profile...
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-4xl mx-auto">
@@ -81,9 +99,8 @@ const Settings = () => {
               type="text"
               id="name"
               value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
+              disabled={isLoading}
+              value={formData.name}
               className="w-full px-4 py-3 dark:bg-navy-900 dark:border dark:border-navy-700 dark:text-white dark:focus:ring-indigo-500 dark:placeholder:text-gray-500 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 rounded-xl"
             />
           </div>
@@ -100,21 +117,22 @@ const Settings = () => {
               type="email"
               id="email"
               value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
+              disabled={isLoading}
+              value={formData.email}
               className="w-full px-4 py-3 dark:bg-navy-900 dark:border dark:border-navy-700 dark:text-white dark:focus:ring-indigo-500 dark:placeholder:text-gray-500 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 rounded-xl"
             />
           </div>
 
           {/* Save Button */}
           <button
-            onClick={handleSaveProfile}
-            disabled={isSaving}
+            disabled
             className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 dark:hover:from-orange-600 dark:hover:to-orange-700 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-orange disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSaving ? "Saving..." : "Save Changes"}
+            Save Changes
           </button>
+          <p className="text-sm dark:text-gray-400 text-gray-600">
+            Profile editing will be enabled once the backend endpoint is added.
+          </p>
         </div>
       </div>
 

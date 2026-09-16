@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   Upload as UploadIcon,
@@ -8,33 +8,63 @@ import {
   Clock,
 } from "lucide-react";
 import { useApp } from "../context/AppContext";
+import { useToast } from "../context/ToastContext";
+import { api } from "../utils/api";
 import StatsCard from "../components/dashboard/StatsCard";
 import ActivityFeed from "../components/dashboard/ActivityFeed";
 import PlatformIcons from "../components/dashboard/PlatformIcons";
-import { RECENT_ACTIVITY } from "../utils/dummyData";
 
 const Dashboard = () => {
-  const { user, stats, connectedPlatforms, uploads, scheduledPosts } = useApp();
+  const { user, connectedPlatforms } = useApp();
+  const { error: showError } = useToast();
+  const navigate = useNavigate();
+  const [stats, setStats] = useState({
+    total_uploads: 0,
+    total_scheduled: 0,
+    connected_platforms: 0,
+    total_views: 0,
+    engagement: 0,
+  });
   const [recentActivity, setRecentActivity] = useState([]);
 
   useEffect(() => {
-    // Combine uploads and scheduled posts for activity feed
-    const combined = [
-      ...uploads.map((u) => ({ ...u, type: "upload" })),
-      ...scheduledPosts.map((s) => ({ ...s, type: "scheduled" })),
-    ]
-      .sort(
-        (a, b) =>
-          new Date(b.timestamp || b.createdAt) -
-          new Date(a.timestamp || b.createdAt),
-      )
-      .slice(0, 5);
+    const loadDashboard = async () => {
+      try {
+        const [statsResponse, videosResponse] = await Promise.all([
+          api.getStats(),
+          api.getVideos(),
+        ]);
+        setStats(statsResponse);
+        setRecentActivity(videosResponse.map((video) => ({
+          ...video,
+          id: video.id || video._id,
+          type: video.status === "scheduled" ? "scheduled" : "upload",
+          platform: video.platform || "youtube",
+          date: video.created_at,
+          title: video.external_url ? (
+            <a
+              href={video.external_url}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:underline"
+            >
+              {video.title}
+            </a>
+          ) : (
+            video.title
+          ),
+        })));
+      } catch (requestError) {
+        if (requestError.status === 401) {
+          navigate("/auth", { replace: true });
+          return;
+        }
+        showError(requestError.message);
+      }
+    };
 
-    // Use dummy data if no real activity
-    setRecentActivity(
-      combined.length > 0 ? combined : RECENT_ACTIVITY.slice(0, 5),
-    );
-  }, [uploads, scheduledPosts]);
+    loadDashboard();
+  }, [navigate, showError]);
 
   return (
     <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8">
@@ -73,7 +103,7 @@ const Dashboard = () => {
           </Link>
         </div>
         <PlatformIcons connectedPlatforms={connectedPlatforms} />
-        {stats.connectedPlatforms === 0 && (
+        {stats.connected_platforms === 0 && (
           <p className="text-sm dark:text-gray-500 text-gray-600 mt-4">
             No platforms connected yet.{" "}
             <Link
@@ -91,16 +121,16 @@ const Dashboard = () => {
         <StatsCard
           icon="Upload"
           title="Total Uploads"
-          value={stats.totalUploads}
-          trend={stats.totalUploads > 0 ? "up" : null}
-          trendValue={stats.totalUploads > 0 ? "+12%" : null}
+          value={stats.total_uploads}
+          trend={stats.total_uploads > 0 ? "up" : null}
+          trendValue={stats.total_uploads > 0 ? "+12%" : null}
         />
         <StatsCard
           icon="Calendar"
           title="Scheduled Posts"
-          value={stats.scheduledPosts}
-          trend={stats.scheduledPosts > 0 ? "up" : null}
-          trendValue={stats.scheduledPosts > 0 ? "+8%" : null}
+          value={stats.total_scheduled}
+          trend={stats.total_scheduled > 0 ? "up" : null}
+          trendValue={stats.total_scheduled > 0 ? "+8%" : null}
         />
         {/* SEO temporarily disabled. Restore the average SEO score card here. */}
         {/*
@@ -121,7 +151,7 @@ const Dashboard = () => {
         <StatsCard
           icon="Globe"
           title="Connected Platforms"
-          value={stats.connectedPlatforms}
+          value={stats.connected_platforms}
         />
       </div>
 
@@ -155,7 +185,7 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <p className="text-2xl font-bold dark:text-white text-gray-900">
-                    {stats.totalViews || "0"}
+                    {stats.total_views || "0"}
                   </p>
                   <p className="text-sm dark:text-gray-400 text-gray-600">
                     Total Views
