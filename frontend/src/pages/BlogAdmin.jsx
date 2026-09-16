@@ -104,12 +104,10 @@ const BlogAdmin = () => {
     setIsEditorOpen(false);
   };
 
-  if (!isAdmin) {
-    return <Navigate to="/dashboard" replace />;
-  }
+
 
   return (
-    <div className="px-4 py-6 sm:px-6 sm:py-8 space-y-6">
+    <div className="w-full min-w-0 space-y-6">
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">

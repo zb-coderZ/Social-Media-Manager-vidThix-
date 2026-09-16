@@ -7,7 +7,7 @@ const PlatformSelector = ({ selected, onChange }) => {
       <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
         Select Platform
       </label>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3">
         {PLATFORMS.map((platform) => {
           const Icon = getIconByName(platform.icon, "Globe");
           const CheckIcon = getIconByName("Check");

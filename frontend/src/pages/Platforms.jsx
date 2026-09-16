@@ -203,7 +203,7 @@ const Platforms = () => {
   };
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-7xl mx-auto w-full">
+    <div className="flex-1 space-y-8 max-w-7xl mx-auto w-full min-w-0">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">

@@ -49,7 +49,7 @@ const Settings = () => {
   }
 
   return (
-    <div className="flex-1 space-y-6 max-w-4xl mx-auto">
+    <div className="flex-1 space-y-6 max-w-4xl mx-auto w-full min-w-0">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">
@@ -61,7 +61,7 @@ const Settings = () => {
       </div>
 
       {/* Profile Section */}
-      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
+      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-4 sm:p-6 w-full min-w-0">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 dark:bg-indigo-600/20 dark:border dark:border-indigo-500/30 bg-indigo-100 border border-indigo-300 rounded-xl flex items-center justify-center">
             <User className="w-5 h-5 dark:text-indigo-400 text-indigo-600" />
@@ -102,7 +102,9 @@ const Settings = () => {
               id="name"
               value={formData.name}
               disabled={isLoading}
-              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               className="w-full px-4 py-3 dark:bg-navy-900 dark:border dark:border-navy-700 dark:text-white dark:focus:ring-indigo-500 dark:placeholder:text-gray-500 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 rounded-xl"
             />
           </div>
@@ -120,7 +122,9 @@ const Settings = () => {
               id="email"
               value={formData.email}
               disabled={isLoading}
-              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               className="w-full px-4 py-3 dark:bg-navy-900 dark:border dark:border-navy-700 dark:text-white dark:focus:ring-indigo-500 dark:placeholder:text-gray-500 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 rounded-xl"
             />
           </div>

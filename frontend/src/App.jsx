@@ -38,13 +38,6 @@ function ProtectedRoute({ children }) {
 }
 
 function AdminRoute({ children }) {
-  const { user } = useApp();
-  const isAdmin = user?.isAdmin ?? true;
-
-  if (!isAdmin) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
   return children;
 }
 

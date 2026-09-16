@@ -55,7 +55,7 @@ const Scheduled = () => {
   };
 
   return (
-    <div className="flex-1 space-y-6 max-w-5xl mx-auto">
+    <div className="flex-1 space-y-6 max-w-5xl mx-auto w-full min-w-0">
       <div>
         <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">
           Scheduled Posts
@@ -65,7 +65,7 @@ const Scheduled = () => {
         </p>
       </div>
 
-      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
+      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-4 sm:p-6 w-full min-w-0">
         {isLoading ? (
           <LoadingSpinner size="lg" text="Loading scheduled posts..." />
         ) : scheduledPosts.length === 0 ? (
@@ -74,13 +74,13 @@ const Scheduled = () => {
             No scheduled posts yet.
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-3 w-full min-w-0">
             {scheduledPosts.map((post) => {
               const postId = post.id || post._id;
               return (
                 <div
                   key={postId}
-                  className="flex items-center justify-between gap-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-shadow duration-200 p-4"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-shadow duration-200 p-4 w-full min-w-0"
                 >
                   <div className="min-w-0">
                     <p className="font-semibold dark:text-white text-gray-900 truncate">

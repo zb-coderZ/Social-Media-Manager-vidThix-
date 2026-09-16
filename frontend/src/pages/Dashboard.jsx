@@ -69,7 +69,7 @@ const Dashboard = () => {
   }, [navigate, showError]);
 
   return (
-    <div className="flex-1 space-y-6">
+    <div className="flex-1 space-y-6 w-full min-w-0">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>

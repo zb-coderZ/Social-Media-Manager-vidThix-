@@ -189,7 +189,7 @@ const Upload = () => {
     selectedFile && formData.title && formData.description && formData.category;
 
   return (
-    <div className="flex-1 space-y-6 max-w-5xl mx-auto">
+    <div className="flex-1 space-y-6 max-w-5xl mx-auto w-full min-w-0">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-2">
@@ -201,7 +201,7 @@ const Upload = () => {
       </div>
 
       {/* Progress Steps */}
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         {[
           {
             icon: "upload",
@@ -241,10 +241,10 @@ const Upload = () => {
           >
             <div className="flex items-center gap-2">
               {step.status === "complete" ? (
-                <CheckCircle2 className="w-5 h-5 dark:text-emerald-400 text-emerald-600" />
+                <CheckCircle2 className="w-5 h-5 dark:text-emerald-400 text-emerald-600 flex-shrink-0" />
               ) : (
                 <span
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
                     step.status === "active"
                       ? "text-brand-600 dark:text-brand-400"
                       : "text-slate-400 dark:text-slate-500"
@@ -254,7 +254,7 @@ const Upload = () => {
                 </span>
               )}
               <span
-                className={`text-sm font-semibold ${
+                className={`text-sm font-semibold truncate ${
                   step.status === "complete"
                     ? "text-brand-600 dark:text-brand-400"
                     : step.status === "active"
@@ -270,11 +270,11 @@ const Upload = () => {
       </div>
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 xl:gap-8 w-full min-w-0">
         {/* Left Column - Upload & Form */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6 w-full min-w-0">
           {/* Platform Selector */}
-          <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card">
+          <div className="p-4 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card w-full min-w-0">
             <PlatformSelector
               selected={selectedPlatform}
               onChange={setSelectedPlatform}
@@ -282,7 +282,7 @@ const Upload = () => {
           </div>
 
           {/* Upload Box */}
-          <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card">
+          <div className="p-4 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card w-full min-w-0">
             <UploadBox
               onFileSelect={handleFileSelect}
               isUploading={uploadStatus === UPLOAD_STATUS.UPLOADING}
@@ -297,7 +297,7 @@ const Upload = () => {
 
           {/* Video Form */}
           {selectedFile && (
-            <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card">
+            <div className="p-4 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card w-full min-w-0">
               <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">
                 Video Details
               </h3>
@@ -311,11 +311,11 @@ const Upload = () => {
         </div>
 
         {/* Right Column - Actions */}
-        <div className="space-y-6">
+        <div className="lg:col-span-1 space-y-6 w-full min-w-0">
           {/* SEO temporarily disabled. Restore the score panel here later. */}
 
           {/* Actions */}
-          <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card space-y-3">
+          <div className="p-4 sm:p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card space-y-3 w-full min-w-0">
             <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">
               Actions
             </h3>
