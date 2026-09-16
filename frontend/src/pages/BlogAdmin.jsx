@@ -109,20 +109,20 @@ const BlogAdmin = () => {
   }
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-6">
-      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div className="px-4 py-6 sm:px-6 sm:py-8 space-y-6">
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-3xl font-bold dark:text-white text-gray-900">
+          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
             Manage Blog Content
           </h1>
-          <p className="dark:text-gray-400 text-gray-600 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Create, edit, and publish SEO-ready articles from your dashboard.
           </p>
         </div>
 
         <button
           onClick={handleNewArticle}
-          className="px-5 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold transition-colors duration-200"
+          className="bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150"
         >
           + New Article
         </button>

@@ -32,7 +32,9 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
         />
         <div className="flex justify-between mt-1">
           {errors.title && (
-            <p className="text-xs text-red-500 dark:text-red-400">{errors.title}</p>
+            <p className="text-xs text-red-500 dark:text-red-400">
+              {errors.title}
+            </p>
           )}
           <p
             className={`text-xs ml-auto ${
@@ -72,7 +74,9 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
         />
         <div className="flex justify-between mt-1">
           {errors.description && (
-            <p className="text-xs text-red-500 dark:text-red-400">{errors.description}</p>
+            <p className="text-xs text-red-500 dark:text-red-400">
+              {errors.description}
+            </p>
           )}
           <p
             className={`text-xs ml-auto ${
@@ -141,7 +145,9 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
           ))}
         </select>
         {errors.category && (
-          <p className="text-xs text-red-500 dark:text-red-400 mt-1">{errors.category}</p>
+          <p className="text-xs text-red-500 dark:text-red-400 mt-1">
+            {errors.category}
+          </p>
         )}
       </div>
     </div>

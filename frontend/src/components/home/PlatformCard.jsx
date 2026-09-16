@@ -7,24 +7,20 @@ const PlatformCard = ({ platform }) => {
   return (
     <div
       className={`group rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6 ${
-        enabled
-          ? "cursor-pointer"
-          : "opacity-60"
+        enabled ? "cursor-pointer" : "opacity-60"
       }`}
     >
       <div className="flex flex-col gap-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div
-              className={`rounded-xl p-2.5 shrink-0 transition-transform duration-200 ${
+            className={`rounded-xl p-2.5 shrink-0 transition-transform duration-200 ${
               enabled
                 ? "bg-brand-50 dark:bg-brand-950/40 text-brand-600 dark:text-brand-400"
                 : "bg-slate-100 dark:bg-slate-800 text-slate-400 grayscale"
             }`}
           >
-            <Icon
-              className="w-6 h-6"
-            />
+            <Icon className="w-6 h-6" />
           </div>
 
           {/* Status Badge */}

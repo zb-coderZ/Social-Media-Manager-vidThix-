@@ -38,8 +38,8 @@ const Blog = () => {
     <div className="min-h-screen dark:bg-navy-950/20 bg-white/20">
       <Navbar isFixed={false} />
 
-      <main className="px-4 sm:px-6 lg:px-8 pt-10 pb-20">
-        <div className="max-w-7xl mx-auto space-y-10">
+      <main className="max-w-7xl mx-auto w-full px-4 py-6 sm:px-6 sm:py-8">
+        <div className="max-w-7xl mx-auto space-y-6">
           <BlogHeader
             title="vidThix Insights"
             subtitle="Learn social media growth, SEO strategies, and content automation."
@@ -51,18 +51,19 @@ const Blog = () => {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search articles..."
-              className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150"
             />
           </div>
 
           {filteredBlogs.length === 0 ? (
-            <div className="rounded-2xl bg-white dark:bg-navy-800/70 border border-gray-200/70 dark:border-indigo-600/30 p-12 text-center shadow-sm">
-              <p className="text-lg font-semibold dark:text-white text-gray-900">
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div className="bg-brand-50 dark:bg-brand-950/40 text-brand-600 dark:text-brand-400 rounded-2xl p-4 mb-4" />
+              <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                 No blog posts yet
               </p>
             </div>
           ) : (
-            <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredBlogs.map((blog) => (
                 <BlogCard key={blog.id} blog={blog} />
               ))}
