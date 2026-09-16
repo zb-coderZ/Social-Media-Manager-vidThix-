@@ -9,7 +9,7 @@ import { FEATURES, PLATFORMS, WORKFLOW_STEPS } from "../utils/dummyData";
 
 const Home = () => {
   return (
-    <div className="relative min-h-screen dark:bg-navy-950/20 bg-white/20">
+    <div className="relative min-h-screen bg-surface-light dark:bg-surface-dark">
       <Navbar />
 
       {/* Hero Section */}
@@ -96,11 +96,11 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/dashboard"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white hover:bg-gray-50 dark:text-indigo-600 text-indigo-600 font-semibold rounded-xl transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150 focus-visible:outline-none focus-visible:shadow-focus"
             >
               Start Free Trial
             </Link>
-            <button className="inline-flex items-center justify-center px-8 py-4 dark:bg-indigo-700 dark:hover:bg-indigo-800 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl border-2 dark:border-white/20 border-white/30 transition-all duration-200 hover:shadow-xl hover:-translate-y-0.5">
+            <button className="inline-flex items-center justify-center bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150">
               Schedule a Demo
             </button>
           </div>

@@ -55,7 +55,7 @@ const Scheduled = () => {
   };
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-5xl mx-auto">
+    <div className="flex-1 space-y-6 max-w-5xl mx-auto">
       <div>
         <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">
           Scheduled Posts
@@ -65,7 +65,7 @@ const Scheduled = () => {
         </p>
       </div>
 
-      <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
         {isLoading ? (
           <LoadingSpinner size="lg" text="Loading scheduled posts..." />
         ) : scheduledPosts.length === 0 ? (
@@ -80,7 +80,7 @@ const Scheduled = () => {
               return (
                 <div
                   key={postId}
-                  className="flex items-center justify-between gap-4 p-4 dark:bg-navy-900/60 dark:border dark:border-navy-700 bg-gray-50 border border-gray-200 rounded-xl"
+                  className="flex items-center justify-between gap-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-shadow duration-200 p-4"
                 >
                   <div className="min-w-0">
                     <p className="font-semibold dark:text-white text-gray-900 truncate">
@@ -97,7 +97,7 @@ const Scheduled = () => {
                     <button
                       onClick={() => handleCancel(postId)}
                       disabled={cancellingId === postId}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="inline-flex items-center gap-2 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-lg px-3 py-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       <XCircle className="w-4 h-4" />
                       {cancellingId === postId ? "Cancelling..." : "Cancel"}

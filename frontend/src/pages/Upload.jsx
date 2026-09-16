@@ -189,12 +189,10 @@ const Upload = () => {
     selectedFile && formData.title && formData.description && formData.category;
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-5xl mx-auto">
+    <div className="flex-1 space-y-6 max-w-5xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">
-          Upload & Publish Content
-        </h1>
+        ? "text-brand-600" : "text-slate-400"
         <p className="dark:text-gray-400 text-gray-600">
           Upload your video, customize it, publish, or schedule it.
         </p>
@@ -235,7 +233,7 @@ const Upload = () => {
               step.status === "complete"
                 ? "dark:bg-emerald-500/20 dark:border-emerald-500/30 bg-emerald-50 border-emerald-200"
                 : step.status === "active"
-                  ? "dark:bg-indigo-500/20 dark:border-indigo-500/30 bg-indigo-50 border-indigo-200"
+                  ? "text-brand-600 font-semibold border-b-2 border-brand-600"
                   : "dark:bg-navy-800/60 dark:border-navy-700 bg-gray-50 border-gray-200"
             }`}
           >
@@ -246,8 +244,8 @@ const Upload = () => {
                 <span
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                     step.status === "active"
-                      ? "dark:bg-indigo-600 dark:text-white bg-indigo-600 text-white"
-                      : "dark:bg-navy-700 dark:text-gray-400 bg-gray-300 text-gray-600"
+                      ? "text-brand-600"
+                      : "text-slate-400"
                   }`}
                 >
                   {index + 1}
@@ -256,10 +254,10 @@ const Upload = () => {
               <span
                 className={`text-sm font-semibold ${
                   step.status === "complete"
-                    ? "dark:text-emerald-400 text-emerald-700"
+                    ? "text-brand-600"
                     : step.status === "active"
-                      ? "dark:text-indigo-400 text-indigo-700"
-                      : "dark:text-gray-400 text-gray-600"
+                      ? "text-brand-600"
+                      : "text-slate-400"
                 }`}
               >
                 {step.label}
@@ -330,7 +328,7 @@ const Upload = () => {
             <button
               onClick={handleCheckSEO}
               disabled={!selectedFile || (!formData.title && !formData.description)}
-              className="w-full flex items-center justify-center gap-2 px-6 py-3 dark:bg-cyan-600/80 dark:hover:bg-cyan-700/80 dark:disabled:bg-cyan-600/40 bg-cyan-600 hover:bg-cyan-700 disabled:bg-cyan-600 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
+              className="w-full inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150 disabled:opacity-50"
             >
               <Target className="w-5 h-5" />
               Check SEO Score
@@ -339,8 +337,8 @@ const Upload = () => {
 
             <button
               onClick={() => setIsSchedulerOpen(true)}
-              disabled={!isFormComplete || isProcessing}
-              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r dark:from-indigo-600 dark:to-indigo-700 dark:hover:from-indigo-700 dark:hover:to-indigo-800 dark:disabled:from-indigo-600/40 dark:disabled:to-indigo-700/40 from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 disabled:from-indigo-500 disabled:to-indigo-600 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
+              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150 focus-visible:outline-none focus-visible:shadow-focus disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-sm"
+              className="w-full inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150 disabled:opacity-50"
             >
               <Calendar className="w-5 h-5" />
               Schedule Post

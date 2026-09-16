@@ -69,7 +69,7 @@ const Dashboard = () => {
   }, [navigate, showError]);
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8">
+    <div className="flex-1 space-y-6">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
@@ -83,7 +83,7 @@ const Dashboard = () => {
 
         <Link
           to="/upload"
-          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-orange hover:-translate-y-0.5 group transform"
+          className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150 focus-visible:outline-none focus-visible:shadow-focus"
         >
           <UploadIcon className="w-5 h-5" />
           Upload Content
@@ -92,7 +92,7 @@ const Dashboard = () => {
       </div>
 
       {/* Connected Platforms */}
-      <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-bold dark:text-white text-gray-900">
             Connected Platforms
@@ -164,9 +164,9 @@ const Dashboard = () => {
           <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
             Upload Trends
           </h3>
-          <div className="h-64 dark:bg-gradient-to-br dark:from-indigo-600/10 dark:to-cyan-500/10 dark:border dark:border-indigo-500/20 bg-gradient-to-br from-indigo-100 to-cyan-100 border border-indigo-200 rounded-xl flex items-center justify-center">
+          <div className="h-64 bg-gradient-to-br from-brand-50 to-accent-50/50 dark:from-brand-950/40 dark:to-slate-900 border border-brand-100 dark:border-brand-900 rounded-2xl flex items-center justify-center">
             <div className="text-center">
-              <TrendingUp className="w-12 h-12 dark:text-indigo-400 text-indigo-600 mx-auto mb-3" />
+              <TrendingUp className="w-12 h-12 text-brand-600 dark:text-brand-400 mx-auto mb-3" />
               <p className="dark:text-gray-300 text-gray-700 font-medium">
                 Chart visualization
               </p>
@@ -179,7 +179,7 @@ const Dashboard = () => {
 
         {/* Quick Stats */}
         <div className="space-y-4">
-          <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+          <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 dark:bg-cyan-500/20 dark:border dark:border-cyan-500/30 bg-cyan-100 border border-cyan-200 rounded-lg flex items-center justify-center">
@@ -200,7 +200,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+          <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 dark:bg-indigo-500/20 dark:border dark:border-indigo-500/30 bg-indigo-100 border border-indigo-200 rounded-lg flex items-center justify-center">
@@ -243,7 +243,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Link
           to="/upload"
-          className="p-6 dark:bg-gradient-to-br dark:from-orange-500 dark:to-orange-600 dark:hover:from-orange-600 dark:hover:to-orange-700 dark:text-white dark:hover:shadow-glow-orange bg-gradient-to-br from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white rounded-2xl hover:shadow-md hover:-translate-y-1 transition-all duration-200 group transform"
+          className="bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150 focus-visible:outline-none focus-visible:shadow-focus p-6 group"
         >
           <UploadIcon className="w-8 h-8 mb-3" />
           <h3 className="text-lg font-bold mb-1">Upload New Content</h3>
@@ -276,9 +276,9 @@ const Dashboard = () => {
 
         <Link
           to="/platforms"
-          className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 dark:hover:border-cyan-400/50 dark:hover:shadow-glow-cyan dark:text-white dark:hover:-translate-y-1 bg-white/60 backdrop-blur-xl border border-gray-200/50 hover:border-indigo-300/50 hover:shadow-md text-gray-900 hover:-translate-y-1 rounded-2xl transition-all duration-200 group"
+          className="p-6 group bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150"
         >
-          <div className="w-8 h-8 bg-gradient-to-br from-indigo-600 to-cyan-500 dark:from-indigo-600 dark:to-cyan-500 from-indigo-400 to-cyan-400 rounded-lg flex items-center justify-center mb-3 dark:shadow-glow shadow-md">
+          <div className="w-8 h-8 bg-brand-50 dark:bg-brand-950/40 text-brand-600 dark:text-brand-400 rounded-xl flex items-center justify-center mb-3">
             <span className="text-white font-bold">+</span>
           </div>
           <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-1">

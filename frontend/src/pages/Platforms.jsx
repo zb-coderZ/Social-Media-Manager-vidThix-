@@ -20,7 +20,7 @@ const PlatformCard = ({
 
   return (
     <div
-      className={`p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 dark:hover:border-cyan-400/50 dark:hover:shadow-glow-cyan dark:hover:-translate-y-0.5 bg-white/60 backdrop-blur-xl border border-gray-200/50 hover:border-indigo-300/50 hover:shadow-md rounded-2xl transition-all duration-200 ${
+      className={`p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 ${
         isDisabled ? "opacity-60" : ""
       }`}
     >
@@ -28,16 +28,16 @@ const PlatformCard = ({
         <div
           className={`w-12 h-12 rounded-xl flex items-center justify-center ${
             isConnected
-              ? "dark:bg-gradient-to-br dark:from-indigo-600 dark:to-cyan-500 bg-gradient-to-br from-indigo-400 to-cyan-400 dark:shadow-glow shadow-md"
+              ? "bg-brand-50 dark:bg-brand-950/40"
               : isDisabled
                 ? "dark:bg-navy-700 bg-gray-300"
-                : "dark:bg-navy-800 dark:border dark:border-navy-700 bg-gray-100"
+                : "bg-slate-100 dark:bg-slate-800"
           }`}
         >
           <Icon
             className={`w-6 h-6 ${
               isConnected
-                ? "text-white"
+                ? "text-brand-600 dark:text-brand-400"
                 : isDisabled
                   ? "dark:text-gray-600 text-gray-400"
                   : "dark:text-gray-500 text-gray-600"
@@ -46,14 +46,14 @@ const PlatformCard = ({
         </div>
 
         {isConnected && (
-          <span className="px-3 py-1 dark:bg-emerald-500/20 dark:text-emerald-400 dark:border dark:border-emerald-500/30 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full flex items-center gap-1 border border-emerald-200">
-            <div className="w-2 h-2 dark:bg-emerald-400 bg-emerald-500 rounded-full" />
+          <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium border bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900">
+            <div className="w-2 h-2 rounded-full bg-emerald-500" />
             Connected
           </span>
         )}
 
         {!platform.enabled && (
-          <span className="px-3 py-1 dark:bg-navy-700/60 dark:text-gray-400 dark:border dark:border-navy-600 bg-gray-200 text-gray-600 text-xs font-semibold rounded-full border border-gray-300">
+          <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium border bg-slate-50 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700">
             Coming Soon
           </span>
         )}
@@ -89,8 +89,8 @@ const PlatformCard = ({
           disabled={isConnecting}
           className={`w-full px-4 py-3 font-semibold rounded-xl transition-all duration-200 ${
             isConnected
-              ? "bg-red-600 dark:hover:bg-red-700 dark:hover:shadow-lg hover:bg-red-700 text-white hover:shadow-lg"
-              : "bg-gradient-to-r from-orange-500 to-orange-600 dark:hover:from-orange-600 dark:hover:to-orange-700 dark:hover:shadow-glow-orange hover:from-orange-600 hover:to-orange-700 text-white hover:shadow-glow-orange hover:shadow-orange-500/30"
+              ? "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150"
+              : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150"
           } disabled:opacity-50 disabled:cursor-not-allowed`}
         >
           {isConnecting ? (
@@ -104,7 +104,7 @@ const PlatformCard = ({
       ) : (
         <button
           disabled
-          className="w-full px-4 py-3 dark:bg-navy-800 dark:text-gray-600 dark:cursor-not-allowed bg-gray-200 text-gray-400 font-semibold rounded-xl cursor-not-allowed"
+          className="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-400 font-medium rounded-xl cursor-not-allowed opacity-60 grayscale"
         >
           Coming Soon
         </button>

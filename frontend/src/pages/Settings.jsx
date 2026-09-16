@@ -49,7 +49,7 @@ const Settings = () => {
   }
 
   return (
-    <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-4xl mx-auto">
+    <div className="flex-1 space-y-6 max-w-4xl mx-auto">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">
@@ -61,7 +61,7 @@ const Settings = () => {
       </div>
 
       {/* Profile Section */}
-      <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 dark:bg-indigo-600/20 dark:border dark:border-indigo-500/30 bg-indigo-100 border border-indigo-300 rounded-xl flex items-center justify-center">
             <User className="w-5 h-5 dark:text-indigo-400 text-indigo-600" />
@@ -128,7 +128,7 @@ const Settings = () => {
           {/* Save Button */}
           <button
             disabled
-            className="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 dark:hover:from-orange-600 dark:hover:to-orange-700 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-orange disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150 focus-visible:outline-none focus-visible:shadow-focus disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-sm"
           >
             Save Changes
           </button>
@@ -139,7 +139,7 @@ const Settings = () => {
       </div>
 
       {/* Notifications Section */}
-      <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 dark:bg-cyan-600/20 dark:border dark:border-cyan-500/30 bg-cyan-100 border border-cyan-300 rounded-xl flex items-center justify-center">
             <Bell className="w-5 h-5 dark:text-cyan-400 text-cyan-600" />
@@ -176,8 +176,8 @@ const Settings = () => {
                 }
                 className={`relative w-12 h-6 rounded-full transition-colors duration-200 ${
                   notifications[key]
-                    ? "dark:bg-indigo-600 bg-indigo-600"
-                    : "dark:bg-navy-700 bg-gray-300"
+                    ? "bg-brand-600"
+                    : "bg-slate-200 dark:bg-slate-700"
                 }`}
               >
                 <span
@@ -192,7 +192,7 @@ const Settings = () => {
       </div>
 
       {/* Appearance Section */}
-      <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+      <div className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card hover:shadow-cardHover transition-shadow duration-200 p-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 dark:bg-orange-600/20 dark:border dark:border-orange-500/30 bg-orange-100 border border-orange-300 rounded-xl flex items-center justify-center">
             <Moon className="w-5 h-5 dark:text-orange-400 text-orange-600" />
@@ -216,7 +216,7 @@ const Settings = () => {
       </div>
 
       {/* Danger Zone */}
-      <div className="p-6 dark:bg-red-500/10 dark:border dark:border-red-500/30 bg-red-50 border border-red-200 rounded-2xl">
+      <div className="p-6 bg-red-50/50 dark:bg-red-950/20 border border-red-200 dark:border-red-900 rounded-2xl">
         <h3 className="text-lg font-bold dark:text-red-400 text-red-900 mb-3">
           Danger Zone
         </h3>
