@@ -12,7 +12,7 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
       <div>
         <label
           htmlFor="title"
-          className="block text-sm font-semibold text-gray-900 dark:text-white mb-2"
+          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5"
         >
           Title <span className="text-red-500">*</span>
         </label>
@@ -23,10 +23,10 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
           value={formData.title}
           onChange={handleChange}
           placeholder="Enter a compelling title (50-60 characters recommended)"
-          className={`w-full px-4 py-3 bg-white dark:bg-navy-800/60 border rounded-xl focus:outline-none focus:ring-2 transition-all duration-200 text-gray-900 dark:text-white dark:placeholder-gray-500 ${
+          className={`w-full rounded-xl border bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:outline-none focus:ring-2 transition-colors duration-150 ${
             errors.title
-              ? "border-red-500 focus:ring-red-500 dark:border-red-500/50 dark:focus:ring-red-500"
-              : "border-gray-300 dark:border-indigo-600/30 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent"
+              ? "border-red-500 focus:ring-red-500/20"
+              : "border-slate-200 dark:border-slate-700 focus:border-brand-500 focus:ring-brand-500/20"
           }`}
           maxLength={100}
         />
@@ -52,7 +52,7 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
       <div>
         <label
           htmlFor="description"
-          className="block text-sm font-semibold text-gray-900 dark:text-white mb-2"
+          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5"
         >
           Description <span className="text-red-500">*</span>
         </label>
@@ -63,10 +63,10 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
           onChange={handleChange}
           placeholder="Write a detailed description (150-300 characters recommended)"
           rows={5}
-          className={`w-full px-4 py-3 bg-white dark:bg-navy-800/60 border rounded-xl focus:outline-none focus:ring-2 transition-all duration-200 resize-none text-gray-900 dark:text-white dark:placeholder-gray-500 ${
+          className={`w-full rounded-xl border bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:outline-none focus:ring-2 transition-colors duration-150 resize-none ${
             errors.description
-              ? "border-red-500 focus:ring-red-500 dark:border-red-500/50 dark:focus:ring-red-500"
-              : "border-gray-300 dark:border-indigo-600/30 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent"
+              ? "border-red-500 focus:ring-red-500/20"
+              : "border-slate-200 dark:border-slate-700 focus:border-brand-500 focus:ring-brand-500/20"
           }`}
           maxLength={5000}
         />
@@ -93,7 +93,7 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
       <div>
         <label
           htmlFor="tags"
-          className="block text-sm font-semibold text-gray-900 dark:text-white mb-2"
+          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5"
         >
           Tags{" "}
           <span className="text-gray-500 dark:text-gray-400 text-xs font-normal">
@@ -107,7 +107,7 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
           value={formData.tags}
           onChange={handleChange}
           placeholder="react, tutorial, web development, javascript (10-15 tags recommended)"
-          className="w-full px-4 py-3 bg-white dark:bg-navy-800/60 border border-gray-300 dark:border-indigo-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white dark:placeholder-gray-500"
+          className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           {formData.tags.split(",").filter((t) => t.trim()).length} tags
@@ -118,7 +118,7 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
       <div>
         <label
           htmlFor="category"
-          className="block text-sm font-semibold text-gray-900 dark:text-white mb-2"
+          className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5"
         >
           Category <span className="text-red-500">*</span>
         </label>
@@ -127,10 +127,10 @@ const VideoForm = ({ formData, onChange, errors = {} }) => {
           name="category"
           value={formData.category}
           onChange={handleChange}
-          className={`w-full px-4 py-3 bg-white dark:bg-navy-800/60 border rounded-xl focus:outline-none focus:ring-2 transition-all duration-200 text-gray-900 dark:text-white ${
+          className={`w-full rounded-xl border bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 focus:outline-none focus:ring-2 transition-colors duration-150 ${
             errors.category
-              ? "border-red-500 focus:ring-red-500 dark:border-red-500/50 dark:focus:ring-red-500"
-              : "border-gray-300 dark:border-indigo-600/30 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent"
+              ? "border-red-500 focus:ring-red-500/20"
+              : "border-slate-200 dark:border-slate-700 focus:border-brand-500 focus:ring-brand-500/20"
           }`}
         >
           <option value="">Select a category</option>

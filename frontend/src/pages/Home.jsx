@@ -20,7 +20,7 @@ const Home = () => {
         id="features"
         className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-navy-950/5 bg-white/5"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold dark:text-white text-gray-900 mb-4">
               Everything You Need to Succeed
@@ -44,7 +44,7 @@ const Home = () => {
         id="platforms"
         className="py-20 px-4 sm:px-6 lg:px-8 dark:bg-navy-900/5 bg-gray-50/5"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold dark:text-white text-gray-900 mb-4">
               Supported Platforms
