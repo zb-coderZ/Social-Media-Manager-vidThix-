@@ -12,12 +12,12 @@ const ParticlesBackground = ({ particleCount, interactive = true }) => {
 
   const getParticleCount = useCallback(() => {
     if (particleCount) return particleCount;
-    if (typeof window === "undefined") return 80;
+    if (typeof window === "undefined") return 25;
 
     const width = window.innerWidth;
-    if (width < 768) return 50;
-    if (width < 1024) return 75;
-    return 110;
+    if (width < 768) return 25;
+    if (width < 1024) return 40;
+    return 60;
   }, [particleCount]);
 
   const getColors = useCallback(() => {
@@ -80,7 +80,7 @@ const ParticlesBackground = ({ particleCount, interactive = true }) => {
                 color: colors.link,
                 distance: 150,
                 enable: true,
-                opacity: 0.95,
+                opacity: 0.15,
                 width: 1.5,
               },
               move: {
@@ -102,8 +102,8 @@ const ParticlesBackground = ({ particleCount, interactive = true }) => {
               },
               opacity: {
                 value: {
-                  min: 0.7,
-                  max: 1,
+                  min: 0.1,
+                  max: 0.14,
                 },
               },
               shape: {

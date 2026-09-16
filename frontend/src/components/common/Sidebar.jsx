@@ -23,7 +23,7 @@ const Sidebar = () => {
       {/* Logo */}
       <div className="p-6 border-b dark:border-navy-800 border-gray-200">
         <Link to="/dashboard" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-gradient-to-br from-indigo-400 to-cyan-400 dark:from-indigo-600 dark:to-cyan-500 rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 dark:shadow-glow shadow-md">
+          <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent-500 rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 dark:shadow-glow shadow-md">
             <span className="text-white font-bold text-xl">V</span>
           </div>
           <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-cyan-600 dark:from-indigo-400 dark:to-cyan-400 bg-clip-text text-transparent">
@@ -43,10 +43,10 @@ const Sidebar = () => {
               key={item.name}
               to={item.href}
               onClick={() => setIsMobileOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
+              className={`relative flex items-center gap-3 px-3 py-2 rounded-lg font-medium transition-colors duration-150 ${
                 active
-                  ? "dark:bg-gradient-to-r dark:from-indigo-600 dark:to-indigo-700 dark:text-white dark:shadow-glow bg-gradient-to-r from-indigo-400 to-indigo-500 text-white shadow-md"
-                  : "dark:text-gray-400 dark:hover:bg-navy-800 dark:hover:text-cyan-400 text-gray-700 hover:bg-gray-100 hover:text-indigo-600"
+                  ? "bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300 before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:rounded-r-lg before:bg-brand-600"
+                  : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60"
               }`}
             >
               <Icon className="w-5 h-5 flex-shrink-0" />
@@ -57,7 +57,7 @@ const Sidebar = () => {
       </nav>
 
       {/* User Profile Section */}
-      <div className="p-4 border-t dark:border-navy-800 border-gray-200">
+      <div className="p-4 border-t border-slate-200/60 dark:border-slate-800">
         <div className="flex items-center gap-3 px-4 py-3 rounded-xl dark:bg-navy-800/60 dark:hover:bg-navy-700/60 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 cursor-pointer">
           <div className="w-10 h-10 bg-gradient-to-br from-indigo-400 to-cyan-400 dark:from-indigo-600 dark:to-cyan-500 rounded-full flex items-center justify-center dark:shadow-glow shadow-md">
             <span className="text-white font-semibold text-sm">
