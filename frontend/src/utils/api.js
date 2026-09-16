@@ -23,7 +23,11 @@ export const authStorage = {
 
 async function request(path, options = {}, allowRefresh = true) {
   const headers = new Headers(options.headers);
-  if (options.body && !headers.has("Content-Type")) {
+  if (
+    options.body &&
+    !(options.body instanceof FormData) &&
+    !headers.has("Content-Type")
+  ) {
     headers.set("Content-Type", "application/json");
   }
   if (authStorage.accessToken) {
@@ -70,6 +74,33 @@ export const api = {
   listPlatforms: () => request("/api/platforms"),
   disconnectPlatform: (platform) =>
     request(`/api/platforms/${platform}`, { method: "DELETE" }),
+  uploadVideo: (formData) =>
+    request("/api/videos/upload", {
+      method: "POST",
+      body: formData,
+    }),
+  updateVideo: (videoId, data) =>
+    request(`/api/videos/${videoId}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+  publishVideo: (videoId, platform = "youtube") =>
+    request(`/api/videos/${videoId}/publish`, {
+      method: "POST",
+      body: JSON.stringify({ platform, privacy_status: "public" }),
+    }),
+  scheduleVideo: (
+    videoId,
+    { scheduled_at, privacy_status = "public", platform = "youtube" },
+  ) =>
+    request(`/api/scheduled/${videoId}`, {
+      method: "POST",
+      body: JSON.stringify({
+        platform,
+        scheduled_time: scheduled_at,
+        privacy_status,
+      }),
+    }),
 };
 
 export { API_BASE_URL };

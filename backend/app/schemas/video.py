@@ -1,5 +1,6 @@
 from datetime import datetime
 from enum import Enum
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -45,10 +46,10 @@ class VideoOut(BaseModel):
 
 class PublishRequest(BaseModel):
     platform: str = "youtube"
-    privacy_status: str = "private"  # private | unlisted | public
+    privacy_status: Literal["public", "unlisted", "private"] = "public"
 
 
 class ScheduleRequest(BaseModel):
     platform: str = "youtube"
     scheduled_time: datetime
-    privacy_status: str = "private"
+    privacy_status: Literal["public", "unlisted", "private"] = "public"

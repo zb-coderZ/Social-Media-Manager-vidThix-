@@ -1,20 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Calendar, Sparkles, CheckCircle2 } from "lucide-react";
-import { useApp } from "../context/AppContext";
 import { useToast } from "../context/ToastContext";
+import { api } from "../utils/api";
 import PlatformSelector from "../components/upload/PlatformSelector";
 import UploadBox from "../components/upload/UploadBox";
 import FilePreview from "../components/upload/FilePreview";
 import VideoForm from "../components/upload/VideoForm";
 import Scheduler from "../components/scheduler/Scheduler";
 import LoadingSpinner from "../components/common/LoadingSpinner";
-import { sleep } from "../utils/helpers";
 import { UPLOAD_STATUS } from "../utils/constants";
 
 const Upload = () => {
   const navigate = useNavigate();
-  const { addUpload, addScheduledPost } = useApp();
   const { success, error: showError, info } = useToast();
 
   const [selectedPlatform, setSelectedPlatform] = useState("youtube");
@@ -31,6 +29,9 @@ const Upload = () => {
   // SEO temporarily disabled. Preserve this state for later restoration.
   // const [seoResult, setSeoResult] = useState(null);
   const [isSchedulerOpen, setIsSchedulerOpen] = useState(false);
+  const [videoId, setVideoId] = useState(null);
+  const [publishedUrl, setPublishedUrl] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleFileSelect = (file) => {
     setSelectedFile(file);
@@ -88,66 +89,87 @@ const Upload = () => {
   };
   */
 
-  const simulateUpload = async () => {
+  const uploadAndSaveMetadata = async () => {
     setUploadStatus(UPLOAD_STATUS.UPLOADING);
+    setUploadProgress(0);
 
-    for (let i = 0; i <= 100; i += 10) {
-      setUploadProgress(i);
-      await sleep(300);
+    const uploadData = new FormData();
+    uploadData.append("file", selectedFile);
+    uploadData.append("title", formData.title);
+    uploadData.append("description", formData.description);
+    uploadData.append(
+      "tags",
+      JSON.stringify(
+        formData.tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean),
+      ),
+    );
+    uploadData.append("category", formData.category);
+
+    const uploadedVideo = await api.uploadVideo(uploadData);
+    const uploadedVideoId = uploadedVideo.id || uploadedVideo._id;
+    if (!uploadedVideoId) {
+      throw new Error("The upload response did not include a video id.");
     }
 
+    setVideoId(uploadedVideoId);
+    setUploadProgress(100);
     setUploadStatus(UPLOAD_STATUS.COMPLETE);
+    await api.updateVideo(uploadedVideoId, {
+      title: formData.title,
+      description: formData.description,
+      tags: formData.tags
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter(Boolean),
+      category: formData.category,
+    });
+
+    return uploadedVideoId;
   };
 
   const handleUpload = async () => {
     if (!validateForm()) return;
 
-    await simulateUpload();
-
-    const upload = {
-      title: formData.title,
-      description: formData.description,
-      tags: formData.tags,
-      category: formData.category,
-      platform: selectedPlatform,
-      // SEO temporarily disabled. Restore the score field with the analyzer.
-      // seoScore: seoResult?.score || 0,
-      fileName: selectedFile.name,
-      fileSize: selectedFile.size,
-      status: "published",
-    };
-
-    addUpload(upload);
-    success("Video uploaded successfully!");
-
-    // Reset form
-    setTimeout(() => {
-      handleReset();
-      navigate("/dashboard");
-    }, 1500);
+    setIsProcessing(true);
+    try {
+      const uploadedVideoId = await uploadAndSaveMetadata();
+      const publishedVideo = await api.publishVideo(
+        uploadedVideoId,
+        selectedPlatform,
+      );
+      setPublishedUrl(publishedVideo.external_url);
+      success("Video published successfully.");
+    } catch (requestError) {
+      setUploadStatus(UPLOAD_STATUS.ERROR);
+      showError(requestError.message);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
-  const handleSchedule = (scheduleData) => {
+  const handleSchedule = async (scheduleData) => {
     if (!validateForm()) return;
 
-    const post = {
-      ...formData,
-      ...scheduleData,
-      platform: selectedPlatform,
-      // SEO temporarily disabled. Restore the score field with the analyzer.
-      // seoScore: seoResult?.score || 0,
-      fileName: selectedFile.name,
-      fileSize: selectedFile.size,
-      status: "scheduled",
-    };
-
-    addScheduledPost(post);
-    success("Post scheduled successfully!");
-
-    setTimeout(() => {
+    setIsProcessing(true);
+    try {
+      const scheduledVideoId = await uploadAndSaveMetadata();
+      await api.scheduleVideo(scheduledVideoId, {
+        scheduled_at: scheduleData.scheduledTime,
+        privacy_status: "public",
+        platform: selectedPlatform,
+      });
+      success("Post scheduled successfully.");
       handleReset();
       navigate("/dashboard");
-    }, 1500);
+    } catch (requestError) {
+      setUploadStatus(UPLOAD_STATUS.ERROR);
+      showError(requestError.message);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleReset = () => {
@@ -156,6 +178,9 @@ const Upload = () => {
     setUploadProgress(0);
     setFormData({ title: "", description: "", tags: "", category: "" });
     setFormErrors({});
+    setVideoId(null);
+    setPublishedUrl(null);
+    setIsProcessing(false);
     // SEO temporarily disabled. Restore when the analyzer is re-enabled.
     // setSeoResult(null);
   };
@@ -314,7 +339,7 @@ const Upload = () => {
 
             <button
               onClick={() => setIsSchedulerOpen(true)}
-              disabled={!isFormComplete}
+              disabled={!isFormComplete || isProcessing}
               className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r dark:from-indigo-600 dark:to-indigo-700 dark:hover:from-indigo-700 dark:hover:to-indigo-800 dark:disabled:from-indigo-600/40 dark:disabled:to-indigo-700/40 from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 disabled:from-indigo-500 disabled:to-indigo-600 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
             >
               <Calendar className="w-5 h-5" />
@@ -323,9 +348,7 @@ const Upload = () => {
 
             <button
               onClick={handleUpload}
-              disabled={
-                !isFormComplete || uploadStatus === UPLOAD_STATUS.UPLOADING
-              }
+              disabled={!isFormComplete || isProcessing}
               className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:from-orange-500/40 disabled:to-orange-600/40 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-orange disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
             >
               {uploadStatus === UPLOAD_STATUS.UPLOADING ? (
@@ -336,7 +359,7 @@ const Upload = () => {
               ) : uploadStatus === UPLOAD_STATUS.COMPLETE ? (
                 <>
                   <CheckCircle2 className="w-5 h-5" />
-                  Upload Complete!
+                  {publishedUrl ? "Published!" : "Upload Complete!"}
                 </>
               ) : (
                 <>
@@ -345,6 +368,17 @@ const Upload = () => {
                 </>
               )}
             </button>
+
+            {videoId && publishedUrl && (
+              <a
+                href={publishedUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="block text-sm text-center text-indigo-600 dark:text-cyan-400 hover:underline"
+              >
+                View published video on YouTube
+              </a>
+            )}
 
             <button
               onClick={handleReset}

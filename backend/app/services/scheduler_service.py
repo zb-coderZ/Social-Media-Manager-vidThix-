@@ -50,7 +50,7 @@ async def process_due_posts():
                 description=video["description"],
                 tags=video.get("tags", []),
                 category=video.get("category", "Other"),
-                privacy_status=post.get("privacy_status", "private"),
+                privacy_status=post.get("privacy_status", "public"),
             )
 
             await db.videos.update_one(
