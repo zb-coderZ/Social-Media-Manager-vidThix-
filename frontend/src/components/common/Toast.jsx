@@ -19,21 +19,21 @@ const Toast = ({ id, message, type, duration }) => {
     switch (type) {
       case "success":
         return {
-          bg: "bg-emerald-50 dark:bg-emerald-600/20 border-emerald-200 dark:border-emerald-500/30",
+          iconBg: "bg-emerald-50 dark:bg-emerald-950/40",
           icon: CheckCircle,
           iconColor: "text-emerald-500 dark:text-emerald-400",
           text: "text-emerald-900 dark:text-emerald-300",
         };
       case "error":
         return {
-          bg: "bg-red-50 dark:bg-red-600/20 border-red-200 dark:border-red-500/30",
+          iconBg: "bg-red-50 dark:bg-red-950/40",
           icon: XCircle,
           iconColor: "text-red-500 dark:text-red-400",
           text: "text-red-900 dark:text-red-300",
         };
       case "warning":
         return {
-          bg: "bg-amber-50 dark:bg-amber-600/20 border-amber-200 dark:border-amber-500/30",
+          iconBg: "bg-amber-50 dark:bg-amber-950/40",
           icon: AlertCircle,
           iconColor: "text-amber-500 dark:text-amber-400",
           text: "text-amber-900 dark:text-amber-300",
@@ -41,10 +41,10 @@ const Toast = ({ id, message, type, duration }) => {
       case "info":
       default:
         return {
-          bg: "bg-blue-50 dark:bg-blue-600/20 border-blue-200 dark:border-blue-500/30",
+          iconBg: "bg-brand-50 dark:bg-brand-950/40",
           icon: Info,
-          iconColor: "text-blue-500 dark:text-blue-400",
-          text: "text-blue-900 dark:text-blue-300",
+          iconColor: "text-brand-600 dark:text-brand-400",
+          text: "text-brand-900 dark:text-brand-300",
         };
     }
   };
@@ -53,10 +53,10 @@ const Toast = ({ id, message, type, duration }) => {
   const Icon = styles.icon;
 
   return (
-    <div
-      className={`flex items-center gap-3 px-4 py-3 rounded-xl border ${styles.bg} shadow-lg backdrop-blur-xl transition-all duration-200 hover:shadow-xl w-full sm:min-w-[320px] max-w-[calc(100vw-2rem)] sm:max-w-md`}
-    >
-      <Icon className={`w-5 h-5 flex-shrink-0 ${styles.iconColor}`} />
+    <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white/95 px-4 py-3 shadow-cardHover backdrop-blur-md dark:border-slate-800 dark:bg-slate-900/95 w-full sm:min-w-[320px] max-w-[calc(100vw-2rem)] sm:max-w-md">
+      <div className={`rounded-lg p-1.5 ${styles.iconBg}`}>
+        <Icon className={`w-5 h-5 ${styles.iconColor}`} />
+      </div>
       <p className={`flex-1 text-sm font-medium ${styles.text}`}>{message}</p>
       <button
         onClick={() => removeToast(id)}

@@ -10,12 +10,16 @@ const LoadingSpinner = ({ size = "md", className = "", text = "" }) => {
 
   return (
     <div
-      className={`flex flex-col items-center justify-center gap-3 ${className}`}
+      className={`flex flex-col items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 p-2 animate-pulse dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 ${className}`}
     >
       <Loader2
-        className={`${sizeClasses[size]} animate-spin text-indigo-600 dark:text-indigo-400`}
+        className={`${sizeClasses[size]} animate-spin text-brand-600 dark:text-brand-400`}
       />
-      {text && <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">{text}</p>}
+      {text && (
+        <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+          {text}
+        </p>
+      )}
     </div>
   );
 };
