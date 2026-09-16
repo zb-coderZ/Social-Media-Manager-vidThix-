@@ -17,7 +17,7 @@ const Footer = () => {
       return (
         <a
           href={link.href}
-          className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
+          className="text-slate-400 hover:text-accent-400 transition-colors duration-200"
         >
           {link.name}
         </a>
@@ -28,7 +28,7 @@ const Footer = () => {
       return (
         <Link
           to={link.href}
-          className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
+          className="text-slate-400 hover:text-accent-400 transition-colors duration-200"
         >
           {link.name}
         </Link>
@@ -38,7 +38,7 @@ const Footer = () => {
     return (
       <a
         href={link.href}
-        className="text-gray-400 hover:text-cyan-400 transition-colors duration-200"
+        className="text-slate-400 hover:text-accent-400 transition-colors duration-200"
       >
         {link.name}
       </a>
@@ -52,14 +52,14 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 group mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-cyan-500 rounded-xl flex items-center justify-center shadow-glow">
+              <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent-500 rounded-xl flex items-center justify-center shadow-glow">
                 <span className="text-white font-bold text-xl">V</span>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-brand-400 to-accent-400 bg-clip-text text-transparent">
                 {APP_NAME}
               </span>
             </Link>
-            <p className="text-gray-400 mb-6 max-w-sm">
+            <p className="text-slate-400 mb-6 max-w-sm">
               The ultimate platform for managing and optimizing your social
               media content across multiple platforms from a single dashboard.
             </p>
@@ -72,7 +72,7 @@ const Footer = () => {
                   <a
                     key={social.name}
                     href={social.href}
-                    className="w-10 h-10 bg-navy-800 hover:bg-indigo-600 border border-navy-700 hover:border-indigo-600 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition-all duration-200 hover:shadow-glow hover:-translate-y-0.5 group"
+                    className="w-10 h-10 bg-navy-800 hover:bg-brand-600 border border-navy-700 hover:border-brand-600 rounded-lg flex items-center justify-center text-slate-400 hover:text-white transition-all duration-200 hover:shadow-glow hover:-translate-y-0.5 group"
                     aria-label={social.name}
                   >
                     <Icon className="w-5 h-5" />
@@ -115,7 +115,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-navy-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-slate-500">
             © {currentYear} {APP_NAME}. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6">

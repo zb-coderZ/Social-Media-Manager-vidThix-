@@ -21,21 +21,11 @@ const BlogTable = ({ blogs, onEdit, onDelete }) => {
       <table className="w-full min-w-[560px] sm:min-w-[680px]">
         <thead>
           <tr className="bg-slate-50 dark:bg-slate-800/50 text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-semibold">
-            <th className="text-left px-3 sm:px-4 py-3">
-              Title
-            </th>
-            <th className="text-left px-3 sm:px-4 py-3">
-              Category
-            </th>
-            <th className="text-left px-3 sm:px-4 py-3">
-              Date
-            </th>
-            <th className="text-left px-3 sm:px-4 py-3">
-              Status
-            </th>
-            <th className="text-left px-3 sm:px-4 py-3">
-              Actions
-            </th>
+            <th className="text-left px-3 sm:px-4 py-3">Title</th>
+            <th className="text-left px-3 sm:px-4 py-3">Category</th>
+            <th className="text-left px-3 sm:px-4 py-3">Date</th>
+            <th className="text-left px-3 sm:px-4 py-3">Status</th>
+            <th className="text-left px-3 sm:px-4 py-3">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -51,7 +41,7 @@ const BlogTable = ({ blogs, onEdit, onDelete }) => {
               </td>
               <td className="px-3 sm:px-4 py-3 text-xs sm:text-sm">
                 <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium bg-slate-50 text-slate-700 border border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700">
-                {blog.category}
+                  {blog.category}
                 </span>
               </td>
               <td className="px-3 sm:px-4 py-3 text-sm text-slate-500 dark:text-slate-400 whitespace-nowrap">

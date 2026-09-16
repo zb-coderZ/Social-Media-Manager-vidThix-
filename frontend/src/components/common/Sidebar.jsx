@@ -21,12 +21,12 @@ const Sidebar = () => {
   const SidebarContent = () => (
     <>
       {/* Logo */}
-      <div className="p-6 border-b dark:border-navy-800 border-gray-200">
+      <div className="p-6 border-b dark:border-navy-800 border-slate-200">
         <Link to="/dashboard" className="flex items-center gap-2 group">
           <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent-500 rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 dark:shadow-glow shadow-md">
             <span className="text-white font-bold text-xl">V</span>
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-cyan-600 dark:from-indigo-400 dark:to-cyan-400 bg-clip-text text-transparent">
+          <span className="text-xl font-bold bg-gradient-to-r from-brand-600 to-accent-600 dark:from-brand-400 dark:to-accent-400 bg-clip-text text-transparent">
             {APP_NAME}
           </span>
         </Link>
@@ -58,17 +58,17 @@ const Sidebar = () => {
 
       {/* User Profile Section */}
       <div className="p-4 border-t border-slate-200/60 dark:border-slate-800">
-        <div className="flex items-center gap-3 px-4 py-3 rounded-xl dark:bg-navy-800/60 dark:hover:bg-navy-700/60 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 cursor-pointer">
-          <div className="w-10 h-10 bg-gradient-to-br from-indigo-400 to-cyan-400 dark:from-indigo-600 dark:to-cyan-500 rounded-full flex items-center justify-center dark:shadow-glow shadow-md">
+        <div className="flex items-center gap-3 px-4 py-3 rounded-xl dark:bg-navy-800/60 dark:hover:bg-navy-700/60 bg-slate-100 hover:bg-slate-200 transition-colors duration-200 cursor-pointer">
+          <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent-500 dark:from-brand-600 dark:to-accent-500 rounded-full flex items-center justify-center dark:shadow-glow shadow-md">
             <span className="text-white font-semibold text-sm">
               {getInitials(user?.name)}
             </span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-semibold dark:text-white text-gray-900 truncate">
+            <p className="text-sm font-semibold dark:text-white text-slate-900 truncate">
               {user?.name || "Demo User"}
             </p>
-            <p className="text-xs dark:text-gray-500 text-gray-600 truncate">
+            <p className="text-xs dark:text-slate-500 text-slate-600 truncate">
               {user?.email || "demo@vidthix.com"}
             </p>
           </div>
@@ -80,14 +80,14 @@ const Sidebar = () => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:w-64 dark:bg-navy-900 dark:border-r dark:border-navy-800 bg-white border-r border-gray-200">
+      <aside className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:w-64 dark:bg-navy-900 dark:border-r dark:border-navy-800 bg-white border-r border-slate-200">
         <SidebarContent />
       </aside>
 
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="md:hidden fixed bottom-4 right-4 z-50 p-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full shadow-glow-orange transition-all duration-200 hover:shadow-glow-orange-lg hover:scale-105"
+        className="md:hidden fixed bottom-4 right-4 z-50 p-4 bg-gradient-to-r from-brand-600 to-accent-500 hover:from-brand-700 hover:to-accent-600 text-white rounded-full transition-all duration-200 hover:scale-105"
         aria-label="Toggle sidebar"
       >
         {isMobileOpen ? (
