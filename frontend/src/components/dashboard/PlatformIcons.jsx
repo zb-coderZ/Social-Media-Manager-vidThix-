@@ -18,12 +18,12 @@ const PlatformIcon = ({ platform, connected }) => {
       <div
         className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 ${
           connected
-            ? "bg-gradient-to-br from-indigo-600 to-cyan-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-indigo-500/50"
-            : "bg-gray-200 dark:bg-navy-700/60"
+            ? "bg-gradient-to-br from-brand-600 to-accent-500 group-hover:scale-110 group-hover:shadow-cardHover"
+            : "bg-slate-100 dark:bg-slate-800"
         }`}
       >
         <Icon
-          className={`w-6 h-6 ${connected ? "text-white" : "text-gray-400 dark:text-gray-500"}`}
+          className={`w-6 h-6 ${connected ? "text-white" : "text-slate-400 dark:text-slate-500"}`}
         />
       </div>
 

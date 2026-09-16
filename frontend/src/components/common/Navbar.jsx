@@ -41,15 +41,25 @@ const Navbar = ({ isFixed = true }) => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="dark:text-slate-300 dark:hover:text-accent-400 text-slate-700 hover:text-brand-600 font-medium transition-colors duration-200"
-              >
-                {link.name}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) =>
+              link.href.includes("#") ? (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="dark:text-slate-300 dark:hover:text-accent-400 text-slate-700 hover:text-brand-600 font-medium transition-colors duration-200"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="dark:text-slate-300 dark:hover:text-accent-400 text-slate-700 hover:text-brand-600 font-medium transition-colors duration-200"
+                >
+                  {link.name}
+                </Link>
+              ),
+            )}
           </div>
 
           {/* CTA Buttons */}
@@ -62,7 +72,7 @@ const Navbar = ({ isFixed = true }) => {
               {isDarkMode ? (
                 <Sun className="w-5 h-5 text-yellow-400" />
               ) : (
-                <Moon className="w-5 h-5 text-slate-600" />
+                <Moon className="w-5 h-5 text-slate-600 dark:text-slate-400" />
               )}
             </button>
             <Link
@@ -95,19 +105,30 @@ const Navbar = ({ isFixed = true }) => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t dark:border-navy-700 border-slate-200">
+          <div className="md:hidden py-4 border-t border-slate-200/60 dark:border-slate-800">
             <div className="flex flex-col gap-3">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="px-3 py-2 dark:text-slate-300 dark:hover:text-accent-400 dark:hover:bg-navy-800 text-slate-700 hover:text-brand-600 hover:bg-slate-50 rounded-lg font-medium transition-all duration-200"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="flex flex-col gap-2 pt-2 border-t dark:border-navy-700 border-slate-200">
+              {NAV_LINKS.map((link) =>
+                link.href.includes("#") ? (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="px-3 py-2 dark:text-slate-300 dark:hover:text-accent-400 dark:hover:bg-navy-800 text-slate-700 hover:text-brand-600 hover:bg-slate-50 rounded-lg font-medium transition-all duration-200"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="px-3 py-2 dark:text-slate-300 dark:hover:text-accent-400 dark:hover:bg-navy-800 text-slate-700 hover:text-brand-600 hover:bg-slate-50 rounded-lg font-medium transition-all duration-200"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                ),
+              )}
+              <div className="flex flex-col gap-2 pt-2 border-t border-slate-200/60 dark:border-slate-800">
                 <button
                   onClick={toggleTheme}
                   className="px-3 py-2 rounded-lg dark:hover:bg-navy-800 hover:bg-slate-50 transition-colors duration-200 flex items-center justify-center gap-2 dark:text-slate-300 text-slate-700"
@@ -119,7 +140,7 @@ const Navbar = ({ isFixed = true }) => {
                     </>
                   ) : (
                     <>
-                      <Moon className="w-5 h-5 text-slate-600" />
+                      <Moon className="w-5 h-5 text-slate-600 dark:text-slate-400" />
                       <span>Dark Mode</span>
                     </>
                   )}

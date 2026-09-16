@@ -78,29 +78,25 @@ const BlogEditor = ({ blog, onCancel, onSaveDraft, onPublish }) => {
   });
 
   return (
-    <section className="rounded-2xl bg-white dark:bg-navy-800/70 border border-gray-200/70 dark:border-indigo-600/30 p-6 shadow-sm space-y-5">
-      <h2 className="text-xl font-bold dark:text-white text-gray-900">
+    <section className="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card p-6 space-y-6">
+      <h2 className="text-lg sm:text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-2">
         {blog ? "Edit Article" : "New Article"}
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <label className="block space-y-2 md:col-span-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Title
-          </span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:col-span-2">
+          <span>Title</span>
           <input
             type="text"
             value={formData.title}
             onChange={(event) => updateField("title", event.target.value)}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 mt-1.5"
             placeholder="How to optimize your social content workflow"
           />
         </label>
 
-        <label className="block space-y-2 md:col-span-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Slug
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:col-span-2">
+          <span>Slug</span>
           <input
             type="text"
             value={formData.slug}
@@ -108,45 +104,39 @@ const BlogEditor = ({ blog, onCancel, onSaveDraft, onPublish }) => {
               setSlugTouched(true);
               updateField("slug", slugifyTitle(event.target.value));
             }}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 mt-1.5"
             placeholder="how-to-optimize-social-content"
           />
         </label>
 
-        <label className="block space-y-2 md:col-span-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Description
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:col-span-2">
+          <span>Description</span>
           <textarea
             rows={3}
             value={formData.description}
             onChange={(event) => updateField("description", event.target.value)}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500 resize-none"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 resize-none mt-1.5"
             placeholder="Short SEO description used in listing and meta tags"
           />
         </label>
 
-        <label className="block space-y-2 md:col-span-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Content
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:col-span-2">
+          <span>Content</span>
           <textarea
             rows={8}
             value={formData.content}
             onChange={(event) => updateField("content", event.target.value)}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 mt-1.5"
             placeholder="Write your article content. Separate paragraphs with blank lines."
           />
         </label>
 
-        <label className="block space-y-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Category
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+          <span>Category</span>
           <select
             value={formData.category}
             onChange={(event) => updateField("category", event.target.value)}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 mt-1.5"
           >
             <option value="">Select category</option>
             {BLOG_CATEGORIES.map((category) => (
@@ -157,77 +147,69 @@ const BlogEditor = ({ blog, onCancel, onSaveDraft, onPublish }) => {
           </select>
         </label>
 
-        <label className="block space-y-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Status
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+          <span>Status</span>
           <select
             value={formData.status}
             onChange={(event) => updateField("status", event.target.value)}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 mt-1.5"
           >
             <option value="draft">Draft</option>
             <option value="published">Publish</option>
           </select>
         </label>
 
-        <label className="block space-y-2 md:col-span-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Thumbnail URL
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:col-span-2">
+          <span>Thumbnail URL</span>
           <input
             type="url"
             value={formData.image}
             onChange={(event) => updateField("image", event.target.value)}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 mt-1.5"
             placeholder="https://example.com/thumbnail.jpg"
           />
         </label>
 
-        <label className="block space-y-2 md:col-span-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Or Upload Thumbnail
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:col-span-2">
+          <span>Or Upload Thumbnail</span>
           <input
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 mt-1.5"
           />
         </label>
 
-        <label className="block space-y-2 md:col-span-2">
-          <span className="text-sm font-semibold dark:text-white text-gray-900">
-            Image Alt Text
-          </span>
+        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5 sm:col-span-2">
+          <span>Image Alt Text</span>
           <input
             type="text"
             value={formData.imageAlt}
             onChange={(event) => updateField("imageAlt", event.target.value)}
-            className="w-full rounded-xl border border-gray-300 dark:border-indigo-600/30 bg-white dark:bg-navy-900/60 px-4 py-3 dark:text-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-violet-500"
+            className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 px-3.5 py-2.5 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150 mt-1.5"
             placeholder="Describe the featured image for accessibility and SEO"
           />
         </label>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 pt-2">
+      <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-end gap-3 pt-4 border-t border-slate-200/60 dark:border-slate-800">
+        <button
+          onClick={onCancel}
+          className="bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150"
+        >
+          Cancel
+        </button>
         <button
           onClick={() => onSaveDraft(toBlogPayload("draft"))}
-          className="px-4 py-2.5 rounded-xl bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-navy-700 dark:text-gray-100 dark:hover:bg-navy-600 font-semibold transition-colors duration-200"
+          className="bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150"
         >
           Save Draft
         </button>
         <button
           onClick={() => onPublish(toBlogPayload("published"))}
-          className="px-4 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold transition-colors duration-200"
+          className="bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150 disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-sm"
         >
           Publish
-        </button>
-        <button
-          onClick={onCancel}
-          className="px-4 py-2.5 rounded-xl border border-gray-300 dark:border-indigo-600/30 dark:text-gray-200 text-gray-700 hover:bg-gray-50 dark:hover:bg-navy-700 transition-colors duration-200"
-        >
-          Cancel
         </button>
       </div>
     </section>

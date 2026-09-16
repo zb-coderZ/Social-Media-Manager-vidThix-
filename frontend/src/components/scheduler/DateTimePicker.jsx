@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Calendar } from "lucide-react";
@@ -6,7 +5,7 @@ import { Calendar } from "lucide-react";
 const DateTimePicker = ({ selectedDate, onDateChange }) => {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-semibold text-gray-900 dark:text-white">
+      <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300">
         Date & Time
       </label>
       <div className="relative">
@@ -18,12 +17,12 @@ const DateTimePicker = ({ selectedDate, onDateChange }) => {
           timeIntervals={15}
           dateFormat="MMMM d, yyyy h:mm aa"
           minDate={new Date()}
-          className="w-full px-4 py-3 pl-12 bg-white dark:bg-navy-800/60 border border-gray-300 dark:border-indigo-600/30 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white dark:placeholder-gray-500"
+          className="w-full px-4 py-3 pl-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 focus:outline-none transition-colors duration-150"
           placeholderText="Select date and time"
         />
-        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500 pointer-events-none" />
+        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 dark:text-slate-500 pointer-events-none" />
       </div>
-      <p className="text-xs text-gray-500 dark:text-gray-400">
+      <p className="text-xs text-slate-500 dark:text-slate-400">
         Schedule your content for the optimal posting time
       </p>
     </div>

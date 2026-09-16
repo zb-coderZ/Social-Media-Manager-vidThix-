@@ -4,7 +4,7 @@ import { ToastContainer } from "../components/common/Toast";
 
 const MainLayout = () => {
   return (
-    <div className="relative min-h-screen dark:bg-navy-950/30 bg-white/30">
+    <div className="relative min-h-screen dark:bg-navy-950/30 bg-white/30 overflow-x-hidden">
       <Sidebar />
 
       {/* Main Content */}

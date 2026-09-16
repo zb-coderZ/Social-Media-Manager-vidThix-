@@ -27,18 +27,18 @@ const FooterPage = () => {
       <Navbar isFixed={false} />
 
       <main className="px-4 sm:px-6 lg:px-8 pt-10 pb-20">
-        <div className="max-w-3xl mx-auto rounded-2xl bg-white dark:bg-navy-800/70 border border-gray-200/70 dark:border-indigo-600/30 p-8 sm:p-10 shadow-sm space-y-5">
-          <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900">
+        <div className="max-w-3xl mx-auto rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-8 sm:p-10 shadow-card space-y-5">
+          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
             {page.title}
           </h1>
-          <p className="text-lg dark:text-gray-300 text-gray-600">
+          <p className="text-lg text-slate-500 dark:text-slate-400">
             {page.description}
           </p>
 
           <div className="pt-2">
             <Link
               to="/dashboard"
-              className="inline-flex items-center px-5 py-3 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-semibold transition-colors duration-200"
+              className="inline-flex items-center bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all duration-150"
             >
               Open Dashboard
             </Link>

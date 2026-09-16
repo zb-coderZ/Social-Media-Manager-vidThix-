@@ -1,7 +1,7 @@
 import { getIconByName } from "../../utils/iconMap";
 
 const PlatformCard = ({ platform }) => {
-  const { name, icon, color, enabled, status, description } = platform;
+  const { name, icon, enabled, status, description } = platform;
   const Icon = getIconByName(icon, "Globe");
 
   return (
@@ -17,7 +17,7 @@ const PlatformCard = ({ platform }) => {
             className={`rounded-xl p-2.5 shrink-0 transition-transform duration-200 ${
               enabled
                 ? "bg-brand-50 dark:bg-brand-950/40 text-brand-600 dark:text-brand-400"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-400 grayscale"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 grayscale"
             }`}
           >
             <Icon className="w-6 h-6" />
@@ -52,7 +52,7 @@ const PlatformCard = ({ platform }) => {
           className={`w-full px-4 py-3 font-semibold rounded-xl transition-all duration-200 ${
             enabled
               ? "bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium hover:-translate-y-0.5 hover:shadow-md"
-              : "bg-slate-100 dark:bg-slate-800 text-slate-400 cursor-not-allowed opacity-60"
+              : "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed opacity-60"
           }`}
         >
           {enabled ? "Connect Now" : "Coming Soon"}

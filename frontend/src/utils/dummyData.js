@@ -212,6 +212,7 @@ export const NAV_LINKS = [
   { name: "Features", href: "/#features" },
   { name: "Platforms", href: "/#platforms" },
   { name: "Pricing", href: "/#pricing" },
+  { name: "Blog", href: "/blog" },
 ];
 
 export const FOOTER_LINKS = {

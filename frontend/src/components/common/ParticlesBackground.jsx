@@ -153,7 +153,7 @@ const ParticlesBackground = ({ particleCount, interactive = true }) => {
   return (
     <div
       id={PARTICLES_CONTAINER_ID}
-      className="fixed inset-0 z-0 pointer-events-none"
+      className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
       style={{
         width: "100%",
         height: "100%",

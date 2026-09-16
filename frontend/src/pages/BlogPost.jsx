@@ -141,7 +141,7 @@ const BlogPost = () => {
               </p>
               <Link
                 to="/dashboard"
-                className="inline-flex items-center bg-white text-slate-700 border border-slate-200 rounded-xl px-4 py-2.5 hover:bg-slate-50 transition-all duration-150"
+                className="inline-flex items-center bg-white text-slate-700 border border-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 dark:hover:bg-slate-800 rounded-xl px-4 py-2.5 hover:bg-slate-50 transition-all duration-150"
               >
                 Try vidThix Free
               </Link>

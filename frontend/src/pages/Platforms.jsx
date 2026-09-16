@@ -104,7 +104,7 @@ const PlatformCard = ({
       ) : (
         <button
           disabled
-          className="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-400 font-medium rounded-xl cursor-not-allowed opacity-60 grayscale"
+          className="w-full px-4 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 font-medium rounded-xl cursor-not-allowed opacity-60 grayscale"
         >
           Coming Soon
         </button>

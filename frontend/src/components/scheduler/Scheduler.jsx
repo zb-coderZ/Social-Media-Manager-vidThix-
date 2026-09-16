@@ -25,26 +25,26 @@ const Scheduler = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="relative w-full max-w-lg bg-white dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 rounded-2xl shadow-2xl transform transition-all">
+      <div className="relative w-full max-w-lg bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card transform transition-all">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-indigo-600/30">
+        <div className="flex items-center justify-between p-6 border-b border-slate-200/60 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-600/20 dark:border dark:border-indigo-500/30 rounded-xl flex items-center justify-center">
-              <CalendarIcon className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+            <div className="w-10 h-10 bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-900 rounded-xl flex items-center justify-center">
+              <CalendarIcon className="w-5 h-5 text-brand-600 dark:text-brand-400" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Schedule Post</h2>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Schedule Post</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400">
                 Choose when to publish your content
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-navy-700/60 rounded-lg transition-colors duration-200"
+            className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors duration-200"
             aria-label="Close"
           >
-            <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+            <X className="w-5 h-5 text-slate-500 dark:text-slate-400" />
           </button>
         </div>
 
@@ -58,29 +58,29 @@ const Scheduler = ({
           <TimezoneSelector selected={timezone} onChange={setTimezone} />
 
           {/* Preview */}
-          <div className="p-4 bg-indigo-50 dark:bg-indigo-600/10 dark:border dark:border-indigo-500/30 border border-indigo-200 rounded-xl">
-            <p className="text-sm font-semibold text-indigo-900 dark:text-indigo-300 mb-1">
+          <div className="p-4 bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-900 rounded-xl">
+            <p className="text-sm font-semibold text-brand-900 dark:text-brand-300 mb-1">
               Your content will be published on:
             </p>
-            <p className="text-indigo-700 dark:text-indigo-400">
+            <p className="text-brand-700 dark:text-brand-400">
               {formatDate(selectedDate, "MMMM dd, yyyy")} at{" "}
               {formatDate(selectedDate, "h:mm a")}
             </p>
-            <p className="text-xs text-indigo-600 dark:text-indigo-500 mt-1">{timezone}</p>
+            <p className="text-xs text-brand-600 dark:text-brand-400 mt-1">{timezone}</p>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="flex items-center gap-3 p-6 border-t border-gray-200 dark:border-indigo-600/30">
+        <div className="flex items-center gap-3 p-6 border-t border-slate-200/60 dark:border-slate-800">
           <button
             onClick={onClose}
-            className="flex-1 px-6 py-3 bg-gray-100 dark:bg-navy-700/60 hover:bg-gray-200 dark:hover:bg-navy-700 text-gray-700 dark:text-gray-300 font-semibold rounded-xl transition-all duration-200"
+            className="flex-1 px-6 py-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold rounded-xl transition-all duration-200"
           >
             Cancel
           </button>
           <button
             onClick={handleSchedule}
-            className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-orange-500/30"
+            className="flex-1 px-6 py-3 bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150"
           >
             Confirm Schedule
           </button>

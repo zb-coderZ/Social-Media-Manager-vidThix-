@@ -1,5 +1,4 @@
 import { getIconByName } from "../../utils/iconMap";
-import { formatRelativeTime } from "../../utils/helpers";
 
 const ActivityItem = ({ activity }) => {
   const { type, title, platform, status, date } = activity;
@@ -11,13 +10,13 @@ const ActivityItem = ({ activity }) => {
       case "published":
         return "dark:bg-emerald-500/20 dark:text-emerald-400 dark:border dark:border-emerald-500/30 bg-emerald-50 text-emerald-700 border border-emerald-200";
       case "scheduled":
-        return "dark:bg-cyan-500/20 dark:text-cyan-400 dark:border dark:border-cyan-500/30 bg-cyan-50 text-cyan-700 border border-cyan-200";
+        return "dark:bg-accent-500/20 dark:text-accent-400 dark:border dark:border-accent-500/30 bg-accent-50 text-accent-700 border border-accent-200";
       case "draft":
-        return "dark:bg-navy-700/60 dark:text-gray-400 dark:border dark:border-navy-600 bg-gray-200 text-gray-600 border border-gray-300";
+        return "dark:bg-slate-800 dark:text-slate-400 dark:border dark:border-slate-700 bg-slate-100 text-slate-600 border border-slate-200";
       case "failed":
         return "dark:bg-red-500/20 dark:text-red-400 dark:border dark:border-red-500/30 bg-red-50 text-red-700 border border-red-200";
       default:
-        return "dark:bg-navy-700/60 dark:text-gray-400 dark:border dark:border-navy-600 bg-gray-200 text-gray-600 border border-gray-300";
+        return "dark:bg-slate-800 dark:text-slate-400 dark:border dark:border-slate-700 bg-slate-100 text-slate-600 border border-slate-200";
     }
   };
 
@@ -37,24 +36,16 @@ const ActivityItem = ({ activity }) => {
   const Icon = getIconByName(getTypeIcon(type), "File");
 
   return (
-    <div className="flex items-start gap-4 p-4 dark:hover:bg-navy-800/40 hover:bg-gray-100 rounded-xl transition-colors duration-200">
-      <div className="w-10 h-10 dark:bg-indigo-600/20 dark:border dark:border-indigo-500/30 bg-indigo-100 border border-indigo-200 rounded-lg flex items-center justify-center flex-shrink-0">
-        <Icon className="w-5 h-5 dark:text-indigo-400 text-indigo-600" />
+    <div className="flex items-start gap-4 p-4 dark:hover:bg-slate-800/40 hover:bg-slate-50 rounded-xl transition-colors duration-200">
+      <div className="w-10 h-10 bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-900 rounded-lg flex items-center justify-center flex-shrink-0">
+        <Icon className="w-5 h-5 text-brand-600 dark:text-brand-400" />
       </div>
 
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2 mb-1">
-          <h4 className="text-sm font-semibold dark:text-white text-gray-900 truncate">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100 truncate">
             {title}
           </h4>
-          {/* SEO temporarily disabled. Restore the score label here later. */}
-          {/*
-          {seoScore !== undefined && (
-            <span className="text-xs font-medium dark:text-gray-500 text-gray-600 flex-shrink-0">
-              SEO: {seoScore}
-            </span>
-          )}
-          */}
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
@@ -63,11 +54,11 @@ const ActivityItem = ({ activity }) => {
           >
             {status}
           </span>
-          <span className="text-xs dark:text-gray-500 text-gray-600">
+          <span className="text-xs text-slate-500 dark:text-slate-400">
             {platform}
           </span>
-          <span className="text-xs dark:text-gray-600 text-gray-500">•</span>
-          <span className="text-xs dark:text-gray-500 text-gray-600">
+          <span className="text-xs text-slate-400 dark:text-slate-500">•</span>
+          <span className="text-xs text-slate-500 dark:text-slate-400">
             {date}
           </span>
         </div>
@@ -81,16 +72,16 @@ const ActivityFeed = ({ activities, title = "Recent Activity" }) => {
 
   if (!activities || activities.length === 0) {
     return (
-      <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-        <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
+      <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card">
+        <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">
           {title}
         </h3>
         <div className="text-center py-12">
-          <div className="w-16 h-16 dark:bg-navy-700/60 dark:border dark:border-navy-600 bg-gray-200 border border-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
-            <InboxIcon className="w-8 h-8 dark:text-gray-600 text-gray-500" />
+          <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+            <InboxIcon className="w-8 h-8 text-slate-400 dark:text-slate-500" />
           </div>
-          <p className="dark:text-gray-500 text-gray-600">No activity yet</p>
-          <p className="text-sm dark:text-gray-600 text-gray-700 mt-1">
+          <p className="text-slate-500 dark:text-slate-400 font-medium">No activity yet</p>
+          <p className="text-sm text-slate-400 dark:text-slate-500 mt-1">
             Your recent uploads will appear here
           </p>
         </div>
@@ -99,8 +90,8 @@ const ActivityFeed = ({ activities, title = "Recent Activity" }) => {
   }
 
   return (
-    <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-      <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
+    <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card">
+      <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">
         {title}
       </h3>
       <div className="space-y-2">

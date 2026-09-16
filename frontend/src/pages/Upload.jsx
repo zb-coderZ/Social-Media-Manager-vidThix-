@@ -192,8 +192,10 @@ const Upload = () => {
     <div className="flex-1 space-y-6 max-w-5xl mx-auto">
       {/* Header */}
       <div>
-        ? "text-brand-600" : "text-slate-400"
-        <p className="dark:text-gray-400 text-gray-600">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-2">
+          Upload Content
+        </h1>
+        <p className="text-slate-500 dark:text-slate-400">
           Upload your video, customize it, publish, or schedule it.
         </p>
       </div>
@@ -234,7 +236,7 @@ const Upload = () => {
                 ? "dark:bg-emerald-500/20 dark:border-emerald-500/30 bg-emerald-50 border-emerald-200"
                 : step.status === "active"
                   ? "text-brand-600 font-semibold border-b-2 border-brand-600"
-                  : "dark:bg-navy-800/60 dark:border-navy-700 bg-gray-50 border-gray-200"
+                  : "bg-white dark:bg-slate-900 border-slate-200/60 dark:border-slate-800"
             }`}
           >
             <div className="flex items-center gap-2">
@@ -244,8 +246,8 @@ const Upload = () => {
                 <span
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
                     step.status === "active"
-                      ? "text-brand-600"
-                      : "text-slate-400"
+                      ? "text-brand-600 dark:text-brand-400"
+                      : "text-slate-400 dark:text-slate-500"
                   }`}
                 >
                   {index + 1}
@@ -254,10 +256,10 @@ const Upload = () => {
               <span
                 className={`text-sm font-semibold ${
                   step.status === "complete"
-                    ? "text-brand-600"
+                    ? "text-brand-600 dark:text-brand-400"
                     : step.status === "active"
-                      ? "text-brand-600"
-                      : "text-slate-400"
+                      ? "text-brand-600 dark:text-brand-400"
+                      : "text-slate-400 dark:text-slate-500"
                 }`}
               >
                 {step.label}
@@ -272,7 +274,7 @@ const Upload = () => {
         {/* Left Column - Upload & Form */}
         <div className="lg:col-span-2 space-y-6">
           {/* Platform Selector */}
-          <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+          <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card">
             <PlatformSelector
               selected={selectedPlatform}
               onChange={setSelectedPlatform}
@@ -280,7 +282,7 @@ const Upload = () => {
           </div>
 
           {/* Upload Box */}
-          <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
+          <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card">
             <UploadBox
               onFileSelect={handleFileSelect}
               isUploading={uploadStatus === UPLOAD_STATUS.UPLOADING}
@@ -295,8 +297,8 @@ const Upload = () => {
 
           {/* Video Form */}
           {selectedFile && (
-            <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
-              <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
+            <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">
                 Video Details
               </h3>
               <VideoForm
@@ -311,33 +313,15 @@ const Upload = () => {
         {/* Right Column - Actions */}
         <div className="space-y-6">
           {/* SEO temporarily disabled. Restore the score panel here later. */}
-          {/*
-          {seoResult && (
-            <SEOScore score={seoResult.score} suggestions={seoResult.suggestions} />
-          )}
-          */}
 
           {/* Actions */}
-          <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl space-y-3">
-            <h3 className="text-lg font-bold dark:text-white text-gray-900 mb-4">
+          <div className="p-6 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl shadow-card space-y-3">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">
               Actions
             </h3>
 
-            {/* SEO temporarily disabled. Restore the Check SEO Score action later. */}
-            {/*
-            <button
-              onClick={handleCheckSEO}
-              disabled={!selectedFile || (!formData.title && !formData.description)}
-              className="w-full inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150 disabled:opacity-50"
-            >
-              <Target className="w-5 h-5" />
-              Check SEO Score
-            </button>
-            */}
-
             <button
               onClick={() => setIsSchedulerOpen(true)}
-              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl px-4 py-2.5 shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150 focus-visible:outline-none focus-visible:shadow-focus disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-sm"
               className="w-full inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-150 disabled:opacity-50"
             >
               <Calendar className="w-5 h-5" />
@@ -347,7 +331,7 @@ const Upload = () => {
             <button
               onClick={handleUpload}
               disabled={!isFormComplete || isProcessing}
-              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:from-orange-500/40 disabled:to-orange-600/40 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-orange disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
+              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-brand-600 to-accent-500 text-white font-medium rounded-xl shadow-sm hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98] transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {uploadStatus === UPLOAD_STATUS.UPLOADING ? (
                 <>
@@ -372,7 +356,7 @@ const Upload = () => {
                 href={publishedUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="block text-sm text-center text-indigo-600 dark:text-cyan-400 hover:underline"
+                className="block text-sm text-center text-brand-600 dark:text-brand-400 hover:underline"
               >
                 View published video on YouTube
               </a>
@@ -380,25 +364,18 @@ const Upload = () => {
 
             <button
               onClick={handleReset}
-              className="w-full px-6 py-3 dark:bg-navy-800 dark:hover:bg-navy-700 dark:text-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-200"
+              className="w-full px-6 py-3 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold rounded-xl transition-all duration-200"
             >
               Reset Form
             </button>
           </div>
 
           {/* Tips */}
-          <div className="p-6 dark:bg-indigo-500/10 dark:border dark:border-indigo-500/30 bg-indigo-50 border border-indigo-200 rounded-2xl">
-            <h4 className="font-bold dark:text-indigo-400 text-indigo-900 mb-3">
+          <div className="p-6 bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-900 rounded-2xl">
+            <h4 className="font-bold text-brand-900 dark:text-brand-300 mb-3">
               💡 Pro Tips
             </h4>
-            <ul className="space-y-2 text-sm dark:text-indigo-300/80 text-indigo-700">
-              {/* SEO tips temporarily disabled. Restore these tips with the analyzer. */}
-              {/*
-              <li>• Use 50-60 characters for optimal title length</li>
-              <li>• Include keywords in your description</li>
-              <li>• Add 10-15 relevant tags</li>
-              <li>• Check SEO score before publishing</li>
-              */}
+            <ul className="space-y-2 text-sm text-brand-700 dark:text-brand-400">
               <li>• Schedule during peak engagement times</li>
             </ul>
           </div>

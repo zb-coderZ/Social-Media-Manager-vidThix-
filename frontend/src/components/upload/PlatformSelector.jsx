@@ -43,7 +43,7 @@ const PlatformSelector = ({ selected, onChange }) => {
                       isSelected
                         ? "text-brand-600 dark:text-brand-400"
                         : isDisabled
-                          ? "text-slate-400"
+                          ? "text-slate-400 dark:text-slate-500"
                           : "text-slate-600 dark:text-slate-400"
                     }`}
                   />
@@ -55,7 +55,7 @@ const PlatformSelector = ({ selected, onChange }) => {
                     {platform.name}
                   </p>
                   {isDisabled && (
-                    <p className="text-xs text-slate-400">Coming Soon</p>
+                    <p className="text-xs text-slate-400 dark:text-slate-500">Coming Soon</p>
                   )}
                 </div>
                 {isSelected && (

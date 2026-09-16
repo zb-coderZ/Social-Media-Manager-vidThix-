@@ -183,7 +183,7 @@ export function getAllBlogs() {
 
   try {
     const parsed = JSON.parse(stored);
-    return Array.isArray(parsed) ? parsed : BLOG_POSTS;
+    return Array.isArray(parsed) && parsed.length > 0 ? parsed : BLOG_POSTS;
   } catch {
     return BLOG_POSTS;
   }

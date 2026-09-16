@@ -21,7 +21,7 @@ const Sidebar = () => {
   const SidebarContent = () => (
     <>
       {/* Logo */}
-      <div className="p-6 border-b dark:border-navy-800 border-slate-200">
+      <div className="p-6 border-b border-slate-200/60 dark:border-slate-800">
         <Link to="/dashboard" className="flex items-center gap-2 group">
           <div className="w-10 h-10 bg-gradient-to-br from-brand-600 to-accent-500 rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 dark:shadow-glow shadow-md">
             <span className="text-white font-bold text-xl">V</span>
@@ -80,7 +80,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:w-64 dark:bg-navy-900 dark:border-r dark:border-navy-800 bg-white border-r border-slate-200">
+      <aside className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:w-64 dark:bg-navy-900 border-r border-slate-200/60 dark:border-slate-800 bg-white">
         <SidebarContent />
       </aside>
 

@@ -30,7 +30,6 @@ export const SIDEBAR_ITEMS = [
     name: "Blog",
     href: "/dashboard/blog",
     icon: "BookOpen",
-    requiredAdmin: true,
   },
   { name: "Upload Content", href: "/upload", icon: "Upload" },
   // SEO temporarily disabled. Restore when the analyzer is re-enabled.
