@@ -52,7 +52,9 @@ const Settings = () => {
     <div className="flex-1 p-4 sm:p-6 lg:p-8 space-y-8 max-w-4xl mx-auto">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">Settings</h1>
+        <h1 className="text-3xl font-bold dark:text-white text-gray-900 mb-2">
+          Settings
+        </h1>
         <p className="dark:text-gray-400 text-gray-600">
           Manage your account settings and preferences
         </p>
@@ -143,7 +145,9 @@ const Settings = () => {
             <Bell className="w-5 h-5 dark:text-cyan-400 text-cyan-600" />
           </div>
           <div>
-            <h2 className="text-lg font-bold dark:text-white text-gray-900">Notifications</h2>
+            <h2 className="text-lg font-bold dark:text-white text-gray-900">
+              Notifications
+            </h2>
             <p className="text-sm dark:text-gray-400 text-gray-600">
               Manage your notification preferences
             </p>
@@ -160,7 +164,9 @@ const Settings = () => {
               key={key}
               className="flex items-center justify-between p-4 dark:bg-navy-900/60 dark:border dark:border-navy-700 bg-gray-50 border border-gray-200 rounded-xl"
             >
-              <span className="text-sm font-medium dark:text-gray-300 text-gray-900">{label}</span>
+              <span className="text-sm font-medium dark:text-gray-300 text-gray-900">
+                {label}
+              </span>
               <button
                 onClick={() =>
                   setNotifications({
@@ -169,7 +175,9 @@ const Settings = () => {
                   })
                 }
                 className={`relative w-12 h-6 rounded-full transition-colors duration-200 ${
-                  notifications[key] ? "dark:bg-indigo-600 bg-indigo-600" : "dark:bg-navy-700 bg-gray-300"
+                  notifications[key]
+                    ? "dark:bg-indigo-600 bg-indigo-600"
+                    : "dark:bg-navy-700 bg-gray-300"
                 }`}
               >
                 <span
@@ -190,21 +198,28 @@ const Settings = () => {
             <Moon className="w-5 h-5 dark:text-orange-400 text-orange-600" />
           </div>
           <div>
-            <h2 className="text-lg font-bold dark:text-white text-gray-900">Appearance</h2>
-            <p className="text-sm dark:text-gray-400 text-gray-600">Customize your interface</p>
+            <h2 className="text-lg font-bold dark:text-white text-gray-900">
+              Appearance
+            </h2>
+            <p className="text-sm dark:text-gray-400 text-gray-600">
+              Customize your interface
+            </p>
           </div>
         </div>
 
         <div className="p-4 dark:bg-emerald-500/10 dark:border dark:border-emerald-500/30 bg-emerald-50 border border-emerald-200 rounded-xl">
           <p className="text-sm dark:text-emerald-300/80 text-emerald-700">
-            🌙 Dark mode is now available! Enjoy the premium dark theme with enhanced readability and reduced eye strain.
+            🌙 Dark mode is now available! Enjoy the premium dark theme with
+            enhanced readability and reduced eye strain.
           </p>
         </div>
       </div>
 
       {/* Danger Zone */}
       <div className="p-6 dark:bg-red-500/10 dark:border dark:border-red-500/30 bg-red-50 border border-red-200 rounded-2xl">
-        <h3 className="text-lg font-bold dark:text-red-400 text-red-900 mb-3">Danger Zone</h3>
+        <h3 className="text-lg font-bold dark:text-red-400 text-red-900 mb-3">
+          Danger Zone
+        </h3>
         <p className="text-sm dark:text-red-300/80 text-red-700 mb-4">
           Once you delete your account, there is no going back. Please be
           certain.

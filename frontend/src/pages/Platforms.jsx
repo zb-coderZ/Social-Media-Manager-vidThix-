@@ -129,13 +129,16 @@ const Platforms = () => {
       const platformConnections = await api.getPlatforms();
       setConnections(
         Object.fromEntries(
-          platformConnections.map((connection) => [connection.platform, {
-            connected: connection.status === "connected",
-            channelName: connection.account_name,
-            avatar: connection.account_avatar,
-            subscribers: connection.subscriber_count,
-            status: connection.status,
-          }]),
+          platformConnections.map((connection) => [
+            connection.platform,
+            {
+              connected: connection.status === "connected",
+              channelName: connection.account_name,
+              avatar: connection.account_avatar,
+              subscribers: connection.subscriber_count,
+              status: connection.status,
+            },
+          ]),
         ),
       );
     } catch (requestError) {
@@ -227,10 +230,7 @@ const Platforms = () => {
             Connected
           </p>
           <p className="text-3xl font-bold dark:text-emerald-400 text-emerald-600">
-            {
-              Object.values(connections).filter((p) => p.connected)
-                .length
-            }
+            {Object.values(connections).filter((p) => p.connected).length}
           </p>
         </div>
         <div className="p-6 dark:bg-navy-800/60 dark:backdrop-blur-xl dark:border dark:border-indigo-600/30 bg-white/60 backdrop-blur-xl border border-gray-200/50 rounded-2xl">
@@ -249,7 +249,7 @@ const Platforms = () => {
           <PlatformCard
             key={platform.id}
             platform={platform}
-              connection={connections[platform.id]}
+            connection={connections[platform.id]}
             onConnect={handleConnect}
             onDisconnect={handleDisconnect}
             isConnecting={isLoading || connectingPlatform === platform.id}

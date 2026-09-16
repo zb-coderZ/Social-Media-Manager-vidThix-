@@ -78,7 +78,10 @@ const Scheduled = () => {
             {scheduledPosts.map((post) => {
               const postId = post.id || post._id;
               return (
-                <div key={postId} className="flex items-center justify-between gap-4 p-4 dark:bg-navy-900/60 dark:border dark:border-navy-700 bg-gray-50 border border-gray-200 rounded-xl">
+                <div
+                  key={postId}
+                  className="flex items-center justify-between gap-4 p-4 dark:bg-navy-900/60 dark:border dark:border-navy-700 bg-gray-50 border border-gray-200 rounded-xl"
+                >
                   <div className="min-w-0">
                     <p className="font-semibold dark:text-white text-gray-900 truncate">
                       {post.platform} video

@@ -35,25 +35,27 @@ const Dashboard = () => {
           api.getVideos(),
         ]);
         setStats(statsResponse);
-        setRecentActivity(videosResponse.map((video) => ({
-          ...video,
-          id: video.id || video._id,
-          type: video.status === "scheduled" ? "scheduled" : "upload",
-          platform: video.platform || "youtube",
-          date: video.created_at,
-          title: video.external_url ? (
-            <a
-              href={video.external_url}
-              target="_blank"
-              rel="noreferrer"
-              className="hover:underline"
-            >
-              {video.title}
-            </a>
-          ) : (
-            video.title
-          ),
-        })));
+        setRecentActivity(
+          videosResponse.map((video) => ({
+            ...video,
+            id: video.id || video._id,
+            type: video.status === "scheduled" ? "scheduled" : "upload",
+            platform: video.platform || "youtube",
+            date: video.created_at,
+            title: video.external_url ? (
+              <a
+                href={video.external_url}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:underline"
+              >
+                {video.title}
+              </a>
+            ) : (
+              video.title
+            ),
+          })),
+        );
       } catch (requestError) {
         if (requestError.status === 401) {
           navigate("/auth", { replace: true });
