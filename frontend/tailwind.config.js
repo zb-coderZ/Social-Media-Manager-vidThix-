@@ -5,6 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        sans: ["Inter", "system-ui", "sans-serif"],
         display: ["Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
         body: ["Inter", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "Fira Code", "monospace"],
@@ -17,12 +18,32 @@ export default {
           800: "#1F2937", // Cards, hover states
           700: "#252D3D", // Darker for interactions
         },
-        // CTA engagement orange
+        brand: {
+          50: "#eef2ff",
+          100: "#e0e7ff",
+          200: "#c7d2fe",
+          300: "#a5b4fc",
+          400: "#818cf8",
+          500: "#6366f1",
+          600: "#4f46e5",
+          700: "#4338ca",
+          800: "#3730a3",
+          900: "#312e81",
+          950: "#1e1b4b",
+        },
         accent: {
-          orange: "#FF6B35", // Primary CTAs (40% higher engagement)
-          indigo: "#6366F1", // Primary elements
-          cyan: "#00D9FF", // Interactive elements
-          emerald: "#10B981", // Success states
+          400: "#38bdf8",
+          500: "#0ea5e9",
+          600: "#0284c7",
+        },
+        surface: {
+          light: "#f8fafc",
+          DEFAULT: "#ffffff",
+          raised: "#ffffff",
+          sunken: "#f1f5f9",
+          dark: "#0f172a",
+          darkRaised: "#1e293b",
+          darkSunken: "#0b1120",
         },
         // Legacy premium scales (keeping for compatibility)
         premium: {
@@ -53,6 +74,10 @@ export default {
         },
       },
       boxShadow: {
+        card: "0 1px 2px rgba(15,23,42,0.04), 0 1px 1px rgba(15,23,42,0.03)",
+        cardHover:
+          "0 8px 24px rgba(79,70,229,0.08), 0 2px 6px rgba(15,23,42,0.04)",
+        focus: "0 0 0 3px rgba(99,102,241,0.15)",
         // Indigo glow effects
         "glow-sm": "0 0 10px rgba(99, 102, 241, 0.3)",
         glow: "0 0 20px rgba(99, 102, 241, 0.4)",
@@ -71,6 +96,10 @@ export default {
         xs: "2px",
         "4xl": "72px",
         "5xl": "96px",
+      },
+      borderRadius: {
+        xl2: "1rem",
+        xl3: "1.25rem",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
