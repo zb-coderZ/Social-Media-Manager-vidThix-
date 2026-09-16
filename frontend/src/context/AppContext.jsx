@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { PLATFORM_IDS, STORAGE_KEYS } from "../utils/constants";
-import { DEFAULT_USER, INITIAL_STATS } from "../utils/dummyData";
+import { INITIAL_STATS } from "../utils/dummyData";
+import { api, authStorage } from "../utils/api";
 
 const AppContext = createContext();
 
@@ -18,8 +19,11 @@ export function AppProvider({ children }) {
   // User state
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.USER);
-    return saved ? { ...DEFAULT_USER, ...JSON.parse(saved) } : DEFAULT_USER;
+    return saved ? JSON.parse(saved) : null;
   });
+  const [isAuthLoading, setIsAuthLoading] = useState(() =>
+    Boolean(authStorage.accessToken),
+  );
 
   // Apply theme to DOM and persist to localStorage
   useEffect(() => {
@@ -32,22 +36,30 @@ export function AppProvider({ children }) {
     }
   }, [isDarkMode]);
 
+  useEffect(() => {
+    if (!authStorage.accessToken) return;
+    api
+      .me()
+      .then((currentUser) => setUser(normalizeUser(currentUser)))
+      .catch(() => {
+        authStorage.clear();
+        localStorage.removeItem(STORAGE_KEYS.USER);
+        setUser(null);
+      })
+      .finally(() => setIsAuthLoading(false));
+  }, []);
+
   // Connected platforms state
-  const [connectedPlatforms, setConnectedPlatforms] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEYS.PLATFORMS);
-    return saved
-      ? JSON.parse(saved)
-      : {
-          [PLATFORM_IDS.YOUTUBE]: {
-            connected: false,
-            channelName: null,
-            subscribers: null,
-          },
-          [PLATFORM_IDS.INSTAGRAM]: { connected: false, disabled: true },
-          [PLATFORM_IDS.TIKTOK]: { connected: false, disabled: true },
-          [PLATFORM_IDS.LINKEDIN]: { connected: false, disabled: true },
-          [PLATFORM_IDS.FACEBOOK]: { connected: false, disabled: true },
-        };
+  const [connectedPlatforms, setConnectedPlatforms] = useState({
+    [PLATFORM_IDS.YOUTUBE]: {
+      connected: false,
+      channelName: null,
+      subscribers: null,
+    },
+    [PLATFORM_IDS.INSTAGRAM]: { connected: false, disabled: true },
+    [PLATFORM_IDS.TIKTOK]: { connected: false, disabled: true },
+    [PLATFORM_IDS.LINKEDIN]: { connected: false, disabled: true },
+    [PLATFORM_IDS.FACEBOOK]: { connected: false, disabled: true },
   });
 
   // Stats state
@@ -67,6 +79,29 @@ export function AppProvider({ children }) {
     const saved = localStorage.getItem(STORAGE_KEYS.SCHEDULED);
     return saved ? JSON.parse(saved) : [];
   });
+
+  useEffect(() => {
+    if (!authStorage.accessToken) return;
+    api
+      .listPlatforms()
+      .then((connections) => {
+        setConnectedPlatforms((previous) => ({
+          ...previous,
+          ...Object.fromEntries(
+            connections.map((connection) => [
+              connection.platform,
+              {
+                connected: connection.status === "connected",
+                channelName: connection.account_name,
+                subscribers: null,
+                disabled: connection.status === "coming_soon",
+              },
+            ]),
+          ),
+        }));
+      })
+      .catch(() => undefined);
+  }, [user]);
 
   // Persist user to localStorage
   useEffect(() => {
@@ -109,6 +144,23 @@ export function AppProvider({ children }) {
   // Update user profile
   const updateUser = (updates) => {
     setUser((prev) => ({ ...prev, ...updates }));
+  };
+
+  const authenticate = async (action, payload) => {
+    const response = await action(payload);
+    authStorage.setTokens(response);
+    const nextUser = normalizeUser(response.user);
+    localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(nextUser));
+    setUser(nextUser);
+    return nextUser;
+  };
+
+  const login = (payload) => authenticate(api.login, payload);
+  const register = (payload) => authenticate(api.register, payload);
+  const logout = () => {
+    authStorage.clear();
+    localStorage.removeItem(STORAGE_KEYS.USER);
+    setUser(null);
   };
 
   // Connect/disconnect platform
@@ -206,6 +258,11 @@ export function AppProvider({ children }) {
     isDarkMode,
     toggleTheme,
     user,
+    isAuthLoading,
+    isAuthenticated: Boolean(user && authStorage.accessToken),
+    login,
+    register,
+    logout,
     updateUser,
     connectedPlatforms,
     connectPlatform,
@@ -220,6 +277,10 @@ export function AppProvider({ children }) {
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+}
+
+function normalizeUser(apiUser) {
+  return { ...apiUser, isAdmin: apiUser.is_admin };
 }
 
 export function useApp() {

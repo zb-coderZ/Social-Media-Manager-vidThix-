@@ -66,13 +66,13 @@ const Navbar = ({ isFixed = true }) => {
               )}
             </button>
             <Link
-              to="/dashboard"
+              to="/auth?mode=login"
               className="px-4 py-2 dark:text-gray-300 dark:hover:text-cyan-400 text-gray-700 hover:text-indigo-600 font-semibold transition-colors duration-200"
             >
               Login
             </Link>
             <Link
-              to="/dashboard"
+              to="/auth?mode=register"
               className="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-200 hover:shadow-glow-orange hover:-translate-y-0.5 transform"
             >
               Sign Up
@@ -125,14 +125,14 @@ const Navbar = ({ isFixed = true }) => {
                   )}
                 </button>
                 <Link
-                  to="/dashboard"
+                  to="/auth?mode=login"
                   className="px-3 py-2 text-center dark:text-gray-300 dark:hover:text-cyan-400 dark:hover:bg-navy-800 text-gray-700 hover:bg-gray-50 rounded-lg font-semibold transition-colors duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Login
                 </Link>
                 <Link
-                  to="/dashboard"
+                  to="/auth?mode=register"
                   className="px-3 py-2 text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >

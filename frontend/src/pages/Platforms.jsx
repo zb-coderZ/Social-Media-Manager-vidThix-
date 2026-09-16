@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { useToast } from "../context/ToastContext";
 import { PLATFORMS } from "../utils/dummyData";
-import { API_DELAYS } from "../utils/constants";
-import { sleep } from "../utils/helpers";
+import { api } from "../utils/api";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import { getIconByName } from "../utils/iconMap";
 
@@ -114,9 +114,19 @@ const PlatformCard = ({
 };
 
 const Platforms = () => {
-  const { connectedPlatforms, connectPlatform, disconnectPlatform } = useApp();
+  const { connectedPlatforms, disconnectPlatform } = useApp();
   const { success, error, info } = useToast();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [connectingPlatform, setConnectingPlatform] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("connected") === "youtube") {
+      success("YouTube connected successfully!");
+      navigate(location.pathname, { replace: true });
+    }
+  }, [location.pathname, location.search, navigate, success]);
 
   const handleConnect = async (platformId) => {
     // Only YouTube is enabled
@@ -128,28 +138,22 @@ const Platforms = () => {
     setConnectingPlatform(platformId);
 
     try {
-      // Simulate OAuth flow
-      await sleep(API_DELAYS.CONNECT_PLATFORM);
-
-      // Simulate successful connection
-      const mockData = {
-        channelName: "Demo Channel",
-        subscribers: "10.5K",
-        connected: true,
-      };
-
-      connectPlatform(platformId, mockData);
-      success("Platform connected successfully!");
-    } catch {
-      error("Failed to connect platform. Please try again.");
-    } finally {
+      const { authorization_url } = await api.youtubeConnect();
+      window.location.assign(authorization_url);
+    } catch (requestError) {
+      error(requestError.message || "Failed to start YouTube connection.");
       setConnectingPlatform(null);
     }
   };
 
-  const handleDisconnect = (platformId) => {
-    disconnectPlatform(platformId);
-    success("Platform disconnected successfully.");
+  const handleDisconnect = async (platformId) => {
+    try {
+      await api.disconnectPlatform(platformId);
+      disconnectPlatform(platformId);
+      success("Platform disconnected successfully.");
+    } catch (requestError) {
+      error(requestError.message || "Failed to disconnect platform.");
+    }
   };
 
   return (

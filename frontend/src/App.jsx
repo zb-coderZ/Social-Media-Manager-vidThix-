@@ -26,6 +26,15 @@ const BlogAdmin = lazy(() => import("./pages/BlogAdmin"));
 const FooterPage = lazy(() => import("./pages/FooterPage"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
+const Auth = lazy(() => import("./pages/Auth"));
+
+function ProtectedRoute({ children }) {
+  const { isAuthenticated, isAuthLoading } = useApp();
+
+  if (isAuthLoading)
+    return <LoadingSpinner size="lg" text="Checking session..." />;
+  return isAuthenticated ? children : <Navigate to="/auth" replace />;
+}
 
 function AdminRoute({ children }) {
   const { user } = useApp();
@@ -63,9 +72,16 @@ function AppShell() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/pages/:slug" element={<FooterPage />} />
+            <Route path="/auth" element={<Auth />} />
 
             {/* Dashboard Routes */}
-            <Route element={<MainLayout />}>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <MainLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/upload" element={<Upload />} />
               {/* SEO temporarily disabled. Restore this route to re-enable the analyzer. */}
