@@ -52,14 +52,15 @@ SEO optimization is temporarily disabled and preserved for future development.
 * Current-user endpoint
 * Protected API routes
 
-### YouTube Integration
+### YouTube Authorization & Integration
 
-* Google OAuth authentication
-* YouTube account connection
-* OAuth callback handling
-* YouTube channel information
-* Video publishing through YouTube Data API
-* Resumable video uploads
+* ✅ **Google OAuth 2.0 Authorization Connection**: Fully implemented, verified, and operational.
+* **State Token Security**: Uses short-lived signed JWT `state` tokens to verify user identity and prevent CSRF attacks during the OAuth callback.
+* **Offline Access & Refresh Tokens**: Requests offline access to retrieve and store `refresh_token` for seamless long-term video uploads without re-authorization.
+* **Automatic Token Refreshing**: Automated expiration checks (`is_token_expired`) that refresh expired access tokens transparently.
+* **YouTube Channel Information Sync**: Fetches and stores channel title, avatar thumbnail, subscriber count, and channel ID upon successful authorization callback.
+* **MongoDB Connection Persistence**: Saves OAuth connection details (status, tokens, timestamps, channel profile) into the `platform_connections` database collection.
+* **Video Publishing & Resumable Uploads**: Uploads videos directly to connected YouTube channels using the YouTube Data API v3 resumable upload protocol.
 
 ### Dashboard
 
@@ -84,15 +85,15 @@ SEO optimization is temporarily disabled and preserved for future development.
 
 ## Supported Platforms
 
-| Platform  | Status         |
-| --------- | -------------- |
-| YouTube   | ✅ Available    |
-| Instagram | 🚧 Coming soon |
-| TikTok    | 🚧 Coming soon |
-| Facebook  | 🚧 Coming soon |
-| LinkedIn  | 🚧 Coming soon |
+| Platform  | Status                     | Authorization & Publishing |
+| --------- | -------------------------- | -------------------------- |
+| YouTube   | ✅ Connected & Operational | Google OAuth 2.0 & YouTube Data API v3 |
+| Instagram | 🚧 Coming soon             | Pending Integration |
+| TikTok    | 🚧 Coming soon             | Pending Integration |
+| Facebook  | 🚧 Coming soon             | Pending Integration |
+| LinkedIn  | 🚧 Coming soon             | Pending Integration |
 
-The current backend includes the architecture required to add additional platforms through dedicated services and OAuth integrations.
+YouTube account authorization and connection flow has been fully verified and tested. Connected channels are displayed on the Platforms dashboard page.
 
 ---
 
@@ -416,6 +417,41 @@ While the OAuth application is in testing mode, add your Google account as a tes
 
 ---
 
+## YouTube Authorization Connection Flow
+
+The YouTube connection authorization workflow operates as follows:
+
+```text
+User Clicks 'Connect YouTube' on UI (/platforms)
+       │
+       ▼
+GET /api/auth/youtube/connect (Backend verifies user JWT & returns Google OAuth URL + state JWT)
+       │
+       ▼
+Redirect to Google OAuth Consent Screen (User grants YouTube permissions)
+       │
+       ▼
+Google Redirects to GET /api/auth/youtube/callback?code=...&state=...
+       │
+       ▼
+Backend Decodes state JWT, Exchanges Code for Access & Refresh Tokens
+       │
+       ▼
+Backend Fetches Channel Metadata (Title, Thumbnail, Channel ID) via YouTube API
+       │
+       ▼
+Connection & Tokens Saved in MongoDB (platform_connections) with status: "connected"
+       │
+       ▼
+Redirect to Frontend (/platforms?connected=youtube) with Success Toast
+```
+
+* **State Token Protection**: Signed JWT state parameter ensures authorization callbacks belong to the authenticated user.
+* **Offline Access & Refresh Tokens**: Obtains long-lived refresh tokens for automated video publishing without requiring user re-authentication.
+* **Channel Profile Sync**: Automatically displays channel title, avatar thumbnail, and channel ID in the user's connected platforms overview.
+
+---
+
 # API Overview
 
 | Method | Endpoint                     | Purpose                      |
@@ -504,10 +540,10 @@ The goal is to allow creators to manage their social video publishing workflow f
 * FastAPI backend
 * MongoDB persistence
 * JWT authentication
-* Video upload
-* Video metadata
-* YouTube OAuth
-* YouTube publishing
+* Video upload & metadata management
+* ✅ **YouTube OAuth authorization & connection (Fully operational & verified)**
+* ✅ **YouTube channel metadata sync (Title, thumbnail, channel ID)**
+* YouTube video publishing (resumable upload)
 * Platform connection management
 * Scheduled posts
 * APScheduler publishing
@@ -676,8 +712,9 @@ uvicorn app.main:app --reload
 [x] FastAPI backend
 [x] MongoDB persistence
 [x] JWT authentication
-[x] YouTube OAuth
-[x] YouTube publishing
+[x] YouTube OAuth authorization & connection (Verified & Operational)
+[x] YouTube channel metadata sync (Title, Avatar, Channel ID)
+[x] YouTube video publishing (Resumable uploads)
 [x] Video uploads
 [x] Scheduling
 [x] Dashboard statistics
