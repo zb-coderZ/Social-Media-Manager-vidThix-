@@ -137,7 +137,7 @@ const BlogAdmin = () => {
   };
 
   return (
-    <div className="w-full min-w-0 space-y-8 max-w-7xl mx-auto">
+    <div className="w-full min-w-0 space-y-6 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
@@ -146,17 +146,17 @@ const BlogAdmin = () => {
               CMS Admin Studio
             </span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Manage Blog & SEO Articles
           </h1>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5">
             Create, publish, and analyze SEO articles for the vidThix audience.
           </p>
         </div>
 
         <button
           onClick={handleNewArticle}
-          className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-bold rounded-2xl px-5 py-3 shadow-lg shadow-brand-500/20 hover:shadow-xl active:scale-[0.98] transition-all shrink-0 text-sm"
+          className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-bold rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 shadow-lg shadow-brand-500/20 hover:shadow-xl active:scale-[0.98] transition-all shrink-0 text-xs sm:text-sm"
         >
           <Plus className="w-4 h-4" />
           <span>Write New Article</span>
@@ -164,7 +164,7 @@ const BlogAdmin = () => {
       </div>
 
       {/* Summary Metrics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 shadow-card flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">
