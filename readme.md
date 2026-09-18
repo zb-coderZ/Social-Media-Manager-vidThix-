@@ -1,739 +1,295 @@
-# vidThix
+# vidThix - Multi-Platform Content Publishing & Automation Studio
 
-**vidThix** is a full-stack social media video publishing platform that allows creators to upload, customize, schedule, and publish video content across connected social media platforms from one workspace.
+**vidThix** is a full-stack social media publishing platform that allows creators and digital teams to upload, customize, schedule, and publish video & text content across connected social platforms (YouTube & LinkedIn) from one unified workspace.
 
-The project combines a **React frontend** with a **FastAPI backend**, MongoDB persistence, JWT authentication, YouTube OAuth, video uploads, publishing workflows, and scheduled posts.
-
-The current implementation focuses on the core workflow:
+The application combines a modern **React 19 frontend** with a **FastAPI backend**, MongoDB database persistence, JWT authentication, YouTube & LinkedIn OAuth 2.0 authorization, automated APScheduler queueing, and a state-of-the-art UI/UX dashboard.
 
 ```text
-Upload video → Customize post → Select platforms → Publish → Schedule → Track status
+Upload / Create Content → Customize Metadata → Select Targets (YouTube / LinkedIn) → Auto Publish / Schedule → Track Live Status
 ```
 
-SEO optimization is temporarily disabled and preserved for future development.
+---
+
+## Key Features & Capabilities
+
+### 🎥 Multi-Platform Publishing Studio
+* **YouTube Publishing**: Full integration with YouTube Data API v3 for resumable video uploads with custom titles, descriptions, categories, and tags.
+* **LinkedIn Publishing**: Integration with LinkedIn v2 REST APIs for sharing posts, text updates, and media content directly to member profiles.
+* **Platform Selector**: Brand-accented platform selector with target-specific options and direct live URL links upon publishing.
+
+### 🔐 Enterprise OAuth 2.0 Authorization
+* ✅ **Google / YouTube OAuth 2.0**: Operational authorization flow with state-token validation, offline refresh tokens, and channel profile sync (Avatar, Channel Name, Subscribers).
+* ✅ **LinkedIn OAuth 2.0**: Operational authorization flow with PKCE state verification, userinfo sync, member profile URNs, and token refresh handling.
+* **State Token Security**: Signed JWT state tokens prevent CSRF callback attacks.
+* **MongoDB Token Storage**: Encrypted storage of OAuth credentials in the `platform_connections` collection.
+
+### 📅 Smart Scheduling & Queue Management
+* **Timezone-Aware Queue**: Schedule posts for future release with local timezone support.
+* **APScheduler Integration**: Automated background scheduler process that triggers video/text publishing at the designated time.
+* **Queue Resolution & Cancellation**: Visual countdowns ("In 2 hours"), status filters (`All`, `Pending`, `Completed`), and one-click cancellation.
+
+### 📊 Intelligent Dashboard & Analytics
+* **Content Distribution Ratio**: Live visualization of YouTube vs LinkedIn publishing distribution.
+* **Segmented Activity Feeds**: Platform filter tabs (`All`, `YouTube`, `LinkedIn`, `Instagram`, `TikTok`, `Facebook`) with count badges and live post links.
+* **System Status Pulse**: Real-time system health and channel connection indicators (`2 Active Connections`).
+
+### 📝 CMS & Blog Management Studio
+* **Admin CMS Studio**: Summary stats (Total Articles, Published Posts, Draft Manuscripts, Reader Views).
+* **Live Google Search SEO Preview**: Dual-column editor featuring real-time preview of how articles will look on Google search results.
+* **Auto-Slug Generator**: One-click slugification tool for article URLs.
+* **Public Reader Experience**: Topic filter pills (`All Topics`, `SEO`, `Content Strategy`, `Automation`), hero search bar, reading time badges, and share buttons.
+
+### 🎨 Premium Landing Page & User Design
+* **Hero Studio Mockup**: Interactive glassmorphic preview box showing live channel states and queue items.
+* **Product Tour Demo Modal**: Video tour modal with direct dashboard launch options.
+* **Transparent Pricing Matrix**: 3-tier pricing table with interactive Monthly / Annual billing toggle (`Save 20%`).
+* **Interactive Accordion FAQ**: Resolves common questions regarding OAuth security, timezone support, and creator features.
 
 ---
 
-## Features
+## Supported Platforms Matrix
 
-### Video Management
+| Platform  | Integration Status          | Authorization Protocol & API Details |
+| --------- | --------------------------- | ------------------------------------ |
+| **YouTube** | ✅ Connected & Operational | Google OAuth 2.0 & YouTube Data API v3 Resumable Uploads |
+| **LinkedIn**| ✅ Connected & Operational | LinkedIn OAuth 2.0 & v2 REST Userinfo / Social Posts API |
+| **Instagram**| 🚧 Coming Soon (Sandbox)  | Prepared for Meta Graph API Integration |
+| **TikTok**   | 🚧 Coming Soon (Sandbox)  | Prepared for TikTok Content Posting API |
+| **Facebook** | 🚧 Coming Soon (Sandbox)  | Prepared for Facebook Graph API |
 
-* Drag-and-drop video upload
-* Video preview
-* Video metadata management
-* Title, description, tags, and category
-* Video library
-* Delete uploaded videos
-* Persistent video records through MongoDB
+---
 
-### Multi-Platform Publishing
-
-* Select connected social media platforms
-* Publish video content from one workspace
-* YouTube publishing through the YouTube Data API
-* Platform connection management
-* Platform-specific publishing status
-* Instagram, TikTok, LinkedIn, and Facebook prepared for future integration
-
-### Scheduling
-
-* Schedule videos for future publishing
-* View scheduled posts
-* Cancel scheduled posts
-* Automatic scheduled publishing through APScheduler
-* Publishing status tracking
-
-### Authentication
-
-* User registration
-* User login
-* JWT access tokens
-* JWT refresh tokens
-* Current-user endpoint
-* Protected API routes
-
-### YouTube Authorization & Integration
-
-* ✅ **Google OAuth 2.0 Authorization Connection**: Fully implemented, verified, and operational.
-* **State Token Security**: Uses short-lived signed JWT `state` tokens to verify user identity and prevent CSRF attacks during the OAuth callback.
-* **Offline Access & Refresh Tokens**: Requests offline access to retrieve and store `refresh_token` for seamless long-term video uploads without re-authorization.
-* **Automatic Token Refreshing**: Automated expiration checks (`is_token_expired`) that refresh expired access tokens transparently.
-* **YouTube Channel Information Sync**: Fetches and stores channel title, avatar thumbnail, subscriber count, and channel ID upon successful authorization callback.
-* **MongoDB Connection Persistence**: Saves OAuth connection details (status, tokens, timestamps, channel profile) into the `platform_connections` database collection.
-* **Video Publishing & Resumable Uploads**: Uploads videos directly to connected YouTube channels using the YouTube Data API v3 resumable upload protocol.
-
-### Dashboard
-
-* Upload statistics
-* Publishing statistics
-* Scheduled-post statistics
-* Recent activity
-* Platform connection status
+## Tech Stack
 
 ### Frontend
+* **Core**: React 19, Vite 8, React Router v7
+* **Styling & Aesthetics**: Tailwind CSS, Glassmorphic UI Design System, Custom SVG Platform Icons
+* **Icons & Visuals**: Lucide React, tsParticles Background
+* **Form & Utilities**: React Dropzone, date-fns, Recharts Analytics
 
-* Responsive React dashboard
-* Light and dark themes
-* Toast notifications
-* Loading states
-* Lazy-loaded routes
-* Public home, about, contact, and blog pages
-* Admin blog management
-* React Router navigation
+### Backend
+* **Framework**: FastAPI (Python 3.11+)
+* **Database**: MongoDB & Motor (Async Python Driver)
+* **Authentication**: JWT Access & Refresh Tokens (`python-jose`, `passlib`, `bcrypt`)
+* **OAuth Services**: Google API Python Client, `google-auth-oauthlib`, LinkedIn REST Service
+* **Scheduler**: APScheduler (Async Background Job Queue)
 
----
-
-## Supported Platforms
-
-| Platform  | Status                     | Authorization & Publishing |
-| --------- | -------------------------- | -------------------------- |
-| YouTube   | ✅ Connected & Operational | Google OAuth 2.0 & YouTube Data API v3 |
-| Instagram | 🚧 Coming soon             | Pending Integration |
-| TikTok    | 🚧 Coming soon             | Pending Integration |
-| Facebook  | 🚧 Coming soon             | Pending Integration |
-| LinkedIn  | 🚧 Coming soon             | Pending Integration |
-
-YouTube account authorization and connection flow has been fully verified and tested. Connected channels are displayed on the Platforms dashboard page.
+### DevOps & Infrastructure
+* **Containerization**: Docker & Docker Compose
+* **Process Manager**: Uvicorn ASGI Server
+* **Linter**: ESLint 9 (`npm run lint` verified with 0 errors)
 
 ---
 
-# Tech Stack
-
-## Frontend
-
-* React 19
-* Vite 8
-* React Router
-* Tailwind CSS
-* Lucide React
-* Recharts
-* React Dropzone
-* React Datepicker
-* date-fns
-* tsParticles
-
-## Backend
-
-* FastAPI
-* Python 3.11+
-* MongoDB
-* Motor
-* Pydantic
-* python-jose
-* Google API Python Client
-* google-auth-oauthlib
-* APScheduler
-
-## DevOps / Infrastructure
-
-* Docker
-* Docker Compose
-* MongoDB Docker container
-* Uvicorn
-
----
-
-# Project Structure
+## Project Directory Structure
 
 ```text
 vidThix/
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── components/       Reusable UI and feature components
-│   │   ├── context/          Application and toast state
-│   │   ├── hooks/            Shared React hooks
-│   │   ├── layout/           Shared dashboard layout
-│   │   ├── pages/            Route-level page components
-│   │   ├── utils/            Constants, helpers, demo data
-│   │   ├── App.jsx           Router and application shell
-│   │   ├── index.css         Global styles
-│   │   └── main.jsx          React entry point
+│   │   ├── components/       
+│   │   │   ├── common/       Navbar, Sidebar, Toast, LoadingSpinner
+│   │   │   ├── dashboard/    ActivityFeed, DistributionBar
+│   │   │   ├── home/         Hero, FeatureCard, PlatformCard, WorkflowSteps, Footer
+│   │   │   ├── upload/       PlatformSelector, ProgressPipeline
+│   │   │   └── ...           BlogTable, BlogEditor, BlogCard, BlogSidebar
+│   │   │
+│   │   ├── context/          AppContext, ToastContext
+│   │   ├── hooks/            usePageMeta, useToast
+│   │   ├── layout/           MainLayout (Admin App Shell)
+│   │   ├── pages/            Home, Dashboard, Upload, Platforms, Scheduled, Settings, Blog, BlogAdmin, BlogPost
+│   │   ├── utils/            api.js, blogData.js, dummyData.js, iconMap.js
+│   │   ├── App.jsx           Router configuration & protected routes
+│   │   └── index.css         Tailwind utilities & glassmorphic tokens
 │   │
 │   ├── package.json
-│   └── ...
+│   └── eslint.config.js
 │
 ├── backend/
 │   ├── app/
-│   │   ├── core/
-│   │   │   └── security.py
-│   │   │
-│   │   ├── models/
-│   │   │
-│   │   ├── schemas/
-│   │   │   ├── user.py
-│   │   │   ├── platform.py
-│   │   │   ├── video.py
-│   │   │   └── scheduled_post.py
+│   │   ├── core/             security.py (JWT hashing & verification)
+│   │   ├── models/           Database MongoDB PyObjectId helper
+│   │   ├── schemas/          user.py, platform.py, video.py, scheduled_post.py
 │   │   │
 │   │   ├── routers/
-│   │   │   ├── auth.py
-│   │   │   ├── youtube.py
-│   │   │   ├── platforms.py
-│   │   │   ├── videos.py
-│   │   │   ├── scheduled.py
-│   │   │   └── dashboard.py
+│   │   │   ├── auth.py       Authentication & User session
+│   │   │   ├── youtube.py    Google OAuth 2.0 connect & callback
+│   │   │   ├── linkedin.py   LinkedIn OAuth 2.0 connect & callback
+│   │   │   ├── platforms.py  Connected platform accounts & disconnect
+│   │   │   ├── videos.py     Video upload & publishing endpoints
+│   │   │   ├── scheduled.py  Scheduled post queue management
+│   │   │   └── dashboard.py  Dashboard stats & distribution metrics
 │   │   │
 │   │   ├── services/
 │   │   │   ├── auth_service.py
-│   │   │   ├── youtube_service.py
-│   │   │   └── scheduler_service.py
+│   │   │   ├── youtube_service.py   Resumable upload & Google API client
+│   │   │   ├── linkedin_service.py  LinkedIn OAuth & social post publisher
+│   │   │   └── scheduler_service.py APScheduler job handler
 │   │   │
-│   │   ├── uploads/
-│   │   ├── config.py
-│   │   ├── database.py
-│   │   └── main.py
+│   │   ├── uploads/          Local video binary storage
+│   │   ├── config.py         Application settings & environment schema
+│   │   ├── database.py       Motor MongoDB async connection
+│   │   └── main.py           FastAPI application entry point
 │   │
 │   ├── requirements.txt
-│   ├── .env.example
-│   └── ...
+│   └── .env.example
 │
-├── .gitignore
 ├── README.md
 └── docker-compose.yml
 ```
 
 ---
 
-# Getting Started
+## Getting Started
 
-## Prerequisites
-
-Make sure you have:
-
-* Node.js and npm
-* Python 3.11+
-* Docker and Docker Compose
-* Git
-
-For real YouTube publishing:
-
-* A Google Cloud project
-* YouTube Data API v3 enabled
-* Google OAuth credentials
+### 1. Prerequisites
+* **Node.js**: v18.0.0+ and `npm`
+* **Python**: v3.11+
+* **MongoDB**: Local MongoDB service running on port `27017` (or via Docker)
 
 ---
 
-# 1. Clone the Repository
+### 2. Environment Variables Configuration
 
-```bash
-git clone <your-repository-url>
-cd vidThix
-```
-
----
-
-# 2. Backend Setup
-
-Move into the backend directory:
-
-```bash
-cd backend
-```
-
-Create a virtual environment:
-
-### Windows
-
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-```
-
-### Linux / macOS
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Create your environment file:
-
-```bash
-cp .env.example .env
-```
-
-On Windows, you can also create `.env` manually from `.env.example`.
-
----
-
-# 3. Backend Environment Variables
-
-Example:
+Create a `.env` file in the `backend/` directory:
 
 ```env
-SECRET_KEY=your-secret-key
+# General
+SECRET_KEY=your_generated_jwt_secret_key_32_bytes
+MAX_UPLOAD_SIZE_MB=500
+FRONTEND_ORIGIN=http://localhost:5173
 
+# MongoDB
 MONGODB_URI=mongodb://localhost:27017
 MONGODB_DB_NAME=vidthix
 
-FRONTEND_ORIGIN=http://localhost:5173
-
-GOOGLE_CLIENT_ID=your-google-client-id
+# YouTube OAuth 2.0
+GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 GOOGLE_REDIRECT_URI=http://localhost:8000/api/auth/youtube/callback
 
-MAX_UPLOAD_SIZE_MB=500
-```
-
-Generate a secure JWT secret:
-
-```bash
-python -c "import secrets; print(secrets.token_hex(32))"
+# LinkedIn OAuth 2.0
+LINKEDIN_CLIENT_ID=your-linkedin-client-id
+LINKEDIN_CLIENT_SECRET=your-linkedin-client-secret
+LINKEDIN_REDIRECT_URI=http://localhost:8000/api/auth/linkedin/callback
+LINKEDIN_SCOPES=openid profile email w_member_social
 ```
 
 ---
 
-# 4. Start MongoDB
-
-Using Docker:
+### 3. Backend Setup & Startup
 
 ```bash
-docker run -d --name vidthix-mongo -p 27017:27017 mongo:7
-```
+# Navigate to backend directory
+cd backend
 
-Or use Docker Compose if your project configuration includes MongoDB.
+# Create and activate virtual environment (Windows)
+python -m venv .venv
+.venv\Scripts\activate
 
----
+# Install dependencies
+pip install -r requirements.txt
 
-# 5. Start the Backend
-
-From the `backend` directory:
-
-```bash
+# Start the FastAPI Uvicorn dev server
 uvicorn app.main:app --reload
 ```
-
-Backend:
-
-```text
-http://localhost:8000
-```
-
-Swagger API documentation:
-
-```text
-http://localhost:8000/docs
-```
+* **API Server**: `http://localhost:8000`
+* **Interactive Swagger Docs**: `http://localhost:8000/docs`
 
 ---
 
-# 6. Frontend Setup
-
-Open another terminal and move into the frontend directory:
+### 4. Frontend Setup & Startup
 
 ```bash
+# Open a new terminal and navigate to frontend directory
 cd frontend
-```
 
-Install dependencies:
-
-```bash
+# Install Node modules
 npm install
-```
 
-Start the development server:
+# Run ESLint validation
+npm run lint
 
-```bash
+# Start Vite dev server
 npm run dev
 ```
-
-Frontend:
-
-```text
-http://localhost:5173
-```
+* **Frontend Web App**: `http://localhost:5173`
 
 ---
 
-# 7. Google Cloud / YouTube Setup
-
-Real YouTube publishing requires Google OAuth.
-
-### Step 1 — Create a Google Cloud Project
-
-Create or select a project in Google Cloud Console.
-
-### Step 2 — Enable YouTube Data API v3
-
-Go to:
+## OAuth 2.0 Authorization Workflow Architecture
 
 ```text
-APIs & Services → Library
-```
-
-Search for:
-
-```text
-YouTube Data API v3
-```
-
-Enable it.
-
-### Step 3 — Create OAuth Credentials
-
-Go to:
-
-```text
-APIs & Services → Credentials
-```
-
-Create an:
-
-```text
-OAuth Client ID
-```
-
-Select:
-
-```text
-Web application
-```
-
-Add the redirect URI:
-
-```text
-http://localhost:8000/api/auth/youtube/callback
-```
-
-Copy the generated:
-
-```text
-Client ID
-Client Secret
-```
-
-and place them in your backend `.env`.
-
-### Step 4 — Add a Test User
-
-While the OAuth application is in testing mode, add your Google account as a test user through the OAuth consent-screen configuration.
-
----
-
-## YouTube Authorization Connection Flow
-
-The YouTube connection authorization workflow operates as follows:
-
-```text
-User Clicks 'Connect YouTube' on UI (/platforms)
+User Clicks 'Connect Platform' on UI (/platforms)
        │
        ▼
-GET /api/auth/youtube/connect (Backend verifies user JWT & returns Google OAuth URL + state JWT)
+GET /api/auth/{platform}/connect 
+(Backend verifies User JWT, generates signed state token, returns OAuth URL)
        │
        ▼
-Redirect to Google OAuth Consent Screen (User grants YouTube permissions)
+Redirect to Google / LinkedIn Consent Screen
        │
        ▼
-Google Redirects to GET /api/auth/youtube/callback?code=...&state=...
+Platform Redirects to Callback URI: GET /api/auth/{platform}/callback?code=...&state=...
        │
        ▼
-Backend Decodes state JWT, Exchanges Code for Access & Refresh Tokens
+Backend Validates State JWT & Exchanges Code for Access & Refresh Tokens
        │
        ▼
-Backend Fetches Channel Metadata (Title, Thumbnail, Channel ID) via YouTube API
+Backend Fetches User / Channel Profile Metadata (Title, Avatar, URN)
        │
        ▼
-Connection & Tokens Saved in MongoDB (platform_connections) with status: "connected"
+Credentials Saved in MongoDB ('platform_connections') with status: "connected"
        │
        ▼
-Redirect to Frontend (/platforms?connected=youtube) with Success Toast
-```
-
-* **State Token Protection**: Signed JWT state parameter ensures authorization callbacks belong to the authenticated user.
-* **Offline Access & Refresh Tokens**: Obtains long-lived refresh tokens for automated video publishing without requiring user re-authentication.
-* **Channel Profile Sync**: Automatically displays channel title, avatar thumbnail, and channel ID in the user's connected platforms overview.
-
----
-
-# API Overview
-
-| Method | Endpoint                     | Purpose                      |
-| ------ | ---------------------------- | ---------------------------- |
-| POST   | `/api/auth/register`         | Create an account            |
-| POST   | `/api/auth/login`            | Login and receive tokens     |
-| POST   | `/api/auth/refresh`          | Refresh access token         |
-| GET    | `/api/auth/me`               | Get current user             |
-| GET    | `/api/auth/youtube/connect`  | Start YouTube OAuth          |
-| GET    | `/api/auth/youtube/callback` | Handle Google OAuth callback |
-| GET    | `/api/platforms`             | List connected platforms     |
-| DELETE | `/api/platforms/{platform}`  | Disconnect platform          |
-| POST   | `/api/videos/upload`         | Upload a video               |
-| GET    | `/api/videos`                | List uploaded videos         |
-| PATCH  | `/api/videos/{id}`           | Update video metadata        |
-| POST   | `/api/videos/{id}/publish`   | Publish a video              |
-| DELETE | `/api/videos/{id}`           | Delete a video               |
-| POST   | `/api/scheduled/{video_id}`  | Schedule a video             |
-| GET    | `/api/scheduled`             | List scheduled posts         |
-| DELETE | `/api/scheduled/{id}`        | Cancel scheduled post        |
-| GET    | `/api/dashboard/stats`       | Get dashboard statistics     |
-
-Interactive API documentation is available at:
-
-```text
-http://localhost:8000/docs
+Redirect to Frontend (/platforms?connected={platform}) with Toast Feedback
 ```
 
 ---
 
-# Frontend Routes
+## REST API Endpoint Summary
 
-| Route             | Purpose                                 |
-| ----------------- | --------------------------------------- |
-| `/`               | Public home page                        |
-| `/about`          | About page                              |
-| `/contact`        | Contact page                            |
-| `/blog`           | Blog listing                            |
-| `/blog/:slug`     | Individual blog post                    |
-| `/pages/:slug`    | Footer content pages                    |
-| `/dashboard`      | Dashboard overview                      |
-| `/upload`         | Upload, customize, publish, or schedule |
-| `/platforms`      | Connect and manage platforms            |
-| `/settings`       | User and application settings           |
-| `/dashboard/blog` | Admin blog management                   |
-| `/scheduled`      | Redirects to dashboard                  |
-
-Unknown routes redirect to the home page.
-
----
-
-# Core Workflow
-
-The main vidThix workflow is:
-
-```text
-                 Upload Video
-                      │
-                      ▼
-              Customize Post
-                      │
-                      ▼
-              Select Platforms
-                      │
-          ┌───────────┼───────────┐
-          ▼           ▼           ▼
-       YouTube    Instagram     TikTok
-          │           │           │
-          └───────────┼───────────┘
-                      ▼
-                Publish / Schedule
-                      │
-                      ▼
-              Track Publishing Status
-```
-
-The goal is to allow creators to manage their social video publishing workflow from a single workspace instead of manually uploading the same content to every platform.
+| Method | Endpoint                        | Description                                  |
+| ------ | ------------------------------- | -------------------------------------------- |
+| `POST`   | `/api/auth/register`            | Register a new user account                  |
+| `POST`   | `/api/auth/login`               | Authenticate user & issue JWT tokens         |
+| `GET`    | `/api/auth/me`                  | Get current authenticated user session       |
+| `GET`    | `/api/auth/youtube/connect`     | Generate Google OAuth authorization URL      |
+| `GET`    | `/api/auth/youtube/callback`    | Process Google OAuth callback & sync channel |
+| `GET`    | `/api/auth/linkedin/connect`    | Generate LinkedIn OAuth authorization URL    |
+| `GET`    | `/api/auth/linkedin/callback`   | Process LinkedIn OAuth callback & sync profile|
+| `GET`    | `/api/platforms`                | List connected user platforms & health status |
+| `DELETE` | `/api/platforms/{platform}`     | Disconnect social account & revoke tokens    |
+| `POST`   | `/api/videos/upload`            | Upload video binary file to storage          |
+| `GET`    | `/api/videos`                   | List user's uploaded videos                  |
+| `POST`   | `/api/videos/{id}/publish`      | Publish video immediately to target platform |
+| `POST`   | `/api/scheduled/{video_id}`     | Schedule video for future queue release      |
+| `GET`    | `/api/scheduled`                | Get user's scheduled post queue              |
+| `DELETE` | `/api/scheduled/{id}`           | Cancel a scheduled post from queue           |
+| `GET`    | `/api/dashboard/stats`          | Retrieve stats & platform ratio breakdown    |
 
 ---
 
-# Current Development Status
+## Completed Milestones & Roadmap
 
-### Working
-
-* React frontend
-* FastAPI backend
-* MongoDB persistence
-* JWT authentication
-* Video upload & metadata management
-* ✅ **YouTube OAuth authorization & connection (Fully operational & verified)**
-* ✅ **YouTube channel metadata sync (Title, thumbnail, channel ID)**
-* YouTube video publishing (resumable upload)
-* Platform connection management
-* Scheduled posts
-* APScheduler publishing
-* Dashboard statistics
-* Docker development environment
-
-### Coming Soon
-
-* Instagram publishing
-* TikTok publishing
-* Facebook publishing
-* LinkedIn publishing
-* Platform-specific content customization
-* Advanced analytics
-* Production cloud storage
-* Scalable background workers
+- [x] **React 19 Frontend Shell & Navigation**
+- [x] **FastAPI & Async MongoDB Backend Architecture**
+- [x] **JWT Authentication (Login, Register, Session)**
+- [x] **YouTube OAuth 2.0 Authorization & Resumable Video Publishing**
+- [x] **LinkedIn OAuth 2.0 Authorization & Social Post Publishing**
+- [x] **Platform Connection Management & Disconnect Confirmation Modal**
+- [x] **APScheduler Automated Queueing & Timezone Post Cancellation**
+- [x] **CMS Blog Management Studio with Live Google SEO Snippet Preview**
+- [x] **Overhauled UI/UX across Dashboard, Upload, Scheduled, Platforms, Settings, Blog & Landing Page**
+- [x] **ESLint Linting (Verified 0 Errors)**
+- [ ] **Instagram Reels & Stories Integration**
+- [ ] **TikTok Short Video Integration**
+- [ ] **Facebook Page Video Publishing**
+- [ ] **Cloud Object Storage (Amazon S3 / Google Cloud Storage)**
 
 ---
 
-# SEO Status
+## License
 
-SEO optimization is **temporarily disabled** because the current product focus is multi-platform social media publishing.
-
-The SEO implementation has **not been deleted** and remains preserved for future development.
-
-Previously implemented SEO components include:
-
-```text
-frontend/src/pages/SEOAnalyzer.jsx
-frontend/src/components/seo/SEOScore.jsx
-frontend/src/components/seo/SEOSuggestions.jsx
-frontend/src/utils/seoCalculator.js
-```
-
-SEO-related integrations have been commented out rather than deleted.
-
-The future SEO workflow can be restored when the core publishing system is mature.
-
----
-
-# Data and Storage
-
-During development:
-
-* MongoDB stores application data.
-* Uploaded videos are stored locally under:
-
-```text
-backend/app/uploads/
-```
-
-* Environment variables are stored in `.env`.
-* `.env` files are excluded from Git.
-* Uploaded files are excluded from Git except for `.gitkeep`.
-
-For production, local video storage should be replaced with object storage such as:
-
-* Amazon S3
-* Google Cloud Storage
-* Cloudflare R2
-
----
-
-# Docker
-
-The project is designed to support Docker-based development.
-
-Start the complete development environment:
-
-```bash
-docker compose up --build
-```
-
-Stop the containers:
-
-```bash
-docker compose down
-```
-
-MongoDB uses a persistent Docker volume so database data can survive container restarts.
-
----
-
-# Production Architecture
-
-A future production deployment can follow this architecture:
-
-```text
-                    Users
-                      │
-                      ▼
-               React Frontend
-                      │
-                      ▼
-                FastAPI API
-                      │
-        ┌─────────────┼─────────────┐
-        ▼             ▼             ▼
-     MongoDB      Object Storage   Redis
-                                  │
-                                  ▼
-                              Job Worker
-                                  │
-              ┌───────────────────┼──────────────────┐
-              ▼                   ▼                  ▼
-           YouTube            Instagram          TikTok
-```
-
-For multiple backend instances, scheduled publishing should eventually move from APScheduler inside the API process to a dedicated worker system such as Celery + Redis or another distributed job queue.
-
----
-
-# Security Notes
-
-Never commit:
-
-```text
-.env
-Google Client Secret
-JWT Secret
-Database credentials
-OAuth tokens
-Uploaded private media
-```
-
-These values should always be stored in environment variables or a secure secret-management system.
-
----
-
-# Development
-
-### Frontend lint
-
-```bash
-cd frontend
-npm run lint
-```
-
-### Frontend production build
-
-```bash
-cd frontend
-npm run build
-```
-
-### Frontend preview
-
-```bash
-cd frontend
-npm run preview
-```
-
-### Backend development server
-
-```bash
-cd backend
-uvicorn app.main:app --reload
-```
-
----
-
-# Future Roadmap
-
-```text
-[x] React frontend prototype
-[x] FastAPI backend
-[x] MongoDB persistence
-[x] JWT authentication
-[x] YouTube OAuth authorization & connection (Verified & Operational)
-[x] YouTube channel metadata sync (Title, Avatar, Channel ID)
-[x] YouTube video publishing (Resumable uploads)
-[x] Video uploads
-[x] Scheduling
-[x] Dashboard statistics
-[x] Docker development setup
-
-[ ] Instagram integration
-[ ] TikTok integration
-[ ] Facebook integration
-[ ] LinkedIn integration
-[ ] Platform-specific post customization
-[ ] Advanced analytics
-[ ] Cloud video storage
-[ ] Distributed background workers
-[ ] SEO optimization
-[ ] Production deployment
-```
-
----
-
-# License
-
-No license has been specified for this project yet.
+This project is licensed under the MIT License - see the project root for details.
