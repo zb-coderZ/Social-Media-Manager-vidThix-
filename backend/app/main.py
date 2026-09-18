@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.database import close_mongo_connection, connect_to_mongo
-from app.routers import auth, dashboard, platforms, scheduled, videos, youtube
+from app.routers import auth, dashboard, linkedin, platforms, scheduled, videos, youtube
 from app.services.scheduler_service import start_scheduler, stop_scheduler
 
 
@@ -37,6 +37,7 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(youtube.router)
+app.include_router(linkedin.router)
 app.include_router(platforms.router)
 app.include_router(videos.router)
 app.include_router(scheduled.router)

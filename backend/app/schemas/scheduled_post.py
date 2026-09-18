@@ -23,6 +23,7 @@ class ScheduledPostOut(BaseModel):
     privacy_status: str
     status: ScheduledPostStatus
     created_at: datetime
+    video_title: str | None = None
 
     class Config:
         populate_by_name = True

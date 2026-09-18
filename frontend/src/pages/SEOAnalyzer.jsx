@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Sparkles } from "lucide-react";
 import SEOScore from "../components/seo/SEOScore";
 import { calculateSEOScore } from "../utils/seoCalculator";
-import { debounce } from "../utils/helpers";
 
 const SEOAnalyzer = () => {
   const [formData, setFormData] = useState({
@@ -12,20 +11,18 @@ const SEOAnalyzer = () => {
   });
   const [seoResult, setSeoResult] = useState(null);
 
-  const analyzeSEO = () => {
-    if (!formData.title && !formData.description && !formData.tags) {
-      setSeoResult(null);
-      return;
-    }
-
-    const result = calculateSEOScore(formData);
-    setSeoResult(result);
-  };
-
   // Debounced SEO analysis
   useEffect(() => {
-    const debouncedAnalyze = debounce(analyzeSEO, 500);
-    debouncedAnalyze();
+    const timer = setTimeout(() => {
+      if (!formData.title && !formData.description && !formData.tags) {
+        setSeoResult(null);
+      } else {
+        const result = calculateSEOScore(formData);
+        setSeoResult(result);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [formData]);
 
   return (

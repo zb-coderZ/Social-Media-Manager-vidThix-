@@ -48,6 +48,16 @@ class Settings:
         "https://www.googleapis.com/auth/userinfo.email",
     ]
 
+    # --- LinkedIn OAuth ---
+    LINKEDIN_CLIENT_ID: str = os.getenv("LINKEDIN_CLIENT_ID", "")
+    LINKEDIN_CLIENT_SECRET: str = os.getenv("LINKEDIN_CLIENT_SECRET", "")
+    LINKEDIN_REDIRECT_URI: str = os.getenv(
+        "LINKEDIN_REDIRECT_URI", "http://localhost:8000/api/auth/linkedin/callback"
+    )
+    LINKEDIN_SCOPES: str = os.getenv(
+        "LINKEDIN_SCOPES", "openid,profile,email,w_member_social"
+    )
+
     # --- File storage ---
     # Local disk for the prototype. Swap for S3 / GCS / R2 later without
     # touching the routers — only upload_service.py needs to change.

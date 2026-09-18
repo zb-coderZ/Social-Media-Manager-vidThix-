@@ -7,7 +7,7 @@ from app.services.auth_service import get_current_user
 router = APIRouter(prefix="/api/platforms", tags=["platforms"])
 
 # Platforms represented in the UI but not yet wired to a real API.
-COMING_SOON = ["instagram", "tiktok", "linkedin", "facebook"]
+COMING_SOON = ["instagram", "tiktok", "facebook"]
 
 
 @router.get("", response_model=list[PlatformConnectionOut])

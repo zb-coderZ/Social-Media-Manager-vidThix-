@@ -34,8 +34,8 @@ export const PLATFORMS = [
     name: "LinkedIn",
     icon: "Linkedin",
     color: "#0077B5",
-    enabled: false,
-    status: "coming-soon",
+    enabled: true,
+    status: "active",
     description: "Share professional content on LinkedIn",
   },
   {

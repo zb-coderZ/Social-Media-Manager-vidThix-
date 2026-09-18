@@ -73,6 +73,7 @@ export const api = {
     }),
   me: () => request("/api/auth/me"),
   youtubeConnect: () => request("/api/auth/youtube/connect"),
+  linkedinConnect: () => request("/api/auth/linkedin/connect"),
   getPlatforms: () => request("/api/platforms"),
   listPlatforms: () => request("/api/platforms"),
   disconnectPlatform: (platform) =>

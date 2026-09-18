@@ -52,11 +52,18 @@ async def schedule_video(
 
 @router.get("", response_model=list[ScheduledPostOut])
 async def list_scheduled(user=Depends(get_current_user), db=Depends(get_db)):
-    return (
+    posts = (
         await db.scheduled_posts.find({"user_id": user["_id"]})
         .sort("scheduled_time", 1)
         .to_list(200)
     )
+    video_ids = [p["video_id"] for p in posts if "video_id" in p]
+    if video_ids:
+        videos = await db.videos.find({"_id": {"$in": video_ids}}).to_list(200)
+        video_map = {v["_id"]: v.get("title", "") for v in videos}
+        for p in posts:
+            p["video_title"] = video_map.get(p.get("video_id"))
+    return posts
 
 
 @router.delete("/{post_id}")

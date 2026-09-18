@@ -24,6 +24,8 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'react-hooks/static-components': 'off',
+      'react-refresh/only-export-components': 'off',
     },
   },
 ])

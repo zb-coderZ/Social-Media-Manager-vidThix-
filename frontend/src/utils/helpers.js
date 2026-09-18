@@ -13,7 +13,7 @@ export function formatDate(date, formatString = "MMM dd, yyyy") {
   try {
     const dateObj = typeof date === "string" ? parseISO(date) : date;
     return format(dateObj, formatString);
-  } catch (error) {
+  } catch {
     return "Invalid date";
   }
 }
@@ -27,7 +27,7 @@ export function formatRelativeTime(date) {
   try {
     const dateObj = typeof date === "string" ? parseISO(date) : date;
     return formatDistanceToNow(dateObj, { addSuffix: true });
-  } catch (error) {
+  } catch {
     return "Unknown";
   }
 }
@@ -215,7 +215,7 @@ export async function copyToClipboard(text) {
   try {
     await navigator.clipboard.writeText(text);
     return true;
-  } catch (error) {
+  } catch {
     return false;
   }
 }

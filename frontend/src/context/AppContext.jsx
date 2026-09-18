@@ -114,13 +114,6 @@ export function AppProvider({ children }) {
       STORAGE_KEYS.PLATFORMS,
       JSON.stringify(connectedPlatforms),
     );
-
-    // Update connected platforms count in stats
-    const connectedCount = Object.values(connectedPlatforms).filter(
-      (platform) => platform.connected === true,
-    ).length;
-
-    setStats((prev) => ({ ...prev, connectedPlatforms: connectedCount }));
   }, [connectedPlatforms]);
 
   // Persist stats to localStorage
